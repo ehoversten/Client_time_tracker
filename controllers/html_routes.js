@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.render('index');
 });
 
-
+// Get All Clients
 router.get('/clients', (req, res) => {
     // array to pass our database data to our view
     let clients = [];

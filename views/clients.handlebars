@@ -1,13 +1,23 @@
 <div class="clients">
+    <div class="client-form">
+        <h1>Add Client</h1>
+        <form action="/api/client/create" method="post">
+            <label for="client_name">Client Account Name:</label>
+            <input type="text" name="client_name" placeholder="Ex. AMG Autos">
+            <label for="client_contact">Client Contact</label>
+            <input type="text" name="client_contact" placeholder="John Doe">
+            <button type="submit">Add</button>
+        </form>
+    </div>  
+
     <h1>Clients List:</h1>
-    {{#if allClients }}
-        <h1>Kire Lives!</h1>
-    {{/if }}
+
     <ul>
-        {{#each allClients }}
+    {{#each allClients }}
         <li>{{ this._id }}</li>
         <li>Company: {{ this.name }}</li>
         <li>Contact: {{ this.contact }}</li>
-        {{/each }}
+        <hr>
+    {{/each }}
     </ul>
 </div>
