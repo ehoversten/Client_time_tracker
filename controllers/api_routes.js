@@ -3,7 +3,7 @@ const router = express.Router();
 
 const db = require('../models');
 
-router.get('/', (req, res) => {
+router.get('/clients', (req, res) => {
     db.Client.find({}).then(data => {
         res.json(data);
     }).catch(err => {

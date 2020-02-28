@@ -1,0 +1,13 @@
+<div class="clients">
+    <h1>Clients List:</h1>
+    {{#if allClients }}
+        <h1>Kire Lives!</h1>
+    {{/if }}
+    <ul>
+        {{#each allClients }}
+        <li>{{ this._id }}</li>
+        <li>Company: {{ this.name }}</li>
+        <li>Contact: {{ this.contact }}</li>
+        {{/each }}
+    </ul>
+</div>
