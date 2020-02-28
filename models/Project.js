@@ -6,6 +6,10 @@ const ProjectSchema = new Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+        required: true
+    },
     client_id: {
         type: Schema.Types.ObjectId,
         ref: 'Client'

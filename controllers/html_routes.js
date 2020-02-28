@@ -29,10 +29,28 @@ router.get('/clients', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+});
 
+
+// get all projects
+router.get('/projects', (req, res) => {
+    let projects = [];
+    db.Project.find({}).then(data => {
+        data.forEach(proj => {
+            let newProj = {
+                _id: proj._id,
+                title: proj.title,
+                description: proj.description,
+                client_id: proj.client_id
+            }
+
+            projects.push(newProj);
+        });
+        res.render('projects', { allProjects: projects });
+    }).catch(err => {
+        res.status(500).json(err);
+    })
 })
-
-
 
 
 

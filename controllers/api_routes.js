@@ -13,12 +13,12 @@ router.get('/clients', (req, res) => {
 
 router.post('/client/create', (req, res) => {
     console.log(req.body);
+    // Parse data from from submit
     let { client_name, client_contact } = req.body;
     db.Client.create({
       name: client_name,
       contact: client_contact
-    })
-      .then(data => {
+    }).then(data => {
         console.log(data);
         // res.status(301).json(data);
         res.redirect('/clients');
@@ -27,5 +27,10 @@ router.post('/client/create', (req, res) => {
         res.status(500).json(err);
       });
 });
+
+
+router.get('/projects', (req, res) => {
+    res.render('projects', {});
+})
 
 module.exports = router;
