@@ -1,0 +1,11 @@
+{
+  "name": "project_time_tracker",
+  "version": "1.0.0",
+  "description": "An application to track a developers time spent on multiple client projects",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erik Hoversten",
+  "license": "MIT"
+}
