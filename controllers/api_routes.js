@@ -29,9 +29,14 @@ router.post('/client/create', (req, res) => {
 });
 
 
-// router.get('/projects', (req, res) => {
-//     res.render('projects', {});
-// });
+router.get('/projects', (req, res) => {
+    db.Project.find({})
+        .then(data => {
+            res.json(data);
+        }).catch(err => {
+            if(err) throw err; 
+        });
+});
 
 
 router.post('/project/create', (req, res) => {
@@ -52,7 +57,7 @@ router.post('/project/create', (req, res) => {
         db.Client.findByIdAndUpdate(
             { _id: cid }, 
             { $push: { projects: cid } },
-            // { new: true }
+            { new: true }
         );
     }).then(data => {
         console.log("------------------")
