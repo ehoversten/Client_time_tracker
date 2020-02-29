@@ -11,23 +11,25 @@ router.get('/', (req, res) => {
 router.get('/clients', (req, res) => {
     // array to pass our database data to our view
     let clients = [];
-    db.Client.find({}).then(data => {
-        console.log(data);
-        data.forEach(client => {
-            // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
-            let client_obj = {
-                _id: client._id,
-                name: client.name,
-                contact: client.contact
-            }
-            clients.push(client_obj)
-        });
+    db.Client.find({})
+        .populate("projects")
+        .then(data => {
+            console.log(data);
+            data.forEach(client => {
+                // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
+                let client_obj = {
+                    _id: client._id,
+                    name: client.name,
+                    contact: client.contact
+                }
+                clients.push(client_obj)
+            });
 
-        console.log(clients);
-        res.render('clients', { allClients: clients });
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+            console.log(clients);
+            res.render('clients', { allClients: clients });
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json(err);
     });
 });
 

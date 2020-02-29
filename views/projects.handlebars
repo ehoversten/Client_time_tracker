@@ -17,9 +17,10 @@
         {{#if allProjects }}
         <ul>
         {{#each allProjects }}
-            <li>Client ID: {{ this._id }}</li>
+            <li>Project ID: {{ this._id }}</li>
             <li>Project Name: {{ this.title }}</li>
             <li>Project Description: {{ this.description }}</li>
+            <li>Client ID: {{ this.client_id }}</li>
             <hr>
         {{/each }}
         </ul>

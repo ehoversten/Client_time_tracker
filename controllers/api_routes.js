@@ -40,6 +40,7 @@ router.get('/projects', (req, res) => {
 
 
 router.post('/project/create', (req, res) => {
+    console.log("Request Body: ")
     console.log(req.body);
     // Parse and deconstruct form submission
     let { project_title, project_desc, client_id } = req.body;
@@ -48,22 +49,22 @@ router.post('/project/create', (req, res) => {
         title: project_title,
         description: project_desc,
         client_id: client_id
-    }).then( data => {
-        console.log("***********")
-        console.log(data);
-        let cid = { client_id } = data;
-        let filter = { _id : cid };
-        // let 
-        db.Client.findByIdAndUpdate(
-            { _id: cid }, 
-            { $push: { projects: cid } },
-            { new: true }
-        );
     }).then(data => {
-        console.log("------------------")
-        // console.log(data);
-        // res.json(data);
-        res.redirect('/projects');
+        console.log("***********")
+        console.log("New Project Data")
+        console.log(data);
+        let { _id, client_id } = data;
+        console.log(`client id: ${client_id}`);
+        let filter = { _id: client_id };
+
+        db.Client.findByIdAndUpdate(
+          { _id: client_id },
+          { $push: { projects: _id } },
+        //   { new: true }
+        );
+    }).then(dbClient => {
+        // Redirect to project list view
+        res.status(304).redirect('/projects');
     }).catch(err => {
         console.log(err);
         res.status(500).json(err);

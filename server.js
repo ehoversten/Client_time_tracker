@@ -8,10 +8,14 @@ const html_routes = require('./controllers/html_routes');
 const PORT = process.env.PORT || 3000;
 
 // Connect to Database 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }
+);
 
 // Bring in our Models
 const db = require("./models");
