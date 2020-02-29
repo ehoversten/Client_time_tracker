@@ -11,13 +11,16 @@
     </div>  
 
     <h1>Clients List:</h1>
-
-    <ul>
-    {{#each allClients }}
-        <li>{{ this._id }}</li>
-        <li>Company: {{ this.name }}</li>
-        <li>Contact: {{ this.contact }}</li>
-        <hr>
-    {{/each }}
-    </ul>
+    {{#if allClients }}
+        {{#each allClients }}
+            <li>Company Ref Number: {{ this._id }}</li>
+            <li>Company: {{ this.name }}</li>
+            <li>Contact: {{ this.contact }}</li>
+            <li>All Projects: {{ this.projects }}</li>
+            <hr>
+        {{/each }}
+        </ul>
+    {{else }}
+        <h2>No Clients Currently</h2>
+    {{/if }}
 </div>

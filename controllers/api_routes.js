@@ -29,8 +29,40 @@ router.post('/client/create', (req, res) => {
 });
 
 
-router.get('/projects', (req, res) => {
-    res.render('projects', {});
-})
+// router.get('/projects', (req, res) => {
+//     res.render('projects', {});
+// });
+
+
+router.post('/project/create', (req, res) => {
+    console.log(req.body);
+    // Parse and deconstruct form submission
+    let { project_title, project_desc, client_id } = req.body;
+
+    db.Project.create({
+        title: project_title,
+        description: project_desc,
+        client_id: client_id
+    }).then( data => {
+        console.log("***********")
+        console.log(data);
+        let cid = { client_id } = data;
+        let filter = { _id : cid };
+        // let 
+        db.Client.findByIdAndUpdate(
+            { _id: cid }, 
+            { $push: { projects: cid } },
+            // { new: true }
+        );
+    }).then(data => {
+        console.log("------------------")
+        // console.log(data);
+        // res.json(data);
+        res.redirect('/projects');
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 module.exports = router;

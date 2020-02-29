@@ -14,12 +14,17 @@
 
     <div class="project-list">
         <h1>Current Projects</h1>
+        {{#if allProjects }}
         <ul>
         {{#each allProjects }}
-            <li>ID: {{ this._id }}</li>
-            <li>Name: {{ this._id }}</li>
-            <li>ID: {{ this._id }}</li>
+            <li>Client ID: {{ this._id }}</li>
+            <li>Project Name: {{ this.title }}</li>
+            <li>Project Description: {{ this.description }}</li>
+            <hr>
         {{/each }}
         </ul>
+        {{else}}
+        <h2>No Projects Currently</h2>
+        {{/if }}
     </div>
 </div>

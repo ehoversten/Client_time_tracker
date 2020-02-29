@@ -35,7 +35,9 @@ router.get('/clients', (req, res) => {
 // get all projects
 router.get('/projects', (req, res) => {
     let projects = [];
-    db.Project.find({}).then(data => {
+    db.Project.find({})
+        .populate('Client')
+        .then(data => {
         data.forEach(proj => {
             let newProj = {
                 _id: proj._id,
