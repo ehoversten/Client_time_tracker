@@ -16,7 +16,12 @@
             <li>Company Ref Number: {{ this._id }}</li>
             <li>Company: {{ this.name }}</li>
             <li>Contact: {{ this.contact }}</li>
+            {{#if projects}}
+            <h3>I got projects!!</h3>
             <li>All Projects: {{ this.projects }}</li>
+            {{else}}
+            <li>All Projects: No projects currently</li>
+            {{/if}}
             <hr>
         {{/each }}
         </ul>

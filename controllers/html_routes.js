@@ -20,7 +20,8 @@ router.get('/clients', (req, res) => {
                 let client_obj = {
                     _id: client._id,
                     name: client.name,
-                    contact: client.contact
+                    contact: client.contact,
+                    projects: client.projects
                 }
                 clients.push(client_obj)
             });

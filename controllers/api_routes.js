@@ -60,11 +60,13 @@ router.post('/project/create', (req, res) => {
         db.Client.findByIdAndUpdate(
           { _id: client_id },
           { $push: { projects: _id } },
-        //   { new: true }
-        );
-    }).then(dbClient => {
-        // Redirect to project list view
-        res.status(304).redirect('/projects');
+          { new: true }
+          // *** I think I need this, or to use callback here and then trigger res.redirect??
+        ).then(dbClient => {
+          console.log(dbClient);
+          res.status(304).redirect('/projects');
+        });
+        // catch all error block
     }).catch(err => {
         console.log(err);
         res.status(500).json(err);
