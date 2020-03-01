@@ -25,10 +25,30 @@ function seedDB() {
             throw err;
         }
         console.log("removed Clients...");
+        // Add some test clients
+        data.forEach(seed => {
+            db.Client.create(seed, (err, clientData) => {
+                if(err) {
+                    console.log(err);
+                }
+                console.log(`client added: ${clientData}`);
+                db.Project.create({
+                    title: "Test Assessment",
+                    description: "Quality assurance and functionality testing",
+                    client_id: clientData._id
+                }, (err, projData) => {
+                    if(err) {
+                        console.log(err);
+                    }
+                    clientData.projects.push(projData);
+                    clientData.save();
+                    console.log("created new project...")
+                });
+            });
+        });
     });
 
 
-    
     // Remove Project Collection/Table
     // db.Project.remove({}, err => {
     //     if(err) {
@@ -47,7 +67,7 @@ function seedDB() {
     //     console.log("removed Clients...");
     // });
 
-};
+}
 
 // make function available outside of file
 module.exports = seedDB;
