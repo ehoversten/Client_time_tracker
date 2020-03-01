@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 router.get('/clients', (req, res) => {
     // array to pass our database data to our view
     let clients = [];
+    let projectsArr = [];
     db.Client.find({})
         .populate("projects")
         .then(data => {
@@ -23,11 +24,14 @@ router.get('/clients', (req, res) => {
                     contact: client.contact,
                     projects: client.projects
                 }
-                clients.push(client_obj)
+                clients.push(client_obj);
+                projectsArr.push(client_obj.projects);
             });
-
+            console.log("********")
             console.log(clients);
-            res.render('clients', { allClients: clients });
+            console.log("//****//")
+            console.log(projectsArr);
+            res.render('clients', { allClients: clients, client_projects: projectsArr });
         }).catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -38,6 +42,7 @@ router.get('/clients', (req, res) => {
 // get all projects
 router.get('/projects', (req, res) => {
     let projects = [];
+    let clients = [];
     db.Project.find({})
         .populate('Client')
         .then(data => {

@@ -17,7 +17,15 @@
             <li>Company: {{ this.name }}</li>
             <li>Contact: {{ this.contact }}</li>
             {{#if projects}}
-            <h3>I got projects!!</h3>
+            {{!-- <h3>I got projects!!</h3> --}}
+            <ul>
+            {{#each client_projects }}
+                <li>Project Title: {{ this.title }}</li>
+                <li>Description: {{ this.description }}</li>
+
+            {{/each }}
+            </ul>
+
             <li>All Projects: {{ this.projects }}</li>
             {{else}}
             <li>All Projects: No projects currently</li>

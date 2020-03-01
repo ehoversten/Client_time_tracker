@@ -19,6 +19,7 @@ mongoose.connect(
 
 // Bring in our Models
 const db = require("./models");
+const seedDB = require('./seeds');
 
 
 // Initialize an express instance
