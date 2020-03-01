@@ -1,0 +1,30 @@
+<div class="digging_down">
+    {{#each td }}
+        <p>Name: {{ name }}</p>
+        <p>Age: {{ age }}</p>
+        {{#if friends }}
+        <h3>My Friends:</h3>
+        <ul>
+            {{#each friends }}
+
+                <li>Friend Id: {{ this._id }}</li>
+                <li>Friend Name: {{ this.name }}</li>
+                <li>Friend Age: {{ this.age }}</li>
+                <br>
+            {{/each }}
+        </ul>
+        {{else}}
+        <p>No Friends</p>
+        {{/if }}
+        <hr>
+    {{/each }}
+
+
+    {{!-- Digging into an object --}}
+    {{#with userdata }}
+    <p>Username: {{ this.username }}</p>
+    <p>Title: {{ this.title }}</p>
+    <p>Company: {{ this.company.title }}</p>
+    {{/with }}
+
+</div>

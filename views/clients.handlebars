@@ -13,20 +13,32 @@
     <h1>Clients List:</h1>
     {{#if allClients }}
         {{#each allClients }}
+        {{ log "--------"}}
+        {{ log this }}
+        {{ log "****" }}
             <li>Company Ref Number: {{ this._id }}</li>
             <li>Company: {{ this.name }}</li>
             <li>Contact: {{ this.contact }}</li>
+
             {{#if projects}}
-            {{!-- <h3>I got projects!!</h3> --}}
+            <h3>I got projects!!</h3>
             <ul>
-            {{#each client_projects }}
-                <li>Project Title: {{ this.title }}</li>
-                <li>Description: {{ this.description }}</li>
+            {{#each projects }}
+            {{ log "//****//" }}
+                {{!-- {{#each this as |key value|}}
+
+                {{/each }} --}}
+
+                <br>
+                <br>
+            {{ log "//****//" }}
+
 
             {{/each }}
             </ul>
 
             <li>All Projects: {{ this.projects }}</li>
+            <li>Title: {{ this.projects.title }}</li>
             {{else}}
             <li>All Projects: No projects currently</li>
             {{/if}}
@@ -36,4 +48,14 @@
     {{else }}
         <h2>No Clients Currently</h2>
     {{/if }}
+</div>
+
+
+<div class="testing">
+    <ul>
+    {{#each client_projects }}
+        <li>Title: {{ this }}</li>
+    {{/each }}
+
+    </ul>
 </div>

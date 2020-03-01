@@ -15,7 +15,7 @@ router.get('/clients', (req, res) => {
     db.Client.find({})
         .populate("projects")
         .then(data => {
-            console.log(data);
+            // console.log(data);
             data.forEach(client => {
                 // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
                 let client_obj = {
@@ -27,10 +27,10 @@ router.get('/clients', (req, res) => {
                 clients.push(client_obj);
                 projectsArr.push(client_obj.projects);
             });
-            console.log("********")
-            console.log(clients);
-            console.log("//****//")
-            console.log(projectsArr);
+            // console.log("********")
+            // console.log(clients);
+            // console.log("//****//")
+            // console.log(projectsArr);
             res.render('clients', { allClients: clients, client_projects: projectsArr });
         }).catch(err => {
             console.log(err);
@@ -61,6 +61,68 @@ router.get('/projects', (req, res) => {
         res.status(500).json(err);
     })
 })
+
+
+// *** TESTING **** // 
+router.get('/testing', (req, res) => {
+    let testData = [
+      {
+        _id: 0,
+        name: "Tom",
+        age: 52,
+        friends: [
+          {
+            _id: 2,
+            name: "Anne",
+            age: 12
+          },
+          {
+            _id: 1,
+            name: "Monica",
+            age: 24
+          }
+        ]
+      },
+      {
+        _id: 1,
+        name: "Monica",
+        age: 24
+      },
+      {
+        _id: 2,
+        name: "Anne",
+        age: 12
+      },
+      {
+        _id: 3,
+        name: "Bill",
+        age: 9,
+        friends: [
+          {
+            _id: 2,
+            name: "Anne",
+            age: 12
+          },
+          {
+            _id: 1,
+            name: "Monica",
+            age: 24
+          }
+        ]
+      }
+    ];
+
+    let user = {
+        username: "bingo",
+        company: {
+            title: "Ford Motor Company",
+            address: "1212 Michigan Ave"
+        },
+        title: "developer"
+    }
+
+    res.render("testing", { td: testData, userdata: user });
+});
 
 
 
