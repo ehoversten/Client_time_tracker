@@ -13,20 +13,17 @@
     <h1>Clients List:</h1>
     {{#if allClients }}
         {{#each allClients }}
-        {{!-- {{ log "--------"}}
-        {{ log this }}
-        {{ log "****" }} --}}
+            <h3>Company: {{ this.name }}</h3>
             <li>Company Ref Number: {{ this._id }}</li>
-            <li>Company: {{ this.name }}</li>
             <li>Contact: {{ this.contact }}</li>
 
             {{#if projects}}
             <h4>Project List | Num Projects: ({{projects.length }})</h4>
             <ul>
             {{#each projects }}
-                <li>Project Name: {{ this.title }}</li>
-                <li>Description: {{ this.description }}</li>
+                <li>Project Title: {{ this.title }}</li>
                 <li>Project ID: {{ this._id }}</li>
+                <li>Description: {{ this.description }}</li>
                 <br>
             {{/each }}
             </ul>
