@@ -17,21 +17,46 @@ router.get('/clients', (req, res) => {
         .then(data => {
             // console.log(data);
             data.forEach(client => {
+                let project_data = [];
                 // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
+                console.log("*** DATA ***");
+                console.log(client);
+
+                let client_projects = client.projects;
+                console.log("** PROJECTS **");
+                console.log(client_projects.length);
+                client_projects.forEach(item => {
+                    console.log("----");
+                    console.log(item);
+                    console.log("Item Type: " + typeof item);
+                    let proj = {
+                        _id: item._id,
+                        title: item.title,
+                        description: item.description,
+                        client_id: item.client_id
+                    }
+                    project_data.push(proj);
+                    // projectsArr.push(item);
+                })
+
+                console.log("Project data:")
+                console.log(typeof project_data)
+                console.log(project_data)
+
                 let client_obj = {
                     _id: client._id,
                     name: client.name,
                     contact: client.contact,
-                    projects: client.projects
+                    projects: project_data
                 }
                 clients.push(client_obj);
-                projectsArr.push(client_obj.projects);
+                // projectsArr.push(client_obj.projects);
             });
             // console.log("********")
             // console.log(clients);
             // console.log("//****//")
-            // console.log(projectsArr);
-            res.render('clients', { allClients: clients, client_projects: projectsArr });
+            // console.log(`Projects Array : ${projectsArr}`);
+            res.render('clients', { allClients: clients });
         }).catch(err => {
             console.log(err);
             res.status(500).json(err);
