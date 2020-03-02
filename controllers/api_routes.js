@@ -12,14 +12,14 @@ router.get('/clients', (req, res) => {
 });
 
 router.post('/client/create', (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     // Parse data from from submit
     let { client_name, client_contact } = req.body;
     db.Client.create({
       name: client_name,
       contact: client_contact
     }).then(data => {
-        console.log(data);
+        // console.log(data);
         // res.status(301).json(data);
         res.redirect('/clients');
       })
@@ -40,8 +40,8 @@ router.get('/projects', (req, res) => {
 
 
 router.post('/project/create', (req, res) => {
-    console.log("Request Body: ")
-    console.log(req.body);
+    // console.log("Request Body: ")
+    // console.log(req.body);
     // Parse and deconstruct form submission
     let { project_title, project_desc, client_id } = req.body;
 
@@ -55,7 +55,6 @@ router.post('/project/create', (req, res) => {
         console.log(data);
         let { _id, client_id } = data;
         console.log(`client id: ${client_id}`);
-        let filter = { _id: client_id };
 
         db.Client.findByIdAndUpdate(
           { _id: client_id },

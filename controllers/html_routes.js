@@ -9,56 +9,58 @@ router.get('/', (req, res) => {
 
 // Get All Clients
 router.get('/clients', (req, res) => {
-    // array to pass our database data to our view
+    // create array to pass our parsed database data
     let clients = [];
-    let projectsArr = [];
+
     db.Client.find({})
         .populate("projects")
         .then(data => {
             // console.log(data);
             data.forEach(client => {
+                // create array to pass our parsed database data
                 let project_data = [];
-                // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
-                console.log("*** DATA ***");
-                console.log(client);
 
+                // create array to parse associated Project data
                 let client_projects = client.projects;
-                console.log("** PROJECTS **");
-                console.log(client_projects.length);
+
                 client_projects.forEach(item => {
-                    console.log("----");
-                    console.log(item);
-                    console.log("Item Type: " + typeof item);
+                    // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
                     let proj = {
                         _id: item._id,
                         title: item.title,
                         description: item.description,
                         client_id: item.client_id
                     }
+                    // Add each parse Project Object to our project_data Array
                     project_data.push(proj);
-                    // projectsArr.push(item);
                 })
 
-                console.log("Project data:")
-                console.log(typeof project_data)
-                console.log(project_data)
+                // *** TESTING *** //
+                // console.log("Project data:")
+                // console.log(typeof project_data)
+                // console.log(project_data)
 
+                // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
                 let client_obj = {
                     _id: client._id,
                     name: client.name,
                     contact: client.contact,
                     projects: project_data
                 }
+                // Add each parse CLient Object to our clients Array
                 clients.push(client_obj);
-                // projectsArr.push(client_obj.projects);
             });
+
+            // *** TESTING *** //
             // console.log("********")
             // console.log(clients);
             // console.log("//****//")
             // console.log(`Projects Array : ${projectsArr}`);
+
+            // Render page, pass our parsed array data to the view
             res.render('clients', { allClients: clients });
         }).catch(err => {
-            console.log(err);
+            // console.log(err);
             res.status(500).json(err);
     });
 });
@@ -71,20 +73,23 @@ router.get('/projects', (req, res) => {
     db.Project.find({})
         .populate('Client')
         .then(data => {
-        data.forEach(proj => {
-            let newProj = {
-                _id: proj._id,
-                title: proj.title,
-                description: proj.description,
-                client_id: proj.client_id
-            }
+            data.forEach(proj => {
+                // create temp object to parse data for handlebars security
+                let newProj = {
+                    _id: proj._id,
+                    title: proj.title,
+                    description: proj.description,
+                    client_id: proj.client_id
+                }
 
-            projects.push(newProj);
-        });
-        res.render('projects', { allProjects: projects });
-    }).catch(err => {
-        res.status(500).json(err);
-    })
+                projects.push(newProj);
+            });
+            // Render page, pass our parsed data as context to view page
+            res.render('projects', { allProjects: projects });
+        }).catch(err => {
+            // return error
+            res.status(500).json(err);
+        })
 })
 
 
