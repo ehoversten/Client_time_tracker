@@ -110,5 +110,17 @@ router.post('/session/create', (req, res) => {
       });
 });
 
+// ---------------------------------- //
+//       API Get ALL SESSIONS         //
+// ---------------------------------- //
+router.get('/sessions', (req, res) => {
+    db.Session.find({})
+        .then(data => {
+            res.json(data);
+        }).catch(err => {
+            if(err) throw err; 
+        });
+});
+
 
 module.exports = router;

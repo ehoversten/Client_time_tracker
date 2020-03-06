@@ -13,13 +13,16 @@
     <hr>
     <div class="project-list">
         <h1>All Sessions</h1>
-        {{#if allProjects }}
+        {{#if allSessions }}
         <ul>
-            {{#each allProjects }}
-            <h4>Project Title: {{ this.title }}</h4>
-            <li>Project ID: {{ this._id }}</li>
-            <li>Project Description: {{ this.description }}</li>
-            <li>Client ID: {{ this.client_id }}</li>
+            {{#each allSessions }}
+            <h4>Session Date: {{ this.date }}</h4>
+            <li>ID: {{ this._id }}</li>
+            <li>Start Time: {{ this.start_time }}</li>
+            <li>End Time: {{ this.end_time }}</li>
+            <li>Project ID: {{ this.project_id }}</li>
+            <li>Session Notes: {{ this.description }}</li>
+            <li>Client ID: {{ this.notes }}</li>
             <hr>
             {{/each }}
         </ul>

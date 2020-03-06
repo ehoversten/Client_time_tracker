@@ -109,7 +109,21 @@ router.get('/sessions', (req, res) => {
   db.Session.find({})
     .then(data => {
       console.log(data);
-      res.render('session', {});
+      data.forEach(sesh => {
+        // create a temp variable to parse data from db
+        let newSession = {
+          _id: sesh._id,
+          date: sesh.date,
+          start_time: sesh.start_time,
+          end_time: sesh.end_time,
+          project_id: sesh.project_id,
+          notes : sesh.notes
+        } 
+        // add data object to context array
+        allSesh.push(newSession); 
+      });
+
+      res.render('session', { allSessions: allSesh });
     })
     .catch(err => {
       if(err) {
