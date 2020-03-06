@@ -3,6 +3,9 @@ const router = express.Router();
 
 const db = require('../models');
 
+// ---------------------------------- //
+//        API Get ALL CLIENTS         //
+// ---------------------------------- //
 router.get('/clients', (req, res) => {
     db.Client.find({}).then(data => {
         res.json(data);
@@ -11,6 +14,9 @@ router.get('/clients', (req, res) => {
     });
 });
 
+// ---------------------------------- //
+//       API Post Create CLIENT       //
+// ---------------------------------- //
 router.post('/client/create', (req, res) => {
     // console.log(req.body);
     // Parse data from from submit
@@ -28,7 +34,9 @@ router.post('/client/create', (req, res) => {
       });
 });
 
-
+// ---------------------------------- //
+//       API Get ALL PROJECTS         //
+// ---------------------------------- //
 router.get('/projects', (req, res) => {
     db.Project.find({})
         .then(data => {
@@ -38,7 +46,9 @@ router.get('/projects', (req, res) => {
         });
 });
 
-
+// ---------------------------------- //
+//       API Post Create PROJECT      //
+// ---------------------------------- //
 router.post('/project/create', (req, res) => {
     // console.log("Request Body: ")
     // console.log(req.body);
@@ -71,5 +81,31 @@ router.post('/project/create', (req, res) => {
         res.status(500).json(err);
     });
 });
+
+
+// ---------------------------------- //
+//       API Post Create SESSION      //
+// ---------------------------------- //
+router.post('/session/create', (req, res) => {
+    // console.log(req.body);
+    // Parse data from from submit
+    let { session_notes, proj_id } = req.body;
+    db.Session.create({
+      date: Date.now(),
+      start_time: 1,
+      end_time: 25,
+      project_id: proj_id,
+      notes: session_notes
+    })
+      .then(data => {
+        console.log(data);
+        // res.status(301).json(data);
+        res.redirect("/sessions");
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+});
+
 
 module.exports = router;

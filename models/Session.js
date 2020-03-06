@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const SessionSchema = new Schema({
     date: {
         type: Date,
+        required: true
     },
     start_time: {
         type: Number,
@@ -11,7 +12,7 @@ const SessionSchema = new Schema({
     },
     end_time: {
         type: Number,
-        required: true
+        // required: true
     },
     project_id: {
         type: Schema.Types.ObjectId,
@@ -32,6 +33,7 @@ module.exports = Session;
 // ** TO DO TASKS ** //
 /*
 
+    * Will need MomentJS or other Date format Lib
     * Add Fields for project_start & project_end
     * Add User field and association
 

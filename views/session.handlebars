@@ -1,0 +1,30 @@
+<div class="projects-container">
+    <div class="project-form">
+        <h1>Add Project</h1>
+        <form action="/api/session/create" method="post">
+
+            <label for="proj_id">Please Enter a Project Identification Number for Session Logging</label>
+            <input type="text" name="proj_id" placeholder="#12345">
+            <label for="session_notes">Session Notes:</label>
+            <input type="textarea" name="session_notes" placeholder="Enter notes for current session">
+            <button type="submit">Start</button>
+        </form>
+    </div>
+    <hr>
+    <div class="project-list">
+        <h1>All Sessions</h1>
+        {{#if allProjects }}
+        <ul>
+            {{#each allProjects }}
+            <h4>Project Title: {{ this.title }}</h4>
+            <li>Project ID: {{ this._id }}</li>
+            <li>Project Description: {{ this.description }}</li>
+            <li>Client ID: {{ this.client_id }}</li>
+            <hr>
+            {{/each }}
+        </ul>
+        {{else}}
+        <h2>No Sessions Currently</h2>
+        {{/if }}
+    </div>
+</div>

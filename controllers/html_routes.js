@@ -3,11 +3,17 @@ const router = express.Router();
 
 const db = require('../models');
 
+
+// ---------------------------------- //
+//        Get LANDING PAGE            //
+// ---------------------------------- //
 router.get('/', (req, res) => {
     res.render('index');
 });
 
-// Get All Clients
+// ---------------------------------- //
+//        Get ALL CLIENTS             //
+// ---------------------------------- //
 router.get('/clients', (req, res) => {
     // create array to pass our parsed database data
     let clients = [];
@@ -65,8 +71,9 @@ router.get('/clients', (req, res) => {
     });
 });
 
-
-// get all projects
+// ---------------------------------- //
+//        Get ALL PROJECTS            //
+// ---------------------------------- //
 router.get('/projects', (req, res) => {
     let projects = [];
     let clients = [];
@@ -93,7 +100,27 @@ router.get('/projects', (req, res) => {
 })
 
 
-// *** TESTING **** // 
+// ---------------------------------- //
+//        Get ALL SESSIONS            //
+// ---------------------------------- //
+router.get('/sessions', (req, res) => {
+  // create a variable to pass data from CONTROLLER to VIEW
+  let allSesh = db.Session.find({})
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      if(err) {
+        res.status(500).json(err);
+      }
+    });
+})
+
+
+
+// ---------------------------------- //
+//      // *** TESTING **** //        //
+// ---------------------------------- //
 router.get('/testing', (req, res) => {
     let testData = [
       {
