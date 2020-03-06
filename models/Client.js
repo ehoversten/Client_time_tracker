@@ -21,3 +21,12 @@ const ClientSchema = new Schema({
 let Client = mongoose.model('Client', ClientSchema);
 
 module.exports = Client;
+
+
+// ** TO DO TASKS ** //
+/*
+
+    * Add Fields for client_start & client_end
+    * Team or Team Members assigned to Client (?)
+
+*/

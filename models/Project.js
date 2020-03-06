@@ -19,3 +19,14 @@ const ProjectSchema = new Schema({
 const Project = mongoose.model("Project", ProjectSchema);
 
 module.exports = Project;
+
+
+
+
+// ** TO DO TASKS ** //
+/*
+
+    * Add Fields for project_start & project_end
+    * Team or Team Members assigned to Project (?)
+
+*/

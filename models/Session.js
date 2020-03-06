@@ -26,3 +26,13 @@ const SessionSchema = new Schema({
 const Session = mongoose.model('Session', SessionSchema);
 
 module.exports = Session;
+
+
+
+// ** TO DO TASKS ** //
+/*
+
+    * Add Fields for project_start & project_end
+    * Add User field and association
+
+*/
