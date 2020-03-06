@@ -92,18 +92,21 @@ router.post('/session/create', (req, res) => {
     let { session_notes, proj_id } = req.body;
     db.Session.create({
       date: Date.now(),
-      start_time: 1,
-      end_time: 25,
+      start_time: Date.now(),
+      end_time: Date.now(),
       project_id: proj_id,
       notes: session_notes
     })
       .then(data => {
         console.log(data);
-        // res.status(301).json(data);
-        res.redirect("/sessions");
+        res.status(301).json(data);
+        // res.redirect("/sessions");
       })
       .catch(err => {
-        res.status(500).json(err);
+        if (err) {
+          console.log(err);
+          res.status(500).json(err);
+        }
       });
 });
 

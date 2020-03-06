@@ -2,25 +2,27 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const SessionSchema = new Schema({
-    date: {
-        type: Date,
-        required: true
-    },
-    start_time: {
-        type: Number,
-        required: true
-    },
-    end_time: {
-        type: Number,
-        // required: true
-    },
-    project_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project'
-    },
-    notes: {
-        type: String
-    }
+  date: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  start_time: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  end_time: {
+    type: Date
+    // required: true
+  },
+  project_id: {
+    type: Schema.Types.ObjectId,
+    ref: "Project"
+  },
+  notes: {
+    type: String
+  }
 });
 
 

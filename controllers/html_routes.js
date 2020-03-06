@@ -105,9 +105,11 @@ router.get('/projects', (req, res) => {
 // ---------------------------------- //
 router.get('/sessions', (req, res) => {
   // create a variable to pass data from CONTROLLER to VIEW
-  let allSesh = db.Session.find({})
+  let allSesh = [];
+  db.Session.find({})
     .then(data => {
       console.log(data);
+      res.render('session', {});
     })
     .catch(err => {
       if(err) {
