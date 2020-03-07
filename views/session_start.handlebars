@@ -2,8 +2,15 @@
     <div class="project-form">
         <h1>Start New Session</h1>
         <form action="/api/session/create" method="post">
-            <label for="proj_id">Please Enter a Project Identification Number for Session Logging</label>
-            <input type="text" name="proj_id" placeholder="#12345">
+            {{!-- <label for="proj_id">Please Enter a Project Identification Number for Session Logging</label>
+            <input type="text" name="proj_id" placeholder="#12345"> --}}
+
+            <label for="client_id">Select Project From List</label>
+            <select id="client_id">
+                {{#each allProjects }}
+                <option value="{{ this.title }}">{{ this.title }}</option>
+                {{/each }}
+            </select>
             <button type="submit">Start Session</button>
         </form>
     </div>

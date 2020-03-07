@@ -76,9 +76,10 @@ router.get('/clients', (req, res) => {
 // ---------------------------------- //
 router.get('/projects', (req, res) => {
   let clients = [];
+  // Find all clients to populate pull-down 
   db.Client.find({})
     .then(data => {
-
+      // Loop through db data to parse for view context
       data.forEach(client => {
         let clientObj = {
           _id: client._id,
@@ -155,7 +156,25 @@ router.get('/sessions', (req, res) => {
 //       Get START NEW SESSION        //
 // ---------------------------------- //
 router.get('/session/start', (req, res) => {
-  res.render('session_start');
+  let projects = [];
+  db.Project.find({})
+    .then(data => {
+      data.forEach(proj => {
+        let pjo = {
+          title: proj.title,
+          description: proj.description,
+          client_id: proj.client_id
+        }
+        projects.push(pjo);
+      });
+      res.render('session_start', { allProjects: projects });
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
+
+
+
 });
 
 
