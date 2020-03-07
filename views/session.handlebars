@@ -18,7 +18,7 @@
             <li>Client: </li>
             <li>Session Notes: {{ this.notes }}</li>
             <form action="/api/session/{{ this._id }}?_method=DELETE" method="POST">
-                <button type="submit">Delete</button>
+                <button class="waves-effect waves-light btn red darken-2" type="submit"><i class="material-icons">delete</i></button>
             </form>
             <hr>
             {{/each }}

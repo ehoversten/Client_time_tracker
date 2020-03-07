@@ -27,7 +27,7 @@
             <li>Project Description: {{ this.description }}</li>
             <li>Client ID: {{ this.client_id }}</li>
             <form action="/api/project/{{ this._id }}?_method=DELETE" method="POST">
-                <button type="submit">Delete</button>
+                <button class="waves-effect waves-light btn red darken-2" type="submit"><i class="material-icons">delete</i></button>
             </form>
             <hr>
         {{/each }}
