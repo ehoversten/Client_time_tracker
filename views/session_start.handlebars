@@ -3,12 +3,12 @@
         <h1>Start New Session</h1>
         <form action="/api/session/create" method="post">
             <label for="client_id">Select Project From List</label>
-            <select id="client_id">
+            <select id="client_id" class="browser-default">
                 {{#each allProjects }}
-                <option value="{{ this.title }}">{{ this.title }}</option>
+                <option value="{{ this.title }}">Proj Title: {{ this.title }} | Proj-Id : {{this._id}}</option>
                 {{/each }}
             </select>
-            <button type="submit">Start Session</button>
+            <button type="submit" class="waves-effect waves-light btn orange lighten-1">Start Session</button>
         </form>
     </div>
 </div>  

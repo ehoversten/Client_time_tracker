@@ -161,6 +161,7 @@ router.get('/session/start', (req, res) => {
     .then(data => {
       data.forEach(proj => {
         let pjo = {
+          _id: proj._id,
           title: proj.title,
           description: proj.description,
           client_id: proj.client_id
