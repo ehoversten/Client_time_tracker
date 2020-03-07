@@ -82,6 +82,22 @@ router.post('/project/create', (req, res) => {
     });
 });
 
+// ---------------------------------- //
+//       API Delete A Project         //
+// ---------------------------------- //
+router.delete('/project/:id', (req, res) => {
+    let objId = req.params.id
+    console.log(objId);
+
+    db.Project.findOneAndRemove(objId, err => {
+        if(err) {
+            console.log(err);
+            res.status(500).json(err);
+        } else {
+            res.redirect('/projects');
+        }
+    });
+})
 
 // ---------------------------------- //
 //  API Post Create (START) SESSION   //

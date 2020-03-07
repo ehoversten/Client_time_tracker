@@ -18,7 +18,7 @@
     <br>
     <hr>
     <div class="project-list">
-        <h1>Current Projects</h1>
+        <h1>Current Projects: {{ allProjects.length }}</h1>
         {{#if allProjects }}
         <ul>
         {{#each allProjects }}
@@ -26,6 +26,9 @@
             <li>Project ID: {{ this._id }}</li>
             <li>Project Description: {{ this.description }}</li>
             <li>Client ID: {{ this.client_id }}</li>
+            <form action="/api/project/{{ this._id }}?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+            </form>
             <hr>
         {{/each }}
         </ul>
