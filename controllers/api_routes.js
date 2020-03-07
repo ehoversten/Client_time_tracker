@@ -93,21 +93,22 @@ router.post('/session/create', (req, res) => {
     db.Session.create({
       date: Date.now(),
       start_time: Date.now(),
-      end_time: Date.now(),
+    //   end_time: Date.now(),
       project_id: proj_id,
-      notes: session_notes
+    //   notes: session_notes
     })
       .then(data => {
         console.log(data);
-        res.status(301).json(data);
-        // res.redirect("/sessions");
-      })
-      .catch(err => {
+        // res.status(301).json(data);
+        res.redirect("/session/end");
+    })
+    .catch(err => {
         if (err) {
-          console.log(err);
-          res.status(500).json(err);
+            console.log(err);
+            res.status(500).json(err);
         }
-      });
+    });
+    res.redirect("/session/end");
 });
 
 // ---------------------------------- //
@@ -121,6 +122,8 @@ router.get('/sessions', (req, res) => {
             if(err) throw err; 
         });
 });
+
+
 
 
 module.exports = router;

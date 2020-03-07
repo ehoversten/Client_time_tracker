@@ -132,7 +132,20 @@ router.get('/sessions', (req, res) => {
     });
 })
 
+// ---------------------------------- //
+//       Get START NEW SESSION        //
+// ---------------------------------- //
+router.get('/session/start', (req, res) => {
+  res.render('session_start');
+});
 
+
+// ---------------------------------- //
+//         Get END SESSION            //
+// ---------------------------------- //
+router.get('/session/end', (req, res) => {
+  res.render('session_end');
+})
 
 // ---------------------------------- //
 //      // *** TESTING **** //        //
