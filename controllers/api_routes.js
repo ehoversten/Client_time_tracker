@@ -84,7 +84,7 @@ router.post('/project/create', (req, res) => {
 
 
 // ---------------------------------- //
-//       API Post Create SESSION      //
+//  API Post Create (START) SESSION   //
 // ---------------------------------- //
 router.post('/session/create', (req, res) => {
     // console.log(req.body);
@@ -97,10 +97,11 @@ router.post('/session/create', (req, res) => {
       project_id: proj_id,
     //   notes: session_notes
     })
-      .then(data => {
+    .then(data => {
         console.log(data);
         // res.status(301).json(data);
-        res.redirect("/session/end");
+        // res.redirect("/session/end");
+        res.redirect("/session/" + data._id + "/edit");
     })
     .catch(err => {
         if (err) {
@@ -108,8 +109,33 @@ router.post('/session/create', (req, res) => {
             res.status(500).json(err);
         }
     });
-    res.redirect("/session/end");
 });
+
+// ---------------------------------- //
+//    API Put Update (END) SESSION    //
+// ---------------------------------- //
+router.put('/session/:id', (req, res) => {
+
+    console.log("**********");
+    console.log(req.params);
+    console.log(req.body);
+
+    db.Session.findByIdAndUpdate(req.params.id, 
+        { 
+            end_time: Date.now(), 
+            notes: req.body.session_notes 
+        })
+        .then(updatedSession => {
+            console.log(updatedSession);
+            res.redirect('/sessions')
+        })
+        .catch(err => {
+            if(err) {
+                console.log(err);
+                res.status(500).json(err);
+            }
+        })
+})
 
 // ---------------------------------- //
 //       API Get ALL SESSIONS         //

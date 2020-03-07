@@ -2,6 +2,7 @@ const express = require('express');
 var exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const logger = require("morgan");
+const methodOverride = require('method-override');
 const api_routes = require('./controllers/api_routes');
 const html_routes = require('./controllers/html_routes');
 
@@ -32,6 +33,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(logger("dev"));
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
