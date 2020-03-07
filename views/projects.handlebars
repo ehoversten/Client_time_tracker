@@ -7,12 +7,15 @@
             <label for="project_desc">Project Description:</label>
             <input type="textarea" name="project_desc" placeholder="Enter short project description">
             <label for="client_id">Select Client</label>
-            <select id="client_id">
-                {{#each allClients }}
-                <option value="{{ this.name }}">{{ this.name }}</option>
-                {{/each }}
-            </select>
-            <button type="submit">Add</button>
+            <div class="input-field col s12">
+                <select id="client_id">
+                    {{#each allClients }}
+                    <option value="{{ this.name }}">{{ this.name }}</option>
+                    {{/each }}
+                </select>
+            </div>
+
+            <button type="submit" class="btn-floating btn waves-effect waves-light red"><i class="material-icons">add</i></button>
         </form>
     </div>
     <br>
