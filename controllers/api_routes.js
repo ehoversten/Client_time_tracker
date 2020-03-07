@@ -150,6 +150,23 @@ router.get('/sessions', (req, res) => {
 });
 
 
+// ---------------------------------- //
+//       API Delete A SESSION         //
+// ---------------------------------- //
+router.delete('/session/:id', (req, res) => {
+    let objId = req.params.id
+    console.log(objId);
+
+    db.Session.findOneAndRemove(objId, err => {
+        if(err) {
+            console.log(err);
+            res.status(500).json(err);
+        } else {
+            res.redirect('/sessions');
+        }
+    });
+})
+
 
 
 module.exports = router;

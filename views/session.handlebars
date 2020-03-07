@@ -17,6 +17,9 @@
             <li>Project ID: {{ this.project_id }}</li>
             <li>Client: </li>
             <li>Session Notes: {{ this.notes }}</li>
+            <form action="/api/session/{{ this._id }}?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+            </form>
             <hr>
             {{/each }}
         </ul>
