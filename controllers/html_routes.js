@@ -75,8 +75,27 @@ router.get('/clients', (req, res) => {
 //        Get ALL PROJECTS            //
 // ---------------------------------- //
 router.get('/projects', (req, res) => {
-  let projects = [];
   let clients = [];
+  db.Client.find({})
+    .then(data => {
+
+      data.forEach(client => {
+        let clientObj = {
+          _id: client._id,
+          name: client.name,
+          contact: client.contact
+        };
+        clients.push(clientObj);
+        console.log(clients);
+      })
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  
+  
+  let projects = [];
   db.Project.find({})
     .populate('Client')
     .then(data => {
@@ -92,7 +111,7 @@ router.get('/projects', (req, res) => {
         projects.push(newProj);
       });
       // Render page, pass our parsed data as context to view page
-      res.render('projects', { allProjects: projects });
+      res.render('projects', { allProjects: projects, allClients: clients });
     }).catch(err => {
       // return error
       res.status(500).json(err);
