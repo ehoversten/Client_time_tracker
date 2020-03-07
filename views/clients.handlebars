@@ -1,48 +1,57 @@
-<div class="clients">
+<div class="clients-container">
     <div class="client-form">
         <div class="row">
             <div class="col s12">
-                <h2>Add Client</h2>
+                <h3>Add Client</h3>
                 <form action="/api/client/create" method="post">
-                    <div class="col s10">
-                        <label for="client_name">Client Account Name:</label>
-                        <input type="text" name="client_name" placeholder="Ex. AMG Autos">
-                        <label for="client_contact">Client Contact:</label>
-                        <input type="text" name="client_contact" placeholder="John Doe">
-                    </div>
-                    <div class="col s2">
-                        <button type="submit" class="right bottom btn waves-effect waves-light green darken-1">Add</button>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input type="text" name="client_name" placeholder="Ex. AMG Autos" class="validate">
+                            <label  for="client_name">Client Account Name:</label>
+                        </div>
+                        <div class="input-field col s8">
+                            <input type="text" name="client_contact" placeholder="Ex. John Doe">
+                            <label for="client_contact">Client Contact:</label>
+                        </div>
+                        <div class="col s2">
+                            <button type="submit" class="right bottom btn waves-effect waves-light green darken-1">Add</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>  
-    <h2>Clients List:</h2>
-    <hr>
-    {{#if allClients }}
-        {{#each allClients }}
-            <h5>Company: {{ this.name }}</h5>
-            <li>Company Ref Number: {{ this._id }}</li>
-            <li>Contact: {{ this.contact }}</li>
-
-            {{#if projects}}
-            <h5>Project List | Num Projects: ({{projects.length }})</h5>
-            <ul> 
-            {{#each projects }}
-                <li>Project Title: {{ this.title }}</li>
-                <li>Project ID: {{ this._id }}</li>
-                <li>Description: {{ this.description }}</li>
-                <br>
-            {{/each }}
-            </ul>
-
-            {{else}}
-            <li>All Projects: No projects currently</li>
-            {{/if}}
+    
+    <div class="row">
+        <div class="col s12">
+            <h2>Clients List:</h2>
             <hr>
-        {{/each }}
-        </ul>
-    {{else }}
-        <h2>No Clients Currently</h2>
-    {{/if }}
+            {{#if allClients }}
+                {{#each allClients }}
+                    <h5>Company: {{ this.name }}</h5>
+                    <li>Company Ref Number: {{ this._id }}</li>
+                    <li>Contact: {{ this.contact }}</li>
+
+                    {{#if projects}}
+                    <h5>Project List | Num Projects: ({{projects.length }})</h5>
+                    <ul> 
+                    {{#each projects }}
+                        <li>Project Title: {{ this.title }}</li>
+                        <li>Project ID: {{ this._id }}</li>
+                        <li>Description: {{ this.description }}</li>
+                        <br>
+                    {{/each }}
+                    </ul>
+
+                    {{else}}
+                    <li>All Projects: No projects currently</li>
+                    {{/if}}
+                    <hr>
+                {{/each }}
+                </ul>
+            {{else }}
+                <h2>No Clients Currently</h2>
+            {{/if }}
+        </div>
+    </div>
 </div>
