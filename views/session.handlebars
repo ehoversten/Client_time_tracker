@@ -1,32 +1,37 @@
 <div class="projects-container">
-    <div class="project-form">
-        <h1>Start New Session</h1>
-        <a href="/session/start"><button class="waves-effect waves-light btn amber lighten-1">Start</button></a>
-    </div>
-    <br>
-    <hr>
-    <div class="project-list">
-        <h1>All Sessions</h1>
-        {{#if allSessions }}
-        <ul>
-            {{#each allSessions }}
-            <h4>Session Date: {{ this.date }}</h4>
-            <li>ID: {{ this._id }}</li>
-            <li>Start Time: {{ this.start_time }}</li>
-            <li>End Time: {{ this.end_time }}</li>
-            <li>Project ID: {{ this.project_id }}</li>
-            <li>Client: </li>
-            <li>Session Notes: {{ this.notes }}</li>
-            <form action="/api/session/{{ this._id }}?_method=DELETE" method="POST">
-                <button class="right waves-effect waves-light btn red darken-2" type="submit"><i class="material-icons">delete</i></button>
-            </form>
-            <br>
+    <div class="row">
+        <div class="col s12">
+            <div class="project-form">
+                <h3>Start New Session</h3>
+                <a href="/session/start"><button class="waves-effect waves-light btn orange lighten-1">Start</button></a>
+            </div>
             <br>
             <hr>
-            {{/each }}
-        </ul>
-        {{else}}
-        <h2>No Sessions Currently</h2>
-        {{/if }}
+            <div class="project-list">
+                <h3>All Sessions</h3>
+                {{#if allSessions }}
+                <ul>
+                    {{#each allSessions }}
+                    <h5>Session Date: {{ this.date }}</h5>
+                    <li>ID: {{ this._id }}</li>
+                    <li>Start Time: {{ this.start_time }}</li>
+                    <li>End Time: {{ this.end_time }}</li>
+                    <li>Project ID: {{ this.project_id }}</li>
+                    <li>Client: </li>
+                    <li>Session Notes: {{ this.notes }}</li>
+                    <form action="/api/session/{{ this._id }}?_method=DELETE" method="POST">
+                        <button class="right waves-effect waves-light btn red darken-2" type="submit"><i class="material-icons">delete</i></button>
+                    </form>
+                    <br>
+                    <br>
+                    <hr>
+                    {{/each }}
+                </ul>
+                {{else}}
+                <h2>No Sessions Currently</h2>
+                {{/if }}
+            </div>
+
+        </div>
     </div>
 </div>
