@@ -12,11 +12,12 @@
                 {{#if allSessions }}
                 <ul>
                     {{#each allSessions }}
-                    <h5>Session Date: {{ this.date }}</h5>
-                    <li>ID: {{ this._id }}</li>
-                    <li>Start Time: {{ this.start_time }}</li>
-                    <li>End Time: {{ this.end_time }}</li>
-                    <li>Project ID: {{ this.project_id }}</li>
+                    <h5>Session Date: {{moment this.date format="dddd, MMMM Do" }}</h5>
+                    <li>Session Id#: {{ this._id }}</li>
+                    <li>Start Time: {{moment this.start_time format="dddd, DD MMMM h:mm a"}}</li>
+                    <li>End Time: {{moment this.end_time format="dddd, DD MMMM h:mm a"}}</li>
+                    <li>Total Session Time: {{moment this.end_time - this.start_time "}}</li>
+                    <li>Project Id#: {{ this.project_id }}</li>
                     <li>Client: </li>
                     <li>Session Notes: {{ this.notes }}</li>
                     <form action="/api/session/{{ this._id }}?_method=DELETE" method="POST">

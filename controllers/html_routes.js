@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var moment = require("helper-moment");
 
 const db = require('../models');
 
@@ -8,7 +9,10 @@ const db = require('../models');
 //        Get LANDING PAGE            //
 // ---------------------------------- //
 router.get('/', (req, res) => {
-    res.render('index');
+  // let now = moment().format("dddd, MMMM Do");
+  let now = Date.now();
+  console.log(now)
+  res.render('index', { date: now });
 });
 
 // ---------------------------------- //

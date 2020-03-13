@@ -5,6 +5,9 @@ const logger = require("morgan");
 const methodOverride = require('method-override');
 const api_routes = require('./controllers/api_routes');
 const html_routes = require('./controllers/html_routes');
+var moment = require("helper-moment");
+var handlebars = require("handlebars");
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -31,6 +34,8 @@ app.use(express.static("public"));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+handlebars.registerHelper("moment", require("helper-moment"));
 
 app.use(logger("dev"));
 
@@ -67,6 +72,7 @@ app.use('/api', api_routes);
 
 
 app.listen(PORT, () => {
+    console.log(moment());
     console.log(`Server listening on port: ${PORT}`);
 });
 
