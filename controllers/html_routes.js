@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-var moment = require("helper-moment");
 
 const db = require('../models');
 
@@ -180,8 +179,6 @@ router.get('/session/start', (req, res) => {
       res.status(500).json(err);
     })
 
-
-
 });
 
 
@@ -191,7 +188,7 @@ router.get('/session/start', (req, res) => {
 router.get('/session/:id/edit', (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
-  console.log(req.params);
+  // console.log(req.params);
 
   // Retrieve currently open session to update
   db.Session.findById(req.params.id, (err, data) => {

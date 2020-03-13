@@ -106,15 +106,14 @@ router.delete('/project/:id', (req, res) => {
 //  API Post Create (START) SESSION   //
 // ---------------------------------- //
 router.post('/session/create', (req, res) => {
-    // console.log(req.body);
+    console.log("*** IN CREATE SESSION ***")
+    console.log(req.body);
     // Parse data from from submit
-    let { session_notes, proj_id } = req.body;
+    let { proj_id } = req.body;
     db.Session.create({
       date: Date.now(),
       start_time: Date.now(),
-    //   end_time: Date.now(),
       project_id: proj_id,
-    //   notes: session_notes
     })
     .then(data => {
         console.log(data);

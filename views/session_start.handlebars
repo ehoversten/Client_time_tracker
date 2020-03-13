@@ -4,19 +4,17 @@
             <h3>Start New Session</h3>
             <form action="/api/session/create" method="post">
                 <div class="input-field col s10">
-                    <label for="client_id">Select Project From List</label>
+                    <label for="proj_id">Select Project From List</label>
                 </div>
                 <br>
                 <br>
                 <div class="input-field col s10">
-
-                    <select id="client_id" class="browser-default">
+                    <select id="proj_id" name="proj_id" class="browser-default">
                         <option value="" disabled selected>Choose your option</option>
                         {{#each allProjects }}
-                        <option value="{{ this.title }}">Proj Title: {{ this.title }} | Proj-Id : {{this._id}}</option>
+                        <option value="{{ this._id }}">Proj Title: {{ this.title }} | Proj-Id : {{this._id}}</option>
                         {{/each }}
                     </select>
-
                 </div>
                 <button type="submit" class="waves-effect waves-light btn orange lighten-1">Start Session</button>
             </form>
