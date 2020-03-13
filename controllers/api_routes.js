@@ -1,4 +1,5 @@
 const express = require('express');
+// const mongoose = require('mongoose');
 const router = express.Router();
 
 const db = require('../models');
@@ -50,10 +51,12 @@ router.get('/projects', (req, res) => {
 //       API Post Create PROJECT      //
 // ---------------------------------- //
 router.post('/project/create', (req, res) => {
-    // console.log("Request Body: ")
-    // console.log(req.body);
+    console.log("Request Body: ")
+    console.log(req.body);
     // Parse and deconstruct form submission
     let { project_title, project_desc, client_id } = req.body;
+
+    // db.Client.findById
 
     db.Project.create({
         title: project_title,

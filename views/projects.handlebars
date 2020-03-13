@@ -10,12 +10,12 @@
                     <label for="project_title">Project Name:</label>
                 </div>
                 <div class="input-field col s8">
-                    <textarea placeholder="Enter short project description" id="project_desc" class="materialize-textarea"></textarea>
+                    <textarea placeholder="Enter short project description" id="project_desc" name="project_desc" class="materialize-textarea"></textarea>
                     <label for="project_desc">Project Description:</label>
                 </div>
 
                 <div class="input-field col s8">
-                    <select id="client_id" class="browser-default">
+                    <select id="client_id" name="client_id" class="browser-default">
                         <option value="" disabled selected>Choose your option</option>
                         {{#each allClients }}
                         <option value="{{ this.name }}">{{ this.name }}</option>

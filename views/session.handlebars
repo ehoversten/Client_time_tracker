@@ -16,7 +16,8 @@
                     <li>Session Id#: {{ this._id }}</li>
                     <li>Start Time: {{moment this.start_time format="dddd, DD MMMM h:mm a"}}</li>
                     <li>End Time: {{moment this.end_time format="dddd, DD MMMM h:mm a"}}</li>
-                    <li>Total Session Time: {{moment this.end_time - this.start_time "}}</li>
+                    <li>Total Session Time: {{moment this.session_length format="mm" }} minutes</li>
+                    <li>Total Session Time: {{ this.session_length }}</li>
                     <li>Project Id#: {{ this.project_id }}</li>
                     <li>Client: </li>
                     <li>Session Notes: {{ this.notes }}</li>
