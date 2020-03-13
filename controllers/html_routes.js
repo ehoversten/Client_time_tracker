@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 var moment = require("helper-moment");
-const mom = require('moment');
 
 const db = require('../models');
 
@@ -135,28 +134,17 @@ router.get('/sessions', (req, res) => {
     .then(data => {
       console.log(data);
       data.forEach(sesh => {
+        
         // create a temp variable to parse data from db
-
-        let session_time = sesh.end_time - sesh.start_time;
-        console.log(session_time);
-
-        let time_s = mom(sesh.start_time);
-        let time_e = mom(sesh.end_time);
-        console.log("********");
-        // console.log(time_s, time_e);
-        let time_length = time_e.diff(time_s, 'minutes');
-        console.log(`Difference : ${time_length}`);
-
-
         let newSession = {
           _id: sesh._id,
           date: sesh.date,
           start_time: sesh.start_time,
           end_time: sesh.end_time,
-          session_length: session_time,
+          session_length: sesh.end_time - sesh.start_time,
           project_id: sesh.project_id,
-          notes : sesh.notes
-        } 
+          notes: sesh.notes
+        }; 
         // add data object to context array
         allSesh.push(newSession); 
       });
