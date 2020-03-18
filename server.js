@@ -1,13 +1,18 @@
 const express = require('express');
-var exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const logger = require("morgan");
 const methodOverride = require('method-override');
+const moment = require("helper-moment");
+const handlebars = require("handlebars");
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const passportLocalMongoose = require("passport-local-mongoose");
+
+
+// Bring in Routes
 const api_routes = require('./controllers/api_routes');
 const html_routes = require('./controllers/html_routes');
-var moment = require("helper-moment");
-var handlebars = require("handlebars");
-
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,6 +28,7 @@ mongoose.connect(
 
 // Bring in our Models
 const db = require("./models");
+
 const seedDB = require('./seeds');
 
 
@@ -37,6 +43,23 @@ app.set("view engine", "handlebars");
 
 handlebars.registerHelper("moment", require("helper-moment"));
 
+// Express-Session Middleware
+app.use(
+  require("express-session")({
+    secret: "typeythings",
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: true }
+  })
+);
+
+// PassportJS Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
+
 app.use(logger("dev"));
 
 // override with POST having ?_method=DELETE
@@ -46,18 +69,6 @@ app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
  
-
-// *** TESTING *** //
-
-// db.Client.create({
-//         name: "Capital Music",
-//         contact: "Carol King"
-//     }).then(data => {
-//         console.log(data);
-//     }).catch(({ message }) => {
-//         console.log(message);
-//     });
-
 
 
 // -- ROUTES -- //

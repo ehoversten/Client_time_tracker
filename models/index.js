@@ -3,5 +3,6 @@
 module.exports = {
   Client: require("./Client"),
   Project: require("./Project"),
-  Session: require("./Session")
+  Session: require("./Session"),
+  User: require("./User")
 };
