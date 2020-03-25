@@ -13,6 +13,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 // Bring in Routes
 const api_routes = require('./controllers/api_routes');
 const html_routes = require('./controllers/html_routes');
+const user_routes = require('./controllers/user_routes');
 
 const PORT = process.env.PORT || 3000;
 
@@ -77,9 +78,19 @@ app.use(express.json());
 //     res.render('index');
 // });
 
+app.get('/userlogin', (req, res) => {
+  res.send("Login");
+})
+
+
+app.get('register', (req, res) => {
+  res.send("Login");
+})
+
 
 app.use('/', html_routes);
 app.use('/api', api_routes);
+app.use('/users', user_routes);
 
 
 app.listen(PORT, () => {
