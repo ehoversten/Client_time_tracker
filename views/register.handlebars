@@ -1,1 +1,50 @@
-{{!-- Registration form will go here --}}
+<div class="registration-container">
+    <div class="row">
+        <div class="col s12">
+            <h3>Hello There, Please Register</h3>
+            <br>
+            <form action="/users/register" method="post">
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="first_name" placeholder="Enter First Name">
+                        <label for="first_name">First Name:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="last_name" placeholder="Enter Last Name">
+                        <label for="last_name">Last Name:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="department" placeholder="Enter Department">
+                        <label for="department">Department:</label>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="username" placeholder="Enter Username">
+                        <label for="username">Username:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="password" id="password" placeholder="Enter Password">
+                        <label for="password">Password:</label>
+                    </div>
+                </div>
+
+                <button class="waves-effect waves-light btn green darken-1" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
