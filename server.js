@@ -78,15 +78,6 @@ app.use(express.json());
 //     res.render('index');
 // });
 
-app.get('/userlogin', (req, res) => {
-  res.send("Login");
-})
-
-
-app.get('register', (req, res) => {
-  res.send("Login");
-})
-
 
 app.use('/', html_routes);
 app.use('/api', api_routes);

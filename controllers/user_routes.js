@@ -12,9 +12,18 @@ router.get('/login', (req, res) => {
     res.render('login');
 })
 
+// ---------------------------------- //
+//          Post LOGIN PAGE           //
+// ---------------------------------- //
+router.post('/login', (req, res) => {
+    console.log(req.body);
+
+    res.redirect('/sessions');
+})
+
 
 // ---------------------------------- //
-//     Get REGISTRATION PAGE         //
+//     Get REGISTRATION PAGE          //
 // ---------------------------------- //
 router.get('/register', (req, res) => {
 
@@ -22,7 +31,9 @@ router.get('/register', (req, res) => {
     res.render('register');
 });
 
-
+// ---------------------------------- //
+//     Post REGISTRATION PAGE         //
+// ---------------------------------- //
 router.post('/register', (req, res) => {
     console.log(req.body);
 
