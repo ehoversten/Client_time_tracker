@@ -90,7 +90,7 @@ app.get('register', (req, res) => {
 
 app.use('/', html_routes);
 app.use('/api', api_routes);
-app.use('/users', user_routes);
+app.use('/user', user_routes);
 
 
 app.listen(PORT, () => {
