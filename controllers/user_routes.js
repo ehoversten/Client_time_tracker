@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 const db = require('../models');
 
@@ -36,6 +37,28 @@ router.get('/register', (req, res) => {
 // ---------------------------------- //
 router.post('/register', (req, res) => {
     console.log(req.body);
+    // create temp obj for user
+    let { first_name, last_name, department, username, email, password } = req.body;
+
+    let newUser = {
+        first_name: first_name,
+        last_name: last_name,
+        department: department,
+        username: username,
+        email: email,
+        password: password
+    }
+
+    db.User.create(newUser)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+        if(err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    })
 
     res.redirect('login');
 });
