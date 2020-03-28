@@ -61,6 +61,29 @@ router.post('/register', (req, res) => {
     })
 
     res.redirect('login');
+
+
+
+    //-- Mongoose Local Passport (?) -- //
+    // db.User.register(new User({
+    //     first_name: first_name,
+    //     last_name: last_name,
+    //     department: department,
+    //     username: username, 
+    //     email: email
+    // }), password, (err, user) => {
+    //     if(err) {
+    //         console.log(err);
+    //         return res.render('register');
+    //     }
+    //     console.log(user);
+    //     passport.authenticate("local")(req, res, function() {
+    //         res.redirect('secret');
+    //     });
+
+    // })
+    //-- Mongoose Local Passport (?) -- //
+    
 });
 
 

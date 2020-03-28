@@ -214,9 +214,18 @@ router.get('/session/:id/edit', (req, res) => {
 
 })
 
+
+// ---------------------------------- //
+//         Get AUTH PAGE              //
+// ---------------------------------- //
+router.get('/secret', (req, res) => {
+  res.render('secret');
+})
+
 // ---------------------------------- //
 //      // *** TESTING **** //        //
 // ---------------------------------- //
+
 router.get('/testing', (req, res) => {
     let testData = [
       {
