@@ -19,17 +19,24 @@ router.get('/login', (req, res) => {
 })
 
 // ---------------------------------- //
-//          Post LOGIN PAGE           //
+//          Post LOGIN ROUTE          //
 // ---------------------------------- //
 router.post('/login', passport.authenticate("local", {
     successRedirect: '/secret',
-    failureRedirect: '/user/login'
+    failureRedirect: '/users/login'
 }), (req, res) => {
     console.log(req.body);
 
     res.redirect('/sessions');
-})
+});
 
+// ---------------------------------- //
+//         Get LOGOUT ROUTE           //
+// ---------------------------------- //
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/users/login');
+});
 
 // ---------------------------------- //
 //     Get REGISTRATION PAGE          //
@@ -40,7 +47,7 @@ router.get('/register', (req, res) => {
 });
 
 // ---------------------------------- //
-//     Post REGISTRATION PAGE         //
+//     Post REGISTRATION ROUTE        //
 // ---------------------------------- //
 router.post('/register', (req, res) => {
     console.log(req.body);

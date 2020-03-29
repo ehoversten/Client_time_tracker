@@ -218,9 +218,19 @@ router.get('/session/:id/edit', (req, res) => {
 // ---------------------------------- //
 //         Get AUTH PAGE              //
 // ---------------------------------- //
-router.get('/secret', (req, res) => {
+router.get('/secret', isLoggedIn, (req, res) => {
   res.render('secret');
-})
+});
+
+
+// Function to check if user is authenticated
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()) {
+    // if user is authenticated run next function
+    return next();
+  }
+  res.redirect("/users/login");
+}
 
 // ---------------------------------- //
 //      // *** TESTING **** //        //
