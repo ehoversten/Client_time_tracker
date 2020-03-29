@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
   // let now = moment().format("dddd, MMMM Do");
   let now = Date.now();
   console.log(now)
+  console.log(req.user);
   res.render('index', { date: now });
 });
 
@@ -127,6 +128,10 @@ router.get('/projects', (req, res) => {
 //        Get ALL SESSIONS            //
 // ---------------------------------- //
 router.get('/sessions', (req, res) => {
+    // Check if user is logged in
+  console.log(`Current User: ${req.user}`);
+
+
   // create a variable to pass data from CONTROLLER to VIEW
   let allSesh = [];
   db.Session.find({})
@@ -148,7 +153,7 @@ router.get('/sessions', (req, res) => {
         allSesh.push(newSession); 
       });
 
-      res.render('session', { allSessions: allSesh });
+      res.render("session", { allSessions: allSesh, currentUser: req.user });
     })
     .catch(err => {
       if(err) {
@@ -161,6 +166,8 @@ router.get('/sessions', (req, res) => {
 //       Get START NEW SESSION        //
 // ---------------------------------- //
 router.get('/session/start', (req, res) => {
+
+
   let projects = [];
   db.Project.find({})
     .then(data => {

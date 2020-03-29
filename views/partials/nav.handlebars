@@ -7,9 +7,14 @@
                     <li><a href="/clients">Clients</a></li>
                     <li><a href="/projects">Projects</a></li>
                     <li><a href="/sessions">Sessions</a></li>
+
+                    {{#if currentUser }}
+                    <li>Signed in as <span>{{ currentUser.first_name }}</span></li>
+                    <li><a href="/users/logout">Logout</a></li>
+                    {{else}}
                     <li><a href="/users/login">Login</a></li>
                     <li><a href="/users/register">Register</a></li>
-                    <li><a href="/users/logout">Logout</a></li>
+                    {{/if }}
                 </ul>
 
             </div>

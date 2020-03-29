@@ -62,6 +62,11 @@ passport.use(new LocalStrategy(db.User.authenticate()));
 passport.serializeUser(db.User.serializeUser());
 passport.deserializeUser(db.User.deserializeUser());
 
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+})
+
 app.use(logger("dev"));
 
 // override with POST having ?_method=DELETE
