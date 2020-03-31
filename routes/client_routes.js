@@ -1,16 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-
 // Bring in our Models
-const db = require('../models');
-
-
+const db = require("../models");
+// Bring in Auth Config Function
+const isLoggedIn = require("../config/auth");
 
 // ---------------------------------- //
 //        Get ALL CLIENTS             //
 // ---------------------------------- //
-router.get('/clients', isLoggedIn, (req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
   // create array to pass our parsed database data
   let clients = [];
 
@@ -65,6 +64,27 @@ router.get('/clients', isLoggedIn, (req, res) => {
       // console.log(err);
       res.status(500).json(err);
   });
+});
+
+
+// ---------------------------------- //
+//         Post Create CLIENT         //
+// ---------------------------------- //
+router.post('/create', (req, res) => {
+    // console.log(req.body);
+    // Parse data from from submit
+    let { client_name, client_contact } = req.body;
+    db.Client.create({
+      name: client_name,
+      contact: client_contact
+    }).then(data => {
+        // console.log(data);
+        // res.status(301).json(data);
+        res.redirect('/clients');
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
 });
 
 

@@ -100,7 +100,7 @@ router.delete('/project/:id', (req, res) => {
             res.redirect('/projects');
         }
     });
-})
+});
 
 // ---------------------------------- //
 //  API Post Create (START) SESSION   //
@@ -183,7 +183,7 @@ router.delete('/session/:id', (req, res) => {
             res.redirect('/sessions');
         }
     });
-})
+});
 
 
 

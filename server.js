@@ -11,7 +11,11 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 
 // Bring in Routes
-const api_routes = require('./controllers/api_routes');
+const client_routes = require('./routes/client_routes');
+const project_routes = require('./routes/project_routes');
+const session_routes = require('./routes/session_routes');
+
+// const api_routes = require('./controllers/api_routes');
 const html_routes = require('./controllers/html_routes');
 const user_routes = require('./controllers/user_routes');
 
@@ -31,7 +35,6 @@ mongoose.connect(
 const db = require("./models");
 
 const seedDB = require('./seeds');
-
 
 // Initialize an express instance
 const app = express();
@@ -76,17 +79,11 @@ app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
  
-
-
-// -- ROUTES -- //
-// app.get('/', (req, res) => {
-//     // res.send("Hi There");
-//     res.render('index');
-// });
-
-
+// Define Routes
 app.use('/', html_routes);
-app.use('/api', api_routes);
+app.use('/clients', client_routes);
+app.use('/projects', project_routes);
+app.use('/sessions', session_routes);
 app.use('/users', user_routes);
 
 

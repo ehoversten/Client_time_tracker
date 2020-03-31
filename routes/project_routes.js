@@ -4,11 +4,14 @@ const router = express.Router();
 // Bring in our Models
 const db = require("../models");
 
+// Bring in Auth Config Function
+const isLoggedIn = require("../config/auth");
 
 // ---------------------------------- //
 //        Get ALL PROJECTS            //
 // ---------------------------------- //
-router.get('/projects', isLoggedIn, (req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
+  // Create a temp array to parse db data
   let clients = [];
   // Find all clients to populate pull-down 
   db.Client.find({})
@@ -29,7 +32,7 @@ router.get('/projects', isLoggedIn, (req, res) => {
       res.status(500).json(err);
     });
   
-  
+  // Create a temp array to parse db data
   let projects = [];
   db.Project.find({})
     .populate('Client')
@@ -50,6 +53,59 @@ router.get('/projects', isLoggedIn, (req, res) => {
     }).catch(err => {
       // return error
       res.status(500).json(err);
+    });
+});
+
+// ---------------------------------- //
+//        Post Create PROJECT         //
+// ---------------------------------- //
+router.post('/create', (req, res) => {
+    console.log("Request Body: ")
+    console.log(req.body);
+    // Parse and deconstruct form submission
+    let { project_title, project_desc, client_id } = req.body;
+
+    db.Project.create({
+        title: project_title,
+        description: project_desc,
+        client_id: client_id
+    }).then(data => {
+        console.log("***********")
+        console.log("New Project Data")
+        console.log(data);
+        let { _id, client_id } = data;
+        console.log(`client id: ${client_id}`);
+
+        db.Client.findByIdAndUpdate(
+          { _id: client_id },
+          { $push: { projects: _id } },
+          { new: true }
+          // *** I think I need this, or to use callback here and then trigger res.redirect??
+        ).then(dbClient => {
+          console.log(dbClient);
+          res.status(304).redirect('/projects');
+        });
+        // catch all error block
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// ---------------------------------- //
+//          Delete A Project          //
+// ---------------------------------- //
+router.delete('/:id', (req, res) => {
+    let objId = req.params.id
+    console.log(objId);
+
+    db.Project.findOneAndRemove(objId, err => {
+        if(err) {
+            console.log(err);
+            res.status(500).json(err);
+        } else {
+            res.redirect('/projects');
+        }
     });
 });
 
