@@ -11,14 +11,13 @@ router.get('/', (req, res) => {
   // let now = moment().format("dddd, MMMM Do");
   let now = Date.now();
   console.log(now)
-  console.log(req.user);
   res.render('index', { date: now });
 });
 
 // ---------------------------------- //
 //        Get ALL CLIENTS             //
 // ---------------------------------- //
-router.get('/clients', (req, res) => {
+router.get('/clients', isLoggedIn, (req, res) => {
   // create array to pass our parsed database data
   let clients = [];
 
@@ -78,7 +77,7 @@ router.get('/clients', (req, res) => {
 // ---------------------------------- //
 //        Get ALL PROJECTS            //
 // ---------------------------------- //
-router.get('/projects', (req, res) => {
+router.get('/projects', isLoggedIn, (req, res) => {
   let clients = [];
   // Find all clients to populate pull-down 
   db.Client.find({})
@@ -91,7 +90,7 @@ router.get('/projects', (req, res) => {
           contact: client.contact
         };
         clients.push(clientObj);
-        console.log(clients);
+        // console.log(clients);
       })
     })
     .catch(err => {
@@ -127,16 +126,19 @@ router.get('/projects', (req, res) => {
 // ---------------------------------- //
 //        Get ALL SESSIONS            //
 // ---------------------------------- //
-router.get('/sessions', (req, res) => {
+router.get('/sessions', isLoggedIn, (req, res) => {
     // Check if user is logged in
   console.log(`Current User: ${req.user}`);
+  let currentUser = req.user;
+  console.log(`User Name: ${req.user.username}`);
 
 
   // create a variable to pass data from CONTROLLER to VIEW
   let allSesh = [];
   db.Session.find({})
     .then(data => {
-      console.log(data);
+      // Did we get data? 
+      // console.log(data);
       data.forEach(sesh => {
         
         // create a temp variable to parse data from db
@@ -153,7 +155,7 @@ router.get('/sessions', (req, res) => {
         allSesh.push(newSession); 
       });
 
-      res.render("session", { allSessions: allSesh, currentUser: req.user });
+      res.render("session", { allSessions: allSesh, currentUser: currentUser });
     })
     .catch(err => {
       if(err) {
@@ -165,8 +167,7 @@ router.get('/sessions', (req, res) => {
 // ---------------------------------- //
 //       Get START NEW SESSION        //
 // ---------------------------------- //
-router.get('/session/start', (req, res) => {
-
+router.get('/session/start', isLoggedIn, (req, res) => {
 
   let projects = [];
   db.Project.find({})
@@ -192,7 +193,7 @@ router.get('/session/start', (req, res) => {
 // ---------------------------------- //
 //         Get END SESSION            //
 // ---------------------------------- //
-router.get('/session/:id/edit', (req, res) => {
+router.get('/session/:id/edit', isLoggedIn, (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
   // console.log(req.params);
@@ -217,9 +218,8 @@ router.get('/session/:id/edit', (req, res) => {
     };
     console.log(foundSession);
     res.render('session_end', { single: foundSession });
-  })
-
-})
+  });
+});
 
 
 // ---------------------------------- //

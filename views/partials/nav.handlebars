@@ -9,7 +9,7 @@
                     <li><a href="/sessions">Sessions</a></li>
 
                     {{#if currentUser }}
-                    <li>Signed in as <span>{{ currentUser.first_name }}</span></li>
+                    <li>Signed in as <span>{{ currentUser.username }}</span></li>
                     <li><a href="/users/logout">Logout</a></li>
                     {{else}}
                     <li><a href="/users/login">Login</a></li>
