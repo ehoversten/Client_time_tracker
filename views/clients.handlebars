@@ -3,35 +3,48 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <h3>Add Client</h3>
-                    <form action="/clients/create" method="post">
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <input type="text" name="client_name" placeholder="Ex. AMG Autos" class="validate">
-                                <label  for="client_name">Client Account Name:</label>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <div class="close-btn">
+                                <h3>Add Client</h3>
+                                <a href="#!" class="modal-close waves-effect waves-light red darken-1 btn-flat"> X </a>
                             </div>
-                            <div class="input-field col s8">
-                                <input type="text" name="client_contact" placeholder="Ex. John Doe">
-                                <label for="client_contact">Client Contact:</label>
-                            </div>
-                            <div class="col s2">
-                                <button type="submit" class="right bottom btn waves-effect waves-light green darken-1">Add</button>
-                            </div>
+                            <form action="/clients/create" method="post">
+                                <div class="row">
+                                    <div class="input-field col s8 offset-s2">
+                                        <input type="text" name="client_name" placeholder="Ex. AMG Autos" class="validate">
+                                        <label  for="client_name">Client Account Name:</label>
+                                    </div>
+                                    <div class="input-field col s8 offset-s2">
+                                        <input type="text" name="client_contact" placeholder="Ex. John Doe">
+                                        <label for="client_contact">Client Contact:</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <button type="submit" class="right bottom btn waves-effect waves-light green darken-1">Add</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>  
 
+    {{!-- CLIENT LIST --}}
     <div class="row">
         <div class="col s12">
-            <h4>Clients List:</h4>
+            <h5>Clients List | Total: {{ allClients.length }}</h5>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger green darken-1" href="#modal1">Add Client</a>
             <hr>
             {{#if allClients }}
                 {{#each allClients }}
                 <div class="col s4">
-                    <div class="card green darken-3">
+                    <div class="card green darken-1">
                         <div class="card-content white-text">
                             <span class="card-title">Company: {{ this.name }}</span>
                             <p>Company Ref Number: {{ this._id }}</p>
@@ -40,19 +53,17 @@
 
                     {{#if projects}}
                         <div class="card-action">
-                            <span class="card-title">Project List | Num Projects: ({{projects.length }})</span>
+                            <p>Project List | ({{projects.length }})</p>
                         {{#each projects }}
                             <ul class="projects">
-                                <li>Project Title: {{ this.title }}</li>
-                                <li>Project ID: {{ this._id }}</li>
-                                <li>Description: {{ this.description }}</li>
+                                <li><a href="{{ this._id }}">Project Title: {{ this.title }}</a></li>
                             </ul>
                         {{/each }}
                         </div>
 
                     {{else}}
                         <div class="card-action">
-                            <h5>All Projects: No projects currently</h5>
+                            <a href="#">No projects currently</a>
                         </div>
                     {{/if}}
                     </div>

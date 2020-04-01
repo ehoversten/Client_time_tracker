@@ -1,60 +1,63 @@
 
 <div class="projects-container">
-    <div class="row">
-        <div class="col s12">
-            <h3>Add Project</h3>
-            <form action="/projects/create" method="post">
-            <div class="row">
-                <div class="input-field col s8">
-                    <input class="validate" type="text" name="project_title" placeholder="Example - For company web site">
-                    <label for="project_title">Project Name:</label>
-                </div>
-                <div class="input-field col s8">
-                    <textarea placeholder="Enter short project description" id="project_desc" name="project_desc" class="materialize-textarea"></textarea>
-                    <label for="project_desc">Project Description:</label>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3>Add Project</h3>
+                <form action="/projects/create" method="post">
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input class="validate" type="text" name="project_title" placeholder="Example - For company web site">
+                        <label for="project_title">Project Name:</label>
+                    </div>
+                    <div class="input-field col s8">
+                        <textarea placeholder="Enter short project description" id="project_desc" name="project_desc" class="materialize-textarea"></textarea>
+                        <label for="project_desc">Project Description:</label>
+                    </div>
 
-                <div class="input-field col s8">
-                    <select id="client_id" name="client_id" class="browser-default">
-                        <option value="" disabled selected>Choose your option</option>
-                        {{#each allClients }}
-                        <option value="{{ this._id }}">{{ this.name }}</option>
-                        {{/each }}
-                    </select>
+                    <div class="input-field col s8">
+                        <select id="client_id" name="client_id" class="browser-default">
+                            <option value="" disabled selected>Choose your option</option>
+                            {{#each allClients }}
+                            <option value="{{ this._id }}">{{ this.name }}</option>
+                            {{/each }}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-floating right btn waves-effect waves-light green darken-1"><i class="material-icons">add</i></button>
                 </div>
-
-                <button type="submit" class="btn-floating right btn waves-effect waves-light green darken-1"><i class="material-icons">add</i></button>
-            </div>
-            </form>
-        </div>
-    </div>
-
-    <hr>
-    
-    <div class="row">
-        <div class="col s12">
-            <div class="project-list">
-                <h3>Current Active Projects List | Total: {{ allProjects.length }}</h3>
-                {{#if allProjects }}
-                <ul>
-                {{#each allProjects }}
-                    <h5>Project Title: {{ this.title }}</h5>
-                    <li>Project ID: {{ this._id }}</li>
-                    <li>Project Description: {{ this.description }}</li>
-                    <li>Client ID: {{ this.client_id }}</li>
-                    <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
-                        <button class="waves-effect waves-light btn right red darken-2" type="submit"><i class="material-icons">delete</i></button>
-                    </form>
-                    <br>
-                    <br>
-                    <hr>
-                {{/each }}
-                </ul>
-                {{else}}
-                <h2>No Projects Currently</h2>
-                {{/if }}
+                </form>
             </div>
         </div>
+
+        <hr>
+        
+        <div class="row">
+            <div class="col s12">
+                <div class="project-list">
+                    <h3>Current Active Projects List | Total: {{ allProjects.length }}</h3>
+                    {{#if allProjects }}
+                    <ul>
+                    {{#each allProjects }}
+                        <h5>Project Title: {{ this.title }}</h5>
+                        <li>Project ID: {{ this._id }}</li>
+                        <li>Project Description: {{ this.description }}</li>
+                        <li>Client ID: {{ this.client_id }}</li>
+                        <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
+                            <button class="waves-effect waves-light btn right red darken-2" type="submit"><i class="material-icons">delete</i></button>
+                        </form>
+                        <br>
+                        <br>
+                        <hr>
+                    {{/each }}
+                    </ul>
+                    {{else}}
+                    <h2>No Projects Currently</h2>
+                    {{/if }}
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
