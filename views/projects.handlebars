@@ -16,8 +16,8 @@
                     </div>
 
                     <div class="input-field col s8">
-                        <select id="client_id" name="client_id" class="browser-default">
-                            <option value="" disabled selected>Choose your option</option>
+                        <select id="client_id" name="client_id">
+                            <option value="" disabled selected>Select Client</option>
                             {{#each allClients }}
                             <option value="{{ this._id }}">{{ this.name }}</option>
                             {{/each }}

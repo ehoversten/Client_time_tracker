@@ -11,7 +11,7 @@
                     <br>
                     <div class="input-field col s10">
                         <select id="proj_id" name="proj_id">
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="" disabled selected>Select Project</option>
                             {{#each allProjects }}
                             <option value="{{ this._id }}">Proj Title: {{ this.title }} | Proj-Id : {{this._id}}</option>
                             {{/each }}
