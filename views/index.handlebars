@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container center">
     <h1>Hey There, Welcome!!</h1>
 
     <div class="time">
@@ -6,4 +6,19 @@
     </div>
     <h4>Have you ever had a difficult time keeping track of what projects you worked on, and for what customer when?</h4>
     <h4>Check out my Developer Project/Client Time Tracking application and worry no longer!!</h4>
+
+    <div class="button-container">
+    {{#if currentUser }}
+        {{!-- <a href="/users/logout">
+            <button class="waves-effect waves-light btn green darken-1">Logout</button>
+        </a> --}}
+    {{else}}
+        <a href="/users/login">
+            <button class="waves-effect waves-light btn green darken-1">Login</button>
+        </a>
+        <a href="/users/register">
+            <button class="waves-effect waves-light btn green darken-1">Register</button>
+        </a>
+    {{/if }}
+    </div>
 </div>
