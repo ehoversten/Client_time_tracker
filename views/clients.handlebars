@@ -49,11 +49,14 @@
                             <span class="card-title">Company: {{ this.name }}</span>
                             <p>Company Ref Number: {{ this._id }}</p>
                             <p>Contact: {{ this.contact }}</p>
+                            <form action="/clients/{{ this._id }}?_method=DELETE" method="POST">
+                                <button class="waves-effect waves-light btn right red darken-2" type="submit"><i class="material-icons">delete</i></button>
+                            </form>
                         </div>
 
                     {{#if projects}}
                         <div class="card-action">
-                            <p>Project List | ({{projects.length }})</p>
+                            <p>Project List | ({{ projects.length }})</p>
                         {{#each projects }}
                             <ul class="projects">
                                 <li><a href="{{ this._id }}">Project Title: {{ this.title }}</a></li>

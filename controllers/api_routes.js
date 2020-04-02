@@ -92,7 +92,7 @@ router.delete('/project/:id', (req, res) => {
     let objId = req.params.id
     console.log(objId);
 
-    db.Project.findOneAndRemove(objId, err => {
+    db.Project.findByIdAndRemove(objId, err => {
         if(err) {
             console.log(err);
             res.status(500).json(err);

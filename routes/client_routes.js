@@ -88,4 +88,22 @@ router.post('/create', (req, res) => {
 });
 
 
+// ---------------------------------- //
+//         Delete A Client            //
+// ---------------------------------- //
+router.delete('/:id', (req, res) => {
+  let objId = req.params.id
+  console.log(`Object ID: ${objId}`);
+
+  db.Client.findOneAndRemove( { _id: objId }, err => {
+    if (err) {
+      console.log(err);
+      res.status(500).json(err);
+    } else {
+      res.redirect('/clients');
+    }
+  });
+});
+
+
 module.exports = router;

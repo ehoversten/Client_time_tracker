@@ -162,7 +162,7 @@ router.delete('/:id', (req, res) => {
   let objId = req.params.id
   console.log(objId);
 
-  db.Session.findOneAndRemove(objId, err => {
+  db.Session.findByIdAndRemove(objId, err => {
     if(err) {
       console.log(err);
       res.status(500).json(err);
