@@ -26,7 +26,19 @@
     <script>
 
         let test_arr = [1, 2, 3, 4, 5];
-        let test_d = d3.selectAll(".d-test li").data(test_arr).enter();
+
+        console.log(d3.select('.d-test')
+            .selectAll('li')
+            .data(test_arr)
+            .text(function(d, i) {
+                return `This is Item ${d} at Idx : ${i}`
+            }));
+
+
+        let test_d = d3.select('.d-test')
+            .selectAll("li")
+            .data(test_arr)
+            .enter();
 
         console.log(test_d);
 
