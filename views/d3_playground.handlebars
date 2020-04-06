@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="d3_playground">
+
+        <ul class="d-test">
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+            <li>Four</li>
+            <li>Five</li>
+        </ul>
+
+
+        <p>{{ test_d }}</p>
+        <p>{{ test_d3 }}</p>
+    </div>
+
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script>
+
+        let test_arr = [1, 2, 3, 4, 5];
+        let test_d = d3.selectAll(".d-test li").data(test_arr).enter();
+
+        console.log(test_d);
+
+    </script>
+    
+</body>
+</html>
+
