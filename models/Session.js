@@ -22,6 +22,15 @@ const SessionSchema = new Schema({
   },
   notes: {
     type: String
+  },
+  session_user: {
+    id: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: {
+      type: String
+    }
   }
 });
 

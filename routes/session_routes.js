@@ -51,6 +51,8 @@ router.get('/', isLoggedIn, (req, res) => {
 //       Get START NEW SESSION        //
 // ---------------------------------- //
 router.get('/start', isLoggedIn, (req, res) => {
+  console.log("*** HIT START SESSION ***");
+  console.log(`User is ${req.user.username}`);
 
   let projects = [];
   db.Project.find({})
@@ -76,6 +78,7 @@ router.get('/start', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 router.post('/create', isLoggedIn, (req, res) => {
   console.log("*** IN CREATE SESSION ***")
+  console.log(`User is ${req.user.username}`);
   console.log(req.body);
   // Parse data from from submit
   let { proj_id } = req.body;
@@ -83,6 +86,10 @@ router.post('/create', isLoggedIn, (req, res) => {
     date: Date.now(),
     start_time: Date.now(),
     project_id: proj_id,
+    session_user: { 
+      id: req.user._id,
+      username: req.user.username
+    }
   })
   .then(data => {
     console.log(data);
@@ -102,6 +109,7 @@ router.post('/create', isLoggedIn, (req, res) => {
 //      Put Update (END) SESSION      //
 // ---------------------------------- //
 router.put('/:id', isLoggedIn, (req, res) => {
+  console.log("*** END SESSION ***");
   console.log("**********");
   console.log(req.params);
   console.log(req.body);
