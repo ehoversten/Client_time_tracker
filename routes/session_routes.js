@@ -32,7 +32,11 @@ router.get('/', isLoggedIn, (req, res) => {
           end_time: sesh.end_time,
           session_length: sesh.end_time - sesh.start_time,
           project_id: sesh.project_id,
-          notes: sesh.notes
+          notes: sesh.notes,
+          session_user: {
+            id: sesh.session_user._id,
+            username: sesh.session_user.username
+          }
         }; 
         // add data object to context array
         allSesh.push(newSession); 

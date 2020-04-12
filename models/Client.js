@@ -14,7 +14,11 @@ const ClientSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Project'
         }
-    ]
+    ],
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
 });
 
 
