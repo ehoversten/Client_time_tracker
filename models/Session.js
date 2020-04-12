@@ -44,13 +44,3 @@ const Session = mongoose.model('Session', SessionSchema);
 
 module.exports = Session;
 
-
-
-// ** TO DO TASKS ** //
-/*
-
-    * Will need MomentJS or other Date format Lib
-    * Add Fields for project_start & project_end
-    * Add User field and association
-
-*/
