@@ -16,9 +16,14 @@ const SessionSchema = new Schema({
     type: Date
     // required: true
   },
-  project_id: {
-    type: Schema.Types.ObjectId,
-    ref: "Project"
+  project_work: {
+    id : {
+      type: Schema.Types.ObjectId,
+      ref: "Project"
+    },
+    project_title:  {
+      type: String
+    }
   },
   notes: {
     type: String

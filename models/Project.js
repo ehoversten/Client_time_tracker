@@ -50,6 +50,6 @@ module.exports = Project;
 
     * Add Fields for project_start & project_end [ x ]
     * Team or Team Members assigned to Project   [ x ]
-        * How to add members to project? (edit  functionality)   
+        * How to add members to project? (edit  functionality)                           [   ]
 
 */
