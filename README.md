@@ -1,32 +1,39 @@
 # Project Time Tracker
 
 ## Overview 
-This is a simple project that allows a User to login/register to the application and then be able to track the time spent per Session working on a particular project from the database. User and Project data are associated to each Session as well as any notes the User wanted to provide when ending the session.
+This is a simple project that allows a User to login/register to the application and then be able to track the time spent per Session working on a particular project from the database. User and Project data are associated to each Session as well as any notes the User wanted to provide when ending the session. Time spent per Session, User and Project associated with Session will be displayed in a Session Table.
 
-## Functionality
+### Functionality
 
 A User Can: 
-    * Register
-    * Login
-    * Is Authorized to View protected routes
-        * Clients
-        * Projects
-        * Sessions
+* Register
+* Login
+* Is Authorized to View protected routes
+    * Clients
+    * Projects
+    * Sessions
 
 A Project Can: 
-    * Be associated to a specified Client
-    * Be associated to a Team (specified Users)
+* Be Created 
+* Be Deleted
+* Be associated to a specified Client
+* Be associated to a Team (specified Users)
 
 A Client Can:
-    * Be associated to a list of Projects
+- Be Created
+- Be Deleted
+* Be associated to a list of Projects
 
 A Session Can:
-    * Keep track of Date of session
-    * Keep track of Duration of session
-    * Keep track of User_id of session
-    * Keep track of Project_id of session
+- Be Created
+- Be Deleted
+* Keep track of Date of session
+* Keep track of Duration of session
+* Keep track of User_id of session
+* Keep track of Project_id of session
 
-This is a simple project that allows a User to login/register to the application and then be able to 
+&nbsp;
+
 
 # 
 
@@ -46,24 +53,34 @@ Give examples
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+Start by cloning the project Repo
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+```bash
+$> git clone https://github.com/ehoversten/Client_time_tracker.git
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Install project dependencies
 
+```javascript
+$> cd Client_time_tracker
 
+$> npm install
+// OR using YARN
+$> yarn install
+```
+
+Run the application locally 
+```javascript
+$> npm run start
+```
+#
+
+ 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Deployment with Docker and AWS coming
+
+&nbsp; 
 
 ## Built With
 
