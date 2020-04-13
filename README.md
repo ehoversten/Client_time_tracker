@@ -1,9 +1,18 @@
 # Project Time Tracker
 
-## Overview 
+![language](https://img.shields.io/badge/Language-JavaScript-yellow)
+![server](https://img.shields.io/badge/Backend-Node/Express-green)
+![database](https://img.shields.io/badge/Database-MongoDB-red)
+![auth](https://img.shields.io/badge/Auth-PassportJS-green)
+
+
+## Description
+
 This is a simple project that allows a User to login/register to the application and then be able to track the time spent per Session working on a particular project from the database. User and Project data are associated to each Session as well as any notes the User wanted to provide when ending the session. Time spent per Session, User and Project associated with Session will be displayed in a Session Table.
 
-### Functionality
+[Project Time Tracker](https://#)
+
+## Usage
 
 A User Can: 
 * Register
@@ -35,21 +44,7 @@ A Session Can:
 &nbsp;
 
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
+## Installation
 
 Start by cloning the project Repo
 

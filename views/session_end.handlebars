@@ -17,6 +17,7 @@
             </div>
             <div class="counter">
                 <h3>Current Session: <span id="time"></span></h3>
+                <h3>Date Session: <span id="day"></span></h3>
                 <button id="stop">Stop</button>
             </div>
         </div>
@@ -26,13 +27,18 @@
     <script>
 
         let time = document.getElementById('time');
+        let day = document.getElementById('day');
         let stopBtn = document.getElementById('stop');
 
         let count = 0;
+
         let timerId = setInterval( () => {
+            let now = Date.now();           
             count++;
             console.log(count);
+            console.log(now);
             time.textContent = count;
+            day.textContent = now;
         }, 1000);
 
         stopBtn.addEventListener('click', () => {
