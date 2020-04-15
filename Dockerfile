@@ -6,12 +6,12 @@ FROM node:alpine
 WORKDIR /usr/app
 
 # Copy the files from the current directory to app/
-# COPY . app/
-COPY ./ ./usr/app
+COPY ./ ./
 
 
 # Install dependencies (npm ci is similar to npm i, but for automated builds)
-RUN npm install
+# RUN npm install
+RUN yarn install
 
 # Listen on the specified port
 # EXPOSE 5000
@@ -19,4 +19,5 @@ RUN npm install
 # Set Node server
 # ENTRYPOINT npm run start
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD ["yarn", "start"]
