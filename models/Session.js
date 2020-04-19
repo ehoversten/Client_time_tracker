@@ -5,38 +5,43 @@ const SessionSchema = new Schema({
   date: {
     type: Date,
     default: Date.now,
-    required: true
+    required: true,
   },
   start_time: {
     type: Date,
     default: Date.now,
-    required: true
+    required: true,
   },
   end_time: {
-    type: Date
+    type: Date,
     // required: true
   },
+  // may not need this (?)
   project_work: {
-    id : {
+    id: {
       type: Schema.Types.ObjectId,
-      ref: "Project"
+      ref: "Project",
     },
-    project_title:  {
-      type: String
-    }
+    project_title: {
+      type: String,
+    },
+  },
+  project_id: {
+    type: Schema.Types.ObjectId,
+    ref: "Project",
   },
   notes: {
-    type: String
+    type: String,
   },
   session_user: {
     id: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
     username: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 });
 
 

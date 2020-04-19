@@ -4,11 +4,13 @@
             <div class="col s8 offset-s2">
                 <h5>Current Session Info:</h5>
                 <hr>
+                <p>Username: {{ single.session_user.username }}</p>
+                <p>User ID: {{ single.session_user.id }}</p>
                 <p>Session ID: {{ single._id }}</p>
                 <p>Project ID: {{ single.project_id }}</p>
                 <form action="/sessions/{{ single._id }}?_method=PUT" method="POST">
                     <div class="input-field col s12">
-                        <textarea placeholder="Enter notes for current session" class="materialize-textarea" name="session_notes" ></textarea>
+                        <textarea placeholder="Enter notes for current session" class="materialize-textarea" name="session_notes"></textarea>
                         <label for="session_notes">Session Notes:</label>
                     </div>
 

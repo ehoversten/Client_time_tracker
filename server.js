@@ -23,26 +23,26 @@ const user_routes = require('./controllers/user_routes');
 const PORT = 3000;
 
 // Connect to Database 
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false
-//   }
-// );
-
-// Connect to Database through Docker Container
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://mongo:27017/docker-node-mongo",
+  process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
   }
-).then( res => console.log(res)
-).catch(err => console.log(err)
 );
+
+// Connect to Database through Docker Container
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://mongo:27017/docker-node-mongo",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   }
+// ).then( res => console.log(res)
+// ).catch(err => console.log(err)
+// );
 
 // Bring in our Models
 const db = require("./models");

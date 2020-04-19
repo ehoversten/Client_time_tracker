@@ -31,13 +31,15 @@ router.get('/', isLoggedIn, (req, res) => {
           start_time: sesh.start_time,
           end_time: sesh.end_time,
           session_length: sesh.end_time - sesh.start_time,
-          project_id: sesh.project_id,
+          project_id: sesh.project_work.id,
           notes: sesh.notes,
           session_user: {
             id: sesh.session_user._id,
             username: sesh.session_user.username
           }
         }; 
+        console.log('--------------')
+        console.log(newSession)
         // add data object to context array
         allSesh.push(newSession); 
       });
@@ -90,8 +92,12 @@ router.post('/create', isLoggedIn, (req, res) => {
     date: Date.now(),
     start_time: Date.now(),
     project_id: proj_id,
+    project_work: {
+      id: proj_id,
+
+    },
     session_user: { 
-      id: req.user._id,
+      id: req.user.id,
       username: req.user.username
     }
   })
@@ -160,7 +166,11 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
       end_time: data.end_time,
       session_length: session_time,
       project_id: data.project_id,
-      notes: data.notes
+      notes: data.notes,
+      session_user: {
+        id: req.user.id,
+        username: req.user.username
+      }
     };
     console.log(foundSession);
     res.render('session_end', { single: foundSession });
