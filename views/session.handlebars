@@ -36,7 +36,7 @@
                                     <td>{{ this.project_id }}</td>
                                     <td>xxx</td>
                                     <td>{{ this.notes }}</td>
-                                    <td>{{ this.session_user.username }}</td>
+                                    <td><a href="/users/{{ this }}""></a>{{ this.session_user.username }}</td>
                                     <td><form action="/sessions/{{ this._id }}?_method=DELETE" method="POST">
                                         <button class="right waves-effect waves-light btn red darken-2" type="submit"><i
                                                 class="material-icons">delete</i></button>

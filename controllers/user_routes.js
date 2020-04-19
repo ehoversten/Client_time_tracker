@@ -3,11 +3,36 @@ const router = express.Router();
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
+const isLoggedIn = require('../config/auth');
 
 const bcrypt = require('bcryptjs');
 
 const db = require('../models');
 const User = require('../models/User');
+
+// ---------------------------------- //
+//      Get USER Detail PAGE          //
+// ---------------------------------- //
+router.get("/overview", isLoggedIn, (req, res) => {
+//   console.log(req.session);
+//   console.log(req.session.passport);
+//   console.log(req.session.passport.user);
+//   console.log(req.user);
+//   console.log(req.user._id);
+
+  let currentUser = {
+      _id: req.user._id,
+      first_name: req.user.first_name,
+      last_name: req.user.last_name,
+      username: req.user.username,
+      department: req.user.department,
+      email: req.user.email,
+      sessions: req.user.sessions,
+      assigned_to: req.user.assigned_to
+  }
+
+  res.render("users/overview", { currentUser: currentUser });
+});
 
 // ---------------------------------- //
 //          Get LOGIN PAGE            //

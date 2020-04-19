@@ -223,7 +223,18 @@ router.get('/', (req, res) => {
 //         Get AUTH PAGE              //
 // ---------------------------------- //
 router.get('/secret', isLoggedIn, (req, res) => {
-  res.render('secret');
+  console.log(req.user);
+  req.session.user = req.user;
+  console.log(`****`);
+  console.log(req.session);
+  // create temp variable to pass to Handlebars View
+  let thisUser = {
+    id: req.user._id,
+    username: req.user.username,
+    first_name: req.user.first_name
+  }
+
+  res.render("secret", { currentUser: thisUser });
 });
 
 
