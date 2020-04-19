@@ -40,6 +40,8 @@ mongoose.connect(
     useUnifiedTopology: true,
     useFindAndModify: false
   }
+).then( res => console.log(res)
+).catch(err => console.log(err)
 );
 
 // Bring in our Models
