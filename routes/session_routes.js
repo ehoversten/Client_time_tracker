@@ -87,32 +87,32 @@ router.post('/create', isLoggedIn, (req, res) => {
   console.log(`User is ${req.user.username}`);
   console.log(req.body);
   // Parse data from from submit
-  let { proj_id } = req.body;
+  let { proj_id, proj_title } = req.body;
   db.Session.create({
     date: Date.now(),
     start_time: Date.now(),
     project_id: proj_id,
     project_work: {
       id: proj_id,
-
+      project_title: proj_title,
     },
-    session_user: { 
+    session_user: {
       id: req.user.id,
-      username: req.user.username
-    }
+      username: req.user.username,
+    },
   })
-  .then(data => {
-    console.log(data);
-    // res.status(301).json(data);
-    // res.redirect("/session/end");
-    res.redirect("/sessions/" + data._id + "/edit");
-  })
-  .catch(err => {
-    if (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+    .then((data) => {
+      console.log(data);
+      // res.status(301).json(data);
+      // res.redirect("/session/end");
+      res.redirect("/sessions/" + data._id + "/edit");
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
+    });
 });
 
 // ---------------------------------- //

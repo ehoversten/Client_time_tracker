@@ -9,29 +9,43 @@ const bcrypt = require('bcryptjs');
 
 const db = require('../models');
 const User = require('../models/User');
+// const Session = require('../models/Session');
 
 // ---------------------------------- //
 //      Get USER Detail PAGE          //
 // ---------------------------------- //
 router.get("/overview", isLoggedIn, (req, res) => {
+
+    // -- TESTING -- //
 //   console.log(req.session);
 //   console.log(req.session.passport);
 //   console.log(req.session.passport.user);
 //   console.log(req.user);
 //   console.log(req.user._id);
 
-  let currentUser = {
-      _id: req.user._id,
-      first_name: req.user.first_name,
-      last_name: req.user.last_name,
-      username: req.user.username,
-      department: req.user.department,
-      email: req.user.email,
-      sessions: req.user.sessions,
-      assigned_to: req.user.assigned_to
-  }
+    // create temp user object to pass to Handlebars View
+    let currentUser = {
+        _id: req.user._id,
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,
+        username: req.user.username,
+        department: req.user.department,
+        email: req.user.email,
+        sessions: req.user.sessions,
+        assigned_to: req.user.assigned_to,
+    };
 
-  res.render("users/overview", { currentUser: currentUser });
+  db.Session.find({ session_user: { username: currentUser.username } })
+//   db.Session.find({ _id: "5e6b0862dbe03da1460b3109" })
+    .then((data) => {
+      console.log("Found Session data for User: ");
+      console.warn(data);
+
+
+      res.render("users/overview", { currentUser: currentUser });
+    })
+    .catch((err) => console.log(err));
+
 });
 
 // ---------------------------------- //

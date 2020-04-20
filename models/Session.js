@@ -42,6 +42,7 @@ const SessionSchema = new Schema({
       type: String,
     },
   },
+  // username: 
 });
 
 
