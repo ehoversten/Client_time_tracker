@@ -12,11 +12,11 @@ const User = require('../models/User');
 // const Session = require('../models/Session');
 
 // ---------------------------------- //
-//      Get USER Detail PAGE          //
+//      Get USER Detail PAGE          //  --> (if authenticated) 
 // ---------------------------------- //
 router.get("/overview", isLoggedIn, (req, res) => {
 
-    // -- TESTING -- //
+// -- TESTING -- //
 //   console.log(req.session);
 //   console.log(req.session.passport);
 //   console.log(req.session.passport.user);
@@ -39,7 +39,8 @@ router.get("/overview", isLoggedIn, (req, res) => {
 //   db.Session.find({ _id: "5e6b0862dbe03da1460b3109" })
     .then((data) => {
       console.log("Found Session data for User: ");
-      console.warn(data);
+      console.warn(data);   // --> 
+      console.log(data);   // --> not making correct query
 
 
       res.render("users/overview", { currentUser: currentUser });
@@ -92,7 +93,8 @@ router.post('/register', (req, res) => {
     console.log(req.body);
     // create temp obj for user
     let { first_name, last_name, department, username, email, password } = req.body;
-
+    
+    //-- Mongoose User Creation (no authentication) -- //
     // let newUser = {
     //     first_name: first_name,
     //     last_name: last_name,
@@ -114,9 +116,10 @@ router.post('/register', (req, res) => {
     // })
 
     // res.redirect('login');
+    //-- Mongoose User Creation (no authentication) -- //
 
 
-    //-- Mongoose Local Passport (?) -- //
+    //-- Mongoose Local Passport User Creation -- //
     User.register(new User({
         first_name: first_name,
         last_name: last_name,
@@ -134,7 +137,7 @@ router.post('/register', (req, res) => {
         });
 
     })
-    //-- Mongoose Local Passport (?) -- //
+    //-- Mongoose Local Passport User Creation -- //
     
 });
 
