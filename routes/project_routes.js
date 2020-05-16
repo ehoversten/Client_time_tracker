@@ -98,23 +98,21 @@ router.post('/create', (req, res) => {
 router.get('/:id', (req, res) => {
   console.log(req.params.id);
 
-  // db.Project.findById({ _id: req.params.id}, (err, data) => {
-  //   if(err) {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   }
-  //   console.log(data);
-
-  // })
-
+  // Find Single Project 
   db.Project.findById({ _id: req.params.id})
     .then(data => {
       console.log("Found Item");
-      console.log(data);
+      // -- TESTING -- //
+      // console.log(typeof data);
+      // console.log(data);
+      
+      // Create a Temp variable by CLONING the returned DB data OBJECT
+      let proj = JSON.parse(JSON.stringify(data));
+      // -- TESTING -- //
+      // console.log("~~~~~~~~~~");
+      // console.log(proj);
 
-      let proj = data;
-
-      res.render('detail', { singleProj: proj })
+      res.render('detail', { detail: proj })
     }).catch(err => {
       console.log(err);
     });
