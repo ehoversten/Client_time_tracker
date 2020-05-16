@@ -98,14 +98,27 @@ router.post('/create', (req, res) => {
 router.get('/:id', (req, res) => {
   console.log(req.params.id);
 
-  db.Project.findById({ _id: req.params.id}, (err, data) => {
-    if(err) {
+  // db.Project.findById({ _id: req.params.id}, (err, data) => {
+  //   if(err) {
+  //     console.log(err);
+  //     res.status(500).json(err);
+  //   }
+  //   console.log(data);
+
+  // })
+
+  db.Project.findById({ _id: req.params.id})
+    .then(data => {
+      console.log("Found Item");
+      console.log(data);
+
+      let proj = data;
+
+      res.render('detail', { singleProj: proj })
+    }).catch(err => {
       console.log(err);
-      res.status(500).json(err);
-    }
-    console.log(data);
-    
-  })
+    });
+
 })
 
 
