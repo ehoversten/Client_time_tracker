@@ -9,6 +9,26 @@
                 <p>Started: {{ detail.start_date }}</p>
                 <p>Completed: {{ detail.completion_date }}</p>
             </div>
+            <hr>
+            <hr>
+
+            {{#if detail_sessions}}
+            <h4>Sessions Found: {{ detail_sessions.length }}</h4>
+                <div class="col s12">
+                {{#each detail_sessions }}
+                    <h5>User: {{ this.session_user.username }}</h5>
+                    <h5>Session ID: {{ this._id }}</h5>
+                    <h5>Date: {{ this.date }}</h5>
+                    <h5>Time started: {{ this.start_time }}</h5>
+                    <h5>Time ended:{{ this.end_time }}</h5>
+                    <h5>Notes: {{ this.notes }}</h5>
+                    <hr>
+                {{/each}}
+                </div>
+            {{else}}
+            <h3>None Sessions Found: </h3>
+
+            {{/if}}
         </div>
     </div>
 </div>
