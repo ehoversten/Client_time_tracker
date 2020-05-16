@@ -59,7 +59,7 @@ router.get('/', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //        Post Create PROJECT         //
 // ---------------------------------- //
-router.post('/create', (req, res) => {
+router.post('/create', isLoggedIn, (req, res) => {
     console.log("Request Body: ")
     console.log(req.body);
     // Parse and deconstruct form submission
@@ -95,7 +95,7 @@ router.post('/create', (req, res) => {
 // ---------------------------------- //
 //      GET Project Detail View       //
 // ---------------------------------- //
-router.get('/:id', (req, res) => {
+router.get('/:id', isLoggedIn, (req, res) => {
   console.log(req.params.id);
 
   // Find Single Project 
@@ -123,7 +123,7 @@ router.get('/:id', (req, res) => {
 // ---------------------------------- //
 //          Delete A Project          //
 // ---------------------------------- //
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLoggedIn, (req, res) => {
     let objId = req.params.id
     console.log(objId);
 
