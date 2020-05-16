@@ -11,27 +11,31 @@ const isLoggedIn = require("../config/auth");
 //        Get ALL PROJECTS            //
 // ---------------------------------- //
 router.get('/', isLoggedIn, (req, res) => {
+
   // Create a temp array to parse db data
   let clients = [];
   // Find all clients to populate pull-down 
   db.Client.find({})
-    .then(data => {
-      // Loop through db data to parse for view context
-      data.forEach(client => {
-        let clientObj = {
-          _id: client._id,
-          name: client.name,
-          contact: client.contact
-        };
-        clients.push(clientObj);
-        // console.log(clients);
-      })
+  .then(data => {
+    // Loop through db data to parse for view context
+    data.forEach(client => {
+      let clientObj = {
+        _id: client._id,
+        name: client.name,
+        contact: client.contact
+      };
+      clients.push(clientObj);
+      // console.log(clients);
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-  
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+
+
+  // --------------------------------------- //
+
   // Create a temp array to parse db data
   let projects = [];
   db.Project.find({})
@@ -59,7 +63,7 @@ router.get('/', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //        Post Create PROJECT         //
 // ---------------------------------- //
-router.post('/create', (req, res) => {
+router.post('/create', isLoggedIn, (req, res) => {
     console.log("Request Body: ")
     console.log(req.body);
     // Parse and deconstruct form submission
@@ -93,9 +97,75 @@ router.post('/create', (req, res) => {
 });
 
 // ---------------------------------- //
+//      GET Project Detail View       //
+// ---------------------------------- //
+router.get('/:id', isLoggedIn, (req, res) => {
+  console.log(req.params.id);
+
+  // --------------------------------------- //
+
+  // Create Temp Obj for Project
+  let proj_sessions = [];
+
+  db.Session.find({})
+    .then(data => {
+      // console.log(data);
+      data.map(session => {
+        let newSession = {
+          _id: session._id,
+          date: session.date,
+          start_time: session.start_time,
+          end_time: session.end_time,
+          project_work: session.project_work,
+          project_id: session.project_id,
+          notes: session.notes,
+          session_user: session.session_user
+        }
+
+        // IF id matches add to proj_sessions variable
+        if(newSession.project_id == req.params.id) {
+          // console.log("Found Match");
+          proj_sessions.push(newSession);
+        }
+        console.log("Project Sessions loaded");
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+
+
+  // --------------------------------------- //
+
+  // Create Temp Obj for Project
+  let proj;
+
+  // Find Single Project 
+  db.Project.findById({ _id: req.params.id})
+    .then(data => {
+      console.log("Found Item");
+      // -- TESTING -- //
+      // console.log(typeof data);
+      // console.log(data);
+      
+      // Create/Update/Assign a Temp variable by CLONING the returned DB data OBJECT
+      proj = JSON.parse(JSON.stringify(data));
+      // -- TESTING -- //
+      // console.log("~~~~~~~~~~");
+      // console.log(proj);
+
+      res.render('detail', { detail: proj, detail_sessions: proj_sessions })
+    }).catch(err => {
+      console.log(err);
+    });
+});
+
+
+// ---------------------------------- //
 //          Delete A Project          //
 // ---------------------------------- //
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLoggedIn, (req, res) => {
     let objId = req.params.id
     console.log(objId);
 
