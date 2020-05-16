@@ -33,13 +33,6 @@ router.get('/', isLoggedIn, (req, res) => {
     res.status(500).json(err);
   });
 
-  // --------------------------------------- //
-  
-  // // Create a temp array to parse db data
-  // let proj_sessions = [];
-  // // Find all clients to populate pull-down 
-  // db.Session.find()
-
 
   // --------------------------------------- //
 
@@ -134,7 +127,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
           // console.log("Found Match");
           proj_sessions.push(newSession);
         }
-
+        console.log("Project Sessions loaded");
       });
     })
     .catch(err => {
