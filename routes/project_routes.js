@@ -93,6 +93,23 @@ router.post('/create', (req, res) => {
 });
 
 // ---------------------------------- //
+//      GET Project Detail View       //
+// ---------------------------------- //
+router.get('/:id', (req, res) => {
+  console.log(req.params.id);
+
+  db.Project.findById({ _id: req.params.id}, (err, data) => {
+    if(err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+    console.log(data);
+    
+  })
+})
+
+
+// ---------------------------------- //
 //          Delete A Project          //
 // ---------------------------------- //
 router.delete('/:id', (req, res) => {
