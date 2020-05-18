@@ -34,10 +34,13 @@
         </div>
       </nav>
       <!-- Navbar End -->
-
+      
       <!-- Begin form -->
-      <div class="container" id="login-form">
-      <form>
+      <div class="row" id ="form-row">
+
+      <div class="col-5">
+      <div class="container">
+      <form id="login-form">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter Username...">
@@ -46,10 +49,18 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" placeholder="Enter Password...">
         </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="login-button">Login</button>
+        <button type="submit" class="btn btn-dark btn-lg btn-block" id="login-button">Login</button>
       </form>
     </div>
+  </div>
     <!-- End form -->
+
+    <div class="col-6" id="member-message">
+    <h2>Not a member yet?</h2>
+    <p id="message-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, sapiente nobis aut mollitia officia quae quidem praesentium at ad odit facilis necessitatibus nostrum nesciunt! Debitis beatae quam rem assumenda ea?</p>
+    <button type="submit" class="btn btn-dark btn-lg" id="login-button">Create New Account</button>
+  </div>
+  </div>
     
 </body>
 </html>
