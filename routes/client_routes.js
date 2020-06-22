@@ -87,6 +87,16 @@ router.post('/create', (req, res) => {
       });
 });
 
+// ---------------------------------- //
+//           Edit A Client            //
+// ---------------------------------- //
+router.get('/:id/edit', (req, res) => {
+  console.log("Hit edit route");
+  let client_id = req.params.id;
+
+  console.log(client_id);
+  res.status(200).send("Edit Route");
+})
 
 // ---------------------------------- //
 //         Delete A Client            //
