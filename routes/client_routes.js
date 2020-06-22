@@ -91,12 +91,29 @@ router.post('/create', (req, res) => {
 //           Edit A Client            //
 // ---------------------------------- //
 router.get('/:id/edit', (req, res) => {
-  console.log("Hit edit route");
   let client_id = req.params.id;
+  // console.log(client_id);
 
-  console.log(client_id);
-  // res.status(200).send("Edit Route");
-  res.render('client_edit', { item: req.params.id });
+  // Find Client in DB
+  db.Client.findOneAndUpdate(client_id, { 
+    new: true
+  }).then(data => {
+    console.log("Found :")
+    console.log(data);
+
+    let cli = {
+      id: data._id,
+      name: data.name,
+      contact: data.contact,
+    }
+    res.render('client_edit', { item: cli });
+  }).catch(err => {
+    res.status(500).json(err);
+  })
+});
+
+router.post('/:id/edit', (req, res) => {
+  
 })
 
 // ---------------------------------- //

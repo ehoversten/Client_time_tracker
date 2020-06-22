@@ -3,14 +3,14 @@
         <div class="row">
             <div class="col s10">
                 <h3>Edit Client</h3>
-                <form action="/clients/{{ this._id }}/edit" method="post">
+                <form action="/clients/{{ this._id }}/edit?_method=PUT" method="post">
                     <div class="row">
                         <div class="input-field col s8 offset-s2">
-                            <input type="text" name="client_name" placeholder="Ex. AMG Autos" class="validate">
+                            <input type="text" name="client_name" value="{{ item.name }}" class="validate">
                             <label for="client_name">Client Account Name:</label>
                         </div>
                         <div class="input-field col s8 offset-s2">
-                            <input type="text" name="client_contact" placeholder="Ex. John Doe">
+                            <input type="text" name="client_contact" value="{{ item.contact }}">
                             <label for="client_contact">Client Contact:</label>
                         </div>
                     </div>
@@ -24,3 +24,4 @@
         </div>
     </div>
 </div>
+
