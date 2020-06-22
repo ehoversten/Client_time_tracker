@@ -95,7 +95,8 @@ router.get('/:id/edit', (req, res) => {
   let client_id = req.params.id;
 
   console.log(client_id);
-  res.status(200).send("Edit Route");
+  // res.status(200).send("Edit Route");
+  res.render('client_edit', { item: req.params.id });
 })
 
 // ---------------------------------- //

@@ -1,0 +1,26 @@
+<div class="edit-container">
+    <div class="container">
+        <div class="row">
+            <div class="col s10">
+                <h3>Edit Client</h3>
+                <form action="/clients/{{ this._id }}/edit" method="post">
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <input type="text" name="client_name" placeholder="Ex. AMG Autos" class="validate">
+                            <label for="client_name">Client Account Name:</label>
+                        </div>
+                        <div class="input-field col s8 offset-s2">
+                            <input type="text" name="client_contact" placeholder="Ex. John Doe">
+                            <label for="client_contact">Client Contact:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button type="submit" class="right bottom btn waves-effect waves-light green darken-1">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
