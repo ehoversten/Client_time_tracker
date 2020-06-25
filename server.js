@@ -32,7 +32,9 @@ mongoose.connect(
   }
 );
 
-// Connect to Database through Docker Container
+// -------------------------------------------- //
+// Connect to Database through Docker Container //
+// -------------------------------------------- //
 // mongoose.connect(
 //   process.env.MONGODB_URI || "mongodb://mongo:27017/docker-node-mongo",
 //   {
@@ -43,6 +45,7 @@ mongoose.connect(
 // ).then( res => console.log(res)
 // ).catch(err => console.log(err)
 // );
+// ------ SAVE ABOVE FOR LATER DEPLOYMENT ------- //
 
 // Bring in our Models
 const db = require("./models");
@@ -83,6 +86,7 @@ app.use(function(req, res, next) {
   next();
 })
 
+// Morgen Logger Middleware
 app.use(logger("dev"));
 
 // override with POST having ?_method=DELETE
@@ -92,7 +96,7 @@ app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
  
-// Define Routes
+// --> Define Routes
 app.use('/', html_routes);
 app.use('/clients', client_routes);
 app.use('/projects', project_routes);
@@ -100,6 +104,7 @@ app.use('/sessions', session_routes);
 app.use('/users', user_routes);
 
 
+// --> Connect Server
 app.listen(PORT, () => {
     console.log(moment());
     console.log(`Server listening on port: ${PORT}`);
