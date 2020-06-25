@@ -35,6 +35,17 @@ router.post('/client/create', (req, res) => {
       });
 });
 
+
+// ---------------------------------- //
+//       API Edit Create CLIENT       //
+// ---------------------------------- //
+// router.get('/clients/:id/edit', (req, res) => {
+//     console.log("Hit edit API route");
+//     console.log(req.params.id);
+//     res.send(200).json({ "success": "true" });
+// })
+
+
 // ---------------------------------- //
 //       API Get ALL PROJECTS         //
 // ---------------------------------- //

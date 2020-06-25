@@ -87,6 +87,49 @@ router.post('/create', (req, res) => {
       });
 });
 
+// ---------------------------------- //
+//           Edit A Client            //
+// ---------------------------------- //
+router.get('/:id/edit', (req, res) => {
+  let client_id = req.params.id;
+  // console.log(client_id);
+
+  // Find Client in DB
+  db.Client.findById(client_id).then(data => {
+    // console.log("Found :")
+    // console.log(data);
+
+    let cli = {
+      _id: data._id,
+      name: data.name,
+      contact: data.contact,
+    }
+    res.render('client_edit', { item: cli });
+  }).catch(err => {
+    res.status(500).json(err);
+  })
+});
+
+router.put('/:id', (req, res) => {
+  let update = {
+    // _id: req.body._id,
+    name: req.body.client_name,
+    contact: req.body.client_contact
+  }
+  
+  console.log(req.params.id);
+  // -- Update Record -- //
+  db.Client.findOneAndUpdate(req.params.id, update, { new: true }, (err, updatedClient) => {
+    if(err) {
+      console.log(err);
+      res.status(500).redirect('/clients')
+    }
+    console.log("Record Updated ...");
+    console.log(updatedClient);
+    res.status(203).redirect('/clients');
+  })
+  
+});
 
 // ---------------------------------- //
 //         Delete A Client            //
