@@ -122,7 +122,7 @@ router.put('/:id', (req, res) => {
   
   console.log(req.params.id);
   // -- Update Record -- //
-  db.Client.findOneAndUpdate(req.params.id, update, { new: true }, (err, updatedClient) => {
+  db.Client.findByIdAndUpdate(req.params.id, update, { new: true }, (err, updatedClient) => {
     if(err) {
       console.log(err);
       res.status(500).redirect('/clients')

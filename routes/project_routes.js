@@ -166,44 +166,42 @@ router.get('/:id', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 router.get('/:id/edit', (req, res) => {
   // console.log(req.params.id);
+  let clients = [];
 
-  // Retrieve Project from DB
-  db.Project.findById(req.params.id)
+  // Find all clients to populate pull down
+  db.Client.find({})
     .then(data => {
-      let item = {
-        _id: data._id,
-        title: data.title,
-        description: data.description,
-        client_id: data.client_id,
-        team_members: data.team_members,
-        all_sessions: data.all_sessions,
-        sessions: data.sessions,
-        created_at: data.created_at,
-        start_date: data.start_date,
-        completion_date: data.completion_date,
-      };
-
-      console.log(item);
-
-      // Find all clients to populate pull down
-      db.Client.find({}).then(data => {
-        let clients = [];
-        data.forEach( item => {
-          let cli = {
-            _id: item._id,
-            name: item.name,
-          }
-          clients.push(cli);
-        })
-
-        res.render('project_edit', { proj: item, allClients: clients })  
-      }).catch(err => {
-        res.status(500).json(err);
-      })
-
-    }).catch(err => {
-      res.status(500).json(err);
+      data.forEach( item => {
+        let cli = {
+          _id: item._id,
+          name: item.name,
+        }
+        clients.push(cli);
+      });
+    
+    // Retrieve Project from DB
+    db.Project.findById(req.params.id)
+      .then(data => {
+        let item = {
+          _id: data._id,
+          title: data.title,
+          description: data.description,
+          client_id: data.client_id,
+          team_members: data.team_members,
+          all_sessions: data.all_sessions,
+          sessions: data.sessions,
+          created_at: data.created_at,
+          start_date: data.start_date,
+          completion_date: data.completion_date,
+        };
+  
+        // Render Edit Page
+        res.render('project_edit', { proj: item, allClients: clients })
     });
+  }).catch(err => {
+    res.status(500).json(err);
+  });
+
 });
 
 // ---------------------------------- //
@@ -215,14 +213,14 @@ router.put('/:id', (req, res) => {
   // console.log(req.body);
 
   let update = {
-    title: req.body.title,
-    description: req.body.description,
-    client_id: req.body.client_id
-  }
+    title: req.body.project_title,
+    description: req.body.project_desc,
+    client_id: req.body.client_id,
+  };
   console.log("*******");
   console.log(update)
 
-  db.Project.findOneAndUpdate(req.params.id, update, { new: true }, (err, data) => {
+  db.Project.findByIdAndUpdate(req.params.id, update, { new: true }, (err, data) => {
     if(err) {
       res.status(500).json(err);
     }
