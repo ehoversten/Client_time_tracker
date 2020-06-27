@@ -8,7 +8,10 @@
                 <p>Created: {{ detail.created_at }}</p>
                 <p>Started: {{ detail.start_date }}</p>
                 <p>Completed: {{ detail.completion_date }}</p>
+
+                <a href="/projects/{{ detail._id }}/edit"><button class="waves-effect waves-light btn right blue darken-2"><i class="material-icons">edit</i></button></a>
             </div>
+
             <hr>
             <hr>
 
