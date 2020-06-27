@@ -110,6 +110,9 @@ router.get('/:id/edit', (req, res) => {
   })
 });
 
+// ---------------------------------- //
+//         Update A Client            //
+// ---------------------------------- //
 router.put('/:id', (req, res) => {
   let update = {
     // _id: req.body._id,

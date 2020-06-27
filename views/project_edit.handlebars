@@ -1,0 +1,40 @@
+<div class="edit-projects-container">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3>Edit Project</h3>
+                <form action="/projects/{{ proj._id }}?_method=PUT" method="post">
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input class="validate" type="text" name="project_title"
+                                value="{{ proj.title }}">
+                            <label for="project_title">Project Name:</label>
+                        </div>
+                        <div class="input-field col s8">
+                            <textarea id="project_desc" name="project_desc" class="materialize-textarea">{{ proj.description }}</textarea>
+                            <label for="project_desc">Project Description:</label>
+                        </div>
+
+                        <div class="input-field col s8">
+                            <select id="client_id" name="client_id">
+                                <option value="{{ proj.client_id }}" disabled selected>Select Client</option>
+                                {{#each allClients }}
+                                <option value="{{ this._id }}">{{ this.name }}</option>
+                                {{/each }}
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-floating right btn waves-effect waves-light green darken-1"><i
+                                class="material-icons">add</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <p>{{ proj._id }}</p>
+    <p>{{ proj.title }}</p>
+</div>

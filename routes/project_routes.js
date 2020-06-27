@@ -161,6 +161,77 @@ router.get('/:id', isLoggedIn, (req, res) => {
     });
 });
 
+// ---------------------------------- //
+//          Edit A Project            //
+// ---------------------------------- //
+router.get('/:id/edit', (req, res) => {
+  // console.log(req.params.id);
+
+  // Retrieve Project from DB
+  db.Project.findById(req.params.id)
+    .then(data => {
+      let item = {
+        _id: data._id,
+        title: data.title,
+        description: data.description,
+        client_id: data.client_id,
+        team_members: data.team_members,
+        all_sessions: data.all_sessions,
+        sessions: data.sessions,
+        created_at: data.created_at,
+        start_date: data.start_date,
+        completion_date: data.completion_date,
+      };
+
+      console.log(item);
+
+      // Find all clients to populate pull down
+      db.Client.find({}).then(data => {
+        let clients = [];
+        data.forEach( item => {
+          let cli = {
+            _id: item._id,
+            name: item.name,
+          }
+          clients.push(cli);
+        })
+
+        res.render('project_edit', { proj: item, allClients: clients })  
+      }).catch(err => {
+        res.status(500).json(err);
+      })
+
+    }).catch(err => {
+      res.status(500).json(err);
+    });
+});
+
+// ---------------------------------- //
+//          Update A Project          //
+// ---------------------------------- //
+router.put('/:id', (req, res) => {
+  // console.log("Saving Project Edit");
+  // console.log(req.params.id);
+  // console.log(req.body);
+
+  let update = {
+    title: req.body.title,
+    description: req.body.description,
+    client_id: req.body.client_id
+  }
+  console.log("*******");
+  console.log(update)
+
+  db.Project.findOneAndUpdate(req.params.id, update, { new: true }, (err, data) => {
+    if(err) {
+      res.status(500).json(err);
+    }
+    console.log("Record Updated");
+    console.log(data);
+    res.redirect("/projects");
+  })
+});
+
 
 // ---------------------------------- //
 //          Delete A Project          //
