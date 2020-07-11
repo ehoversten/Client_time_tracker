@@ -16,44 +16,60 @@ router.get('/', isLoggedIn, (req, res) => {
   let clients = [];
   // Find all clients to populate pull-down 
   db.Client.find({})
-  .then(data => {
-    // Loop through db data to parse for view context
-    data.forEach(client => {
-      let clientObj = {
-        _id: client._id,
-        name: client.name,
-        contact: client.contact
-      };
-      clients.push(clientObj);
-      // console.log(clients);
+    .then(data => {
+      // Loop through db data to parse for view context
+      data.forEach(client => {
+        let clientObj = {
+          _id: client._id,
+          name: client.name,
+          contact: client.contact
+        };
+        clients.push(clientObj);
+        // console.log(clients);
+      })
     })
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 
   // --------------------------------------- //
 
   // Create a temp array to parse db data
   let projects = [];
   db.Project.find({})
-    .populate('Client')
+    .populate('Client', ['name', 'contact'])
+    // .exec((err, result) => {
+    //   console.log("------------");
+    //   console.log(result);
+    //   return result;
+    // })
     .then(data => {
+      console.log("**********");
+      console.log(data);
+
       data.forEach(proj => {
         // create temp object to parse data for handlebars security
         let newProj = {
             _id: proj._id,
             title: proj.title,
             description: proj.description,
-            client_id: proj.client_id
+            client_id: proj.client_id,
+            client_name: proj.name,
+            client_contact: proj.contact
         }
+
+        // ** TESTING ** //
+        console.log("*^*^*^*^*^*^");
+        console.log(newProj);
 
         projects.push(newProj);
       });
       // Render page, pass our parsed data as context to view page
       res.render('projects', { allProjects: projects, allClients: clients });
+
+      // ** TESTING ** //
+      // res.status(200).json(data);
     }).catch(err => {
       // return error
       res.status(500).json(err);
@@ -99,7 +115,7 @@ router.post('/create', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //      GET Project Detail View       //
 // ---------------------------------- //
-router.get('/:id', isLoggedIn, (req, res) => {
+router.get('/:id', isLoggedIn, async (req, res) => {
   console.log(req.params.id);
 
   // --------------------------------------- //
@@ -107,7 +123,9 @@ router.get('/:id', isLoggedIn, (req, res) => {
   // Create Temp Obj for Project
   let proj_sessions = [];
 
-  db.Session.find({})
+  let all_sesh = await db.Session.find({})
+    .populate('User')
+    .populate('Project')
     .then(data => {
       // console.log(data);
       data.map(session => {
@@ -127,8 +145,9 @@ router.get('/:id', isLoggedIn, (req, res) => {
           // console.log("Found Match");
           proj_sessions.push(newSession);
         }
-        console.log("Project Sessions loaded");
       });
+      // ** TESTING ** //
+      console.log("Project Sessions loaded");
     })
     .catch(err => {
       console.log(err);
@@ -142,7 +161,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
   let proj;
 
   // Find Single Project 
-  db.Project.findById({ _id: req.params.id})
+  let single_proj = await db.Project.findById({ _id: req.params.id})
     .then(data => {
       console.log("Found Item");
       // -- TESTING -- //
@@ -158,6 +177,13 @@ router.get('/:id', isLoggedIn, (req, res) => {
       res.render('detail', { detail: proj, detail_sessions: proj_sessions })
     }).catch(err => {
       console.log(err);
+    });
+
+    res.render("detail", {
+      detail: proj,
+      detail_sessions: proj_sessions,
+      single_proj,
+      all_sesh,
     });
 });
 
@@ -217,6 +243,7 @@ router.put('/:id', (req, res) => {
     description: req.body.project_desc,
     client_id: req.body.client_id,
   };
+
   console.log("*******");
   console.log(update)
 

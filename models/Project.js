@@ -14,6 +14,10 @@ const ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Client'
     },
+    // client: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Client'
+    // },
     team_members : [    
         {
             id : {

@@ -16,7 +16,8 @@ router.get('/', isLoggedIn, (req, res) => {
   db.Client.find({})
     .populate("projects")
     .then(data => {
-      // console.log(data);
+      console.log("*/*/*/*/*/*/*/*/*/*`")
+      console.log(data);
       data.forEach(client => {
         // create array to pass our parsed database data
         let project_data = [];
@@ -60,6 +61,9 @@ router.get('/', isLoggedIn, (req, res) => {
 
       // Render page, pass our parsed array data to the view
       res.render('clients', { allClients: clients });
+
+      // ** TESTING ** //
+      // res.status(200).json(clients);
     }).catch(err => {
       // console.log(err);
       res.status(500).json(err);

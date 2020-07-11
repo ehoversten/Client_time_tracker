@@ -34,7 +34,7 @@ router.get('/', isLoggedIn, (req, res) => {
           project_id: sesh.project_work.id,
           notes: sesh.notes,
           session_user: {
-            id: sesh.session_user._id,
+            id: sesh.session_user.id,
             username: sesh.session_user.username
           }
         }; 
@@ -43,6 +43,10 @@ router.get('/', isLoggedIn, (req, res) => {
         // add data object to context array
         allSesh.push(newSession); 
       });
+
+      // ** TESTING ** //
+      console.log("<><><><><><><>");
+      console.log(allSesh);
 
       res.render("session", { allSessions: allSesh, currentUser: currentUser });
     })

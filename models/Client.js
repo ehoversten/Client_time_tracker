@@ -9,18 +9,6 @@ const ClientSchema = new Schema({
     contact: {
         type: String
     },
-    // not needed (?)
-    // projects_name: [ 
-    //     {
-    //         _id : {
-    //             type: Schema.Types.ObjectId,
-    //             ref: 'Project'
-    //         },
-    //         project_name : {
-    //             type: String
-    //         }
-    //     }
-    // ],
     created_at: {
         type: Date,
         default: Date.now
