@@ -123,7 +123,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
   // Create Temp Obj for Project
   let proj_sessions = [];
 
-  let all_sesh = await db.Session.find({})
+  await db.Session.find({})
     .populate('User')
     .populate('Project')
     .then(data => {
@@ -161,7 +161,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
   let proj;
 
   // Find Single Project 
-  let single_proj = await db.Project.findById({ _id: req.params.id})
+  await db.Project.findById({ _id: req.params.id})
     .then(data => {
       console.log("Found Item");
       // -- TESTING -- //
@@ -174,59 +174,116 @@ router.get('/:id', isLoggedIn, async (req, res) => {
       // console.log("~~~~~~~~~~");
       // console.log(proj);
 
-      res.render('detail', { detail: proj, detail_sessions: proj_sessions })
+      // res.render('detail', { detail: proj, detail_sessions: proj_sessions })
     }).catch(err => {
       console.log(err);
     });
 
     res.render("detail", {
       detail: proj,
-      detail_sessions: proj_sessions,
-      single_proj,
-      all_sesh,
+      detail_sessions: proj_sessions
     });
 });
 
 // ---------------------------------- //
 //          Edit A Project            //
 // ---------------------------------- //
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', async (req, res) => {
   // console.log(req.params.id);
   let clients = [];
+  let project_clients, this_proj;
 
   // Find all clients to populate pull down
-  db.Client.find({})
-    .then(data => {
-      data.forEach( item => {
-        let cli = {
-          _id: item._id,
-          name: item.name,
-        }
-        clients.push(cli);
-      });
+  try {
+    project_clients = await db.Client.find({});
+    project_clients.map( client => {
+      let cli = {
+        _id: client._id,
+        name: client.name,
+        contact: client.contact
+      }
+      clients.push(cli);
+    }); 
+
+     // ** TESTING ** //
+    console.log("<*><*><*><*><*><*><*>");
+    console.log(clients);
     
-    // Retrieve Project from DB
-    db.Project.findById(req.params.id)
-      .then(data => {
-        let item = {
-          _id: data._id,
-          title: data.title,
-          description: data.description,
-          client_id: data.client_id,
-          team_members: data.team_members,
-          all_sessions: data.all_sessions,
-          sessions: data.sessions,
-          created_at: data.created_at,
-          start_date: data.start_date,
-          completion_date: data.completion_date,
-        };
-  
-        // Render Edit Page
-        res.render('project_edit', { proj: item, allClients: clients })
+    this_proj = await db.Project.findById(req.params.id);
+    let proj = {
+      _id: this_proj._id,
+      title: this_proj.title,
+      description: this_proj.description,
+      client_id: this_proj.client_id,
+      team_members: this_proj.team_members,
+      all_sessions: this_proj.all_sessions,
+      sessions: this_proj.sessions,
+      created_at: this_proj.created_at,
+      start_date: this_proj.start_date,
+      completion_date: this_proj.completion_date,
+    };
+    console.log("<#><#><#><#><#><#><#>");
+    console.log(proj);
+
+    res.render("project_edit", {
+      proj: proj,
+      allClients: clients,
     });
-  }).catch(err => {
+
+  } catch(err) {
+    console.log(err);
     res.status(500).json(err);
-  });
+  }
+
+  // let project_clients = await db.Client.find({})
+  //   .then(data => {
+  //     data.forEach( item => {
+  //       let cli = {
+  //         _id: item._id,
+  //         name: item.name,
+  //       }
+  //       clients.push(cli);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.status(500).json(err);
+  //   });
+  
+  // ** TESTING ** //
+  // console.log("<*><*><*><*><*><*><*>");
+  // console.log(project_clients);
+
+  // Retrieve Project from DB
+  // let this_proj = await db.Project.findById(req.params.id)
+  //   .then(data => {
+  //     let item = {
+  //       _id: data._id,
+  //       title: data.title,
+  //       description: data.description,
+  //       client_id: data.client_id,
+  //       team_members: data.team_members,
+  //       all_sessions: data.all_sessions,
+  //       sessions: data.sessions,
+  //       created_at: data.created_at,
+  //       start_date: data.start_date,
+  //       completion_date: data.completion_date,
+  //     };
+  //   })
+  //   .catch(err => {
+  //     res.status(500).json(err);
+  //   });
+
+  // ** TESTING ** //
+  // console.log("<*><*><*><*><*><*><*>");
+  // console.log(this_proj);
+  
+  // Render Edit Page
+  // res.render('project_edit', { proj: item, allClients: clients })
+
+  // res.render("project_edit", { 
+  //   proj: this_proj,
+  //   allClients: project_clients 
+  // });
 
 });
 
