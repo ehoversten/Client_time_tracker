@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//-- Bring in Client Model
+const Client = require('./Client');
+
 const ProjectSchema = new Schema({
     title: {
         type: String,
@@ -10,14 +13,25 @@ const ProjectSchema = new Schema({
         type: String,
         required: true
     },
+    //-- Playing With Embedding vs. Referencing Associated Data --//
     client_id: {
         type: Schema.Types.ObjectId,
         ref: 'Client'
     },
-    // client: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Client'
-    // },
+    client_obj: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Client'
+        }
+    ],
+    client: {
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Client'
+        },
+        client_name: { type: String },
+        client_contact: { type: String }
+    },
     team_members : [    
         {
             id : {

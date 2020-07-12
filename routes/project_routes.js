@@ -191,7 +191,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
   // console.log(req.params.id);
   let clients = [];
-  let project_clients, this_proj;
+  let project_clients, this_proj, this_client;
 
   // Find all clients to populate pull down
   try {
@@ -222,8 +222,10 @@ router.get('/:id/edit', async (req, res) => {
       start_date: this_proj.start_date,
       completion_date: this_proj.completion_date,
     };
-    console.log("<#><#><#><#><#><#><#>");
-    console.log(proj);
+
+    this_client = await db.Client.findById(proj.client_id);
+    console.log("<#><#><#> CLIENT <#><#><#><#>");
+    console.log(this_client);
 
     res.render("project_edit", {
       proj: proj,
