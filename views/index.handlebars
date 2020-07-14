@@ -1,24 +1,28 @@
-<div class="container center">
-    <h1>Hey There, Welcome!!</h1>
+<!-- Begin form -->
+<div class="row" id="form-row">
 
-    <div class="time">
-        <h3>Today is <span class="datetime">{{moment date "dddd MMMM Do" }}</span></h3>
+    <div class="col-5">
+        <div class="container">
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="username" class="form-control" aria-describedby="emailHelp"
+                        placeholder="Enter Username...">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" placeholder="Enter Password...">
+                </div>
+                <button type="submit" class="btn btn-dark btn-lg btn-block" id="login-button">Login</button>
+            </form>
+        </div>
     </div>
-    <h4>Have you ever had a difficult time keeping track of what projects you worked on, and for what customer when?</h4>
-    <h4>Check out my Developer Project/Client Time Tracking application and worry no longer!!</h4>
+    <!-- End form -->
 
-    <div class="button-container">
-    {{#if currentUser }}
-        {{!-- <a href="/users/logout">
-            <button class="waves-effect waves-light btn green darken-1">Logout</button>
-        </a> --}}
-    {{else}}
-        <a href="/users/login">
-            <button class="waves-effect waves-light btn green darken-1">Login</button>
-        </a>
-        <a href="/users/register">
-            <button class="waves-effect waves-light btn green darken-1">Register</button>
-        </a>
-    {{/if }}
+    <div class="col-6" id="member-message">
+        <h2>Not a member yet?</h2>
+        <p id="message-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, sapiente nobis aut
+            mollitia officia quae quidem praesentium at ad odit facilis necessitatibus nostrum nesciunt! Debitis beatae
+            quam rem assumenda ea?</p>
+        <button type="submit" class="btn btn-dark btn-lg" id="login-button">Create New Account</button>
     </div>
-</div>
