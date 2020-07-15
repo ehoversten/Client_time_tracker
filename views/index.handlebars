@@ -3,7 +3,7 @@
 
     <div class="col-5">
         <div class="container">
-            <form action="/users/index" method="post" id="login-form">
+            <form action="/users/login" method="post" id="login-form">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="username" class="form-control" aria-describedby="emailHelp"
@@ -24,5 +24,6 @@
         <p id="message-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, sapiente nobis aut
             mollitia officia quae quidem praesentium at ad odit facilis necessitatibus nostrum nesciunt! Debitis beatae
             quam rem assumenda ea?</p>
-         <a href="/users/register"></a><button type="submit" class="btn btn-dark btn-lg" id="new-account-button">Create New Account</button></div></div></a>
+         {{!-- <a href="/users/register"></a><button class="btn btn-dark btn-lg" id="new-account-button">Create New Account</button></div></div></a> --}}
+         <a class = "btn btn-dark btn-lg" href="/users/register">Create new account</a>
     </div>
