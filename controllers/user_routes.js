@@ -67,7 +67,7 @@ router.post('/index', passport.authenticate("local", {
 }), (req, res) => {
     console.log(req.body);
 
-    res.redirect('/sessions');
+   // res.redirect('/sessions');
 });
 
 // ---------------------------------- //

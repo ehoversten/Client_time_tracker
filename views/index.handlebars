@@ -3,15 +3,15 @@
 
     <div class="col-5">
         <div class="container">
-            <form action="/users/login" method="post" id="login-form">
+            <form action="/users/index" method="post" id="login-form">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="username" class="form-control" aria-describedby="emailHelp"
+                    <input name = "username" type="username" class="form-control" aria-describedby="emailHelp"
                         placeholder="Enter Username...">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" placeholder="Enter Password...">
+                    <input name = "password" type="password" class="form-control" placeholder="Enter Password...">
                 </div>
                 <button type="submit" class="btn btn-dark btn-lg btn-block" id="login-button">Login</button>
             </form>

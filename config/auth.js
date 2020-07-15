@@ -4,7 +4,7 @@ function isLoggedIn(req, res, next) {
     // if user is authenticated run next function
     return next();
   }
-  res.redirect("/users/login");
+  res.redirect("/");
 }
 
 
