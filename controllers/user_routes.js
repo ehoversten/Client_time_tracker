@@ -52,16 +52,16 @@ router.get("/overview", isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //          Get LOGIN PAGE            //
 // ---------------------------------- //
-router.get('/login', (req, res) => {
+router.get('/index', (req, res) => {
     console.log(req.body);
 
-    res.render('login');
+    res.render('index');
 })
 
 // ---------------------------------- //
 //          Post LOGIN ROUTE          //
 // ---------------------------------- //
-router.post('/login', passport.authenticate("local", {
+router.post('/index', passport.authenticate("local", {
     successRedirect: '/secret',
     failureRedirect: '/'
 }), (req, res) => {
@@ -75,7 +75,7 @@ router.post('/login', passport.authenticate("local", {
 // ---------------------------------- //
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/users/login');
+    res.redirect('/');
 });
 
 // ---------------------------------- //

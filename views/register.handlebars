@@ -1,58 +1,41 @@
-<div class="registration-container container">
-    <div class="row">
-        <div class="col s12 center">
-            <h3>Hello There, Please Register</h3>
-            <br>
-            <form action="/users/register" method="post">
 
-                <div class="row">
-                    <div class="input-field col s6 offset-s3">
-                        <input name="first_name" type="text" id="first_name" placeholder="Enter First Name">
-                        <label for="first_name">First Name:</label>
-                    </div>
+
+
+<!-- Begin form -->
+<div class="row" id="form-row">
+
+    <div class="col-6 offset-3 mt-5">
+        <div class="container">
+            <form action="/users/register" method="post" id="login-form">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" id = "first_name"
+                        placeholder="Enter First Name">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" id = "last_name" placeholder="Enter Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id = "email" aria-describedby="emailHelp" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label for="department">Department:</label>
+                    <input type="text" class="form-control" id = "department" placeholder="Enter Department">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id = "username" placeholder="Enter Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="text" class="form-control" id = "password" placeholder="Enter Password">
                 </div>
 
-                <div class="row">
-                    <div class="input-field col s6 offset-s3">
-                        <input name="last_name" type="text" id="last_name" placeholder="Enter Last Name">
-                        <label for="last_name">Last Name:</label>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="input-field col s6 offset-s3">
-                        <input name="email" type="email" id="email" placeholder="Enter Email">
-                        <label for="email">Email:</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6 offset-s3">
-                        <input name="department" type="text" id="department" placeholder="Enter Department">
-                        <label for="department">Department:</label>
-                    </div>
-                </div>
-
-
-                <br>
-                <br>
-
-                <div class="row">
-                    <div class="input-field col s6 offset-s3">
-                        <input name="username" type="text" id="username" placeholder="Enter Username">
-                        <label for="username">Username:</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6 offset-s3">
-                        <input name="password" type="password" id="password" placeholder="Enter Password">
-                        <label for="password">Password:</label>
-                    </div>
-                </div>
-
-                <button class="waves-effect waves-light btn green darken-1" type="submit">Submit</button>
+                <button type="submit" class="btn btn-dark btn-lg btn-block" id="login-button">Register</button>
             </form>
         </div>
     </div>
-</div>
+    <!-- End form -->
