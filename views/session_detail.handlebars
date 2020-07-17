@@ -1,0 +1,17 @@
+<div class="session-form">
+    <div class="container">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h5>Current Session Info:</h5>
+                <hr>
+                <p>Username: {{ single.session_user.username }}</p>
+                <p>Session ID: {{ single._id }}</p>
+                <p>Session Length: {{ single.session_length }}</p>
+                <p>Session Start: {{ single.start_time }}</p>
+                <p>Session End: {{ single.end_time }}</p>
+                <p>Project ID: {{ single.project_id }}</p>
+                <button href="/sessions/{{ single._id }}/edit" class="waves-effect waves-light btn right green darken-1" type="submit">Update Session</button>
+            </div>
+        </div>
+    </div>
+</div>

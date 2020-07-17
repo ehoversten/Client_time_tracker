@@ -124,6 +124,41 @@ router.post('/create', isLoggedIn, (req, res) => {
 });
 
 // ---------------------------------- //
+//        Get Detail SESSION          //
+// ---------------------------------- //
+router.get('/:id', isLoggedIn, (req, res) => {
+  console.log(req.params.id);
+
+  db.Session.findById(req.params.id)
+    .then(data => {
+      // create temp variable to parse data from database
+      let session_time = data.end_time - data.start_time;
+      console.log(session_time);
+
+      let foundSession = {
+        _id: data._id,
+        start_time: data.start_time,
+        end_time: data.end_time,
+        session_length: session_time,
+        project_id: data.project_id,
+        notes: data.notes,
+        session_user: {
+          id: req.user.id,
+          username: req.user.username
+        }
+      };
+      console.log(foundSession);
+      res.render('session_detail', { single: foundSession });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+    });
+});
+
+
+
+// ---------------------------------- //
 //      Put Update (END) SESSION      //
 // ---------------------------------- //
 router.put('/:id', isLoggedIn, (req, res) => {

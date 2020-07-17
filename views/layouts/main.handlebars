@@ -28,12 +28,26 @@
     <script src="https://d3js.org/d3.v5.js"></script>
 
     <script>
+        //-- Materialize SELECT Script --//
         document.addEventListener('DOMContentLoaded', function () {
             M.AutoInit();
 
             var elems = document.querySelectorAll('select');
             var instances = M.FormSelect.init(elems, options);
         });
+
+        //-- Materialize DATE PICKER Script --//
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.timepicker');
+            var instances = M.Timepicker.init(elems, options);
+        });
+
+        //-- Materialize TIME PICKER Script --//
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.timepicker');
+            var instances = M.Timepicker.init(elems, options);
+        });
+        
     </script>
 </body>
 </html>

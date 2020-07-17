@@ -38,7 +38,7 @@
                                     <td>{{ this.notes }}</td>
                                     <td><a href="/users/overview"></a>{{ this.session_user.username }}</td>
                                     <td>
-                                        <a href="/sessions/{{ this._id }}/edit" class="waves-effect waves-light btn right green darken-2" type="submit"><i class="material-icons">chat</i></a>
+                                        <a href="/sessions/{{ this._id }}" class="waves-effect waves-light btn right green darken-2" type="submit"><i  class="material-icons">chat</i></a>
 
                                         <form action="/sessions/{{ this._id }}?_method=DELETE" method="POST">
                                             <button class="right waves-effect waves-light btn red darken-2" type="submit"><i class="material-icons">delete</i></button>
