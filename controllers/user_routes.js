@@ -62,9 +62,9 @@ router.get('/login', (req, res) => {
 //          Post LOGIN ROUTE          //
 // ---------------------------------- //
 router.post('/login', passport.authenticate("local", {
-    successRedirect: '/secret',
-    failureRedirect: '/users/login'
-}), (req, res) => {
+        successRedirect: '/secret',
+        failureRedirect: '/users/login'
+    }), (req, res) => {
     console.log(req.body);
 
     res.redirect('/sessions');

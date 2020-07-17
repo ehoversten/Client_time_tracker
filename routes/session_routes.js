@@ -113,7 +113,7 @@ router.post('/create', isLoggedIn, (req, res) => {
       console.log(data);
       // res.status(301).json(data);
       // res.redirect("/session/end");
-      res.redirect("/sessions/" + data._id + "/edit");
+      res.redirect("/sessions/" + data._id + "/stop");
     })
     .catch((err) => {
       console.log(err);
@@ -151,7 +151,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //         Get END SESSION            //
 // ---------------------------------- //
-router.get('/:id/edit', isLoggedIn, (req, res) => {
+router.get('/:id/stop', isLoggedIn, (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
   // console.log(req.params);
@@ -186,7 +186,42 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //         Get EDIT SESSION           //
 // ---------------------------------- //
+router.get('/:id/edit', (req, res) => {
+  // ** TESTING ** //
+  console.log(`Req Params: ${req.params.id}`);
+  // console.log(req.params);
 
+  db.Session.findById(req.params.id)
+    .then(data => {
+      console.log(data);
+
+      // create temp variable to parse data from database
+      let session_time = data.end_time - data.start_time;
+      // console.log(session_time);
+
+      let foundSession = {
+        _id: data._id,
+        start_time: data.start_time,
+        end_time: data.end_time,
+        session_length: session_time,
+        project_id: data.project_id,
+        notes: data.notes,
+        session_user: {
+          id: req.user.id,
+          username: req.user.username,
+        },
+      };
+
+      console.log("<><><><><><>");
+      console.log(foundSession);
+      // res.send("Testing");
+      res.render("session_edit", { single: foundSession });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 
 // ---------------------------------- //
