@@ -39,15 +39,17 @@ router.get('/', isLoggedIn, (req, res) => {
             username: sesh.session_user.username
           }
         }; 
-        console.log('--------------')
-        console.log(newSession)
+        // ** TESTING ** //
+        // console.log('--------------')
+        // console.log(newSession)
+
         // add data object to context array
         allSesh.push(newSession); 
       });
 
       // ** TESTING ** //
       console.log("<><><><><><><>");
-      console.log(allSesh);
+      // console.log(allSesh);
 
       res.render("session", { allSessions: allSesh, currentUser: currentUser });
     })
