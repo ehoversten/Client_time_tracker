@@ -10,7 +10,9 @@
                 <p>Session Start: {{ single.start_time }}</p>
                 <p>Session End: {{ single.end_time }}</p>
                 <p>Project ID: {{ single.project_id }}</p>
-                <button href="/sessions/{{ single._id }}/edit" class="waves-effect waves-light btn right green darken-1" type="submit">Update Session</button>
+                <a href="/sessions/{{ single._id }}/edit">
+                    <button class="waves-effect waves-light btn right green darken-1" type="submit">Update Session</button>
+                </a>
             </div>
         </div>
     </div>
