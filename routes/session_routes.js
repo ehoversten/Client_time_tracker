@@ -131,12 +131,15 @@ router.get('/:id', isLoggedIn, (req, res) => {
 
   db.Session.findById(req.params.id)
     .then(data => {
+      console.log("Found Session Data");
+      console.log(data);
       // create temp variable to parse data from database
       let session_time = data.end_time - data.start_time;
       console.log(session_time);
 
       let foundSession = {
         _id: data._id,
+        date: data.date,
         start_time: data.start_time,
         end_time: data.end_time,
         session_length: session_time,
@@ -163,25 +166,25 @@ router.get('/:id', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 router.put('/:id', isLoggedIn, (req, res) => {
   // ** TESTING ** //
-  console.log("*** END SESSION ***");
-  console.log("**********");
+  console.log("*** UPDATE/END SESSION ***");
   console.log(req.params);
+  console.log("**********");
   console.log(req.body);
 
   //-- Retrieve Session
-  db.Session.findByIdAndUpdate(req.params.id, 
-    { 
-      end_time: Date.now(), 
-      notes: req.body.session_notes 
-    })
-    .then(updatedSession => {
-      console.log(updatedSession);
-      res.redirect('/sessions')
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  // db.Session.findByIdAndUpdate(req.params.id, 
+  //   { 
+  //     end_time: Date.now(), 
+  //     notes: req.body.session_notes 
+  //   })
+  //   .then(updatedSession => {
+  //     console.log(updatedSession);
+  //     res.redirect('/sessions')
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.status(500).json(err);
+  //   });
 });
 
 
@@ -227,6 +230,8 @@ router.get('/:id/edit', (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
   // console.log(req.params);
+
+
 
   db.Session.findById(req.params.id)
     .then(data => {

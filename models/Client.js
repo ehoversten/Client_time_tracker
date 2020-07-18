@@ -21,6 +21,17 @@ const ClientSchema = new Schema({
     ]
 });
 
+//-- Look into PRE HOOKS and mongoose --//
+
+// const Comment = require("./comment");
+// campgroundSchema.pre("remove", async function () {
+//   await Comment.remove({
+//     _id: {
+//       $in: this.comments,
+//     },
+//   });
+// });
+
 
 let Client = mongoose.model('Client', ClientSchema);
 
