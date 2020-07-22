@@ -89,8 +89,8 @@ span {
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 150px;
+    max-width: 150px;
     background: #5a5d69;
     color: #fff;
     transition: all 0.3s;
@@ -227,6 +227,27 @@ a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    
+}
+
+#client-container {
+    z-index: -1;
+    margin-top: -80vh;
+    width: 50vw;
+}
+
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px; 
+  color:#ccc;
 }
 
 /* ---------------------------------------------------
