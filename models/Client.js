@@ -21,7 +21,7 @@ const ClientSchema = new Schema({
     ]
 });
 
-//-- Look into PRE HOOKS and mongoose --//
+//-- Look into PRE HOOKS with mongoose --//
 
 // const Comment = require("./comment");
 // campgroundSchema.pre("remove", async function () {
