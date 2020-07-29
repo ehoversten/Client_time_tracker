@@ -9,18 +9,6 @@ const ClientSchema = new Schema({
     contact: {
         type: String
     },
-    // not needed (?)
-    // projects_name: [ 
-    //     {
-    //         _id : {
-    //             type: Schema.Types.ObjectId,
-    //             ref: 'Project'
-    //         },
-    //         project_name : {
-    //             type: String
-    //         }
-    //     }
-    // ],
     created_at: {
         type: Date,
         default: Date.now
@@ -32,6 +20,17 @@ const ClientSchema = new Schema({
         }
     ]
 });
+
+//-- Look into PRE HOOKS with mongoose --//
+
+// const Comment = require("./comment");
+// campgroundSchema.pre("remove", async function () {
+//   await Comment.remove({
+//     _id: {
+//       $in: this.comments,
+//     },
+//   });
+// });
 
 
 let Client = mongoose.model('Client', ClientSchema);

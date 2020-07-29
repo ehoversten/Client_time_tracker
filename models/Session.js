@@ -22,7 +22,7 @@ const SessionSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Project",
     },
-    project_title: {
+    title: {
       type: String,
     },
   },
