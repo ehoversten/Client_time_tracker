@@ -1,85 +1,42 @@
-<div class="clients-container">
-    <div class="client-form">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <!-- Modal Structure -->
-                    <div id="modal1" class="modal">
-                        <div class="modal-content">
-                            <div class="close-btn">
-                                <h3>Add Client</h3>
-                                <a href="#!" class="modal-close waves-effect waves-light red darken-1 btn-flat"> X </a>
-                            </div>
-                            <form action="/clients/create" method="post">
-                                <div class="row">
-                                    <div class="input-field col s8 offset-s2">
-                                        <input type="text" name="client_name" placeholder="Ex. AMG Autos" class="validate">
-                                        <label  for="client_name">Client Account Name:</label>
-                                    </div>
-                                    <div class="input-field col s8 offset-s2">
-                                        <input type="text" name="client_contact" placeholder="Ex. John Doe">
-                                        <label for="client_contact">Client Contact:</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s12">
-                                        <button type="submit" class="right bottom btn waves-effect waves-light green darken-1">Add</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- End Modal -->
-                </div>
-            </div>
-        </div>
-    </div>  
+{{!-- Search function --}}
+<div class="container" id="client-container">
+<div class="form-group pull-right">
+    <input type="text" class="search form-control" placeholder="What you looking for?">
+</div>
+<span class="counter pull-right"></span>
+</div>
 
-    {{!-- CLIENT LIST --}}
-    <div class="row">
-        <div class="col s12">
-            <h5>Clients List | Total: {{ allClients.length }}</h5>
-            <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger green darken-1" href="#modal1">Add Client</a>
-            <hr>
-            {{#if allClients }}
-                {{#each allClients }}
-                <div class="col s4">
-                    <div class="card green darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">Company: {{ this.name }}</span>
-                            <p>Company Ref Number: {{ this._id }}</p>
-                            <p>Contact: {{ this.contact }}</p>
-
-                            <a href="/clients/{{ this._id }}/edit"><button class="waves-effect waves-light btn right blue darken-2"><i class="material-icons">edit</i></button></a>
-   
-                            <form action="/clients/{{ this._id }}?_method=DELETE" method="POST">
-                                <button class="waves-effect waves-light btn right red darken-2" type="submit"><i class="material-icons">delete</i></button>
-                            </form>
-                        </div>
-
-                    {{#if projects}}
-                        <div class="card-action">
-                            <p>Project List | ({{ projects.length }})</p>
-                        {{#each projects }}
-                            <ul class="projects">
-                                <li><a href="/projects/{{ this._id }}">Project Title: {{ this.title }}</a></li>
-                            </ul>
-                        {{/each }}
-                        </div>
-
-                    {{else}}
-                        <div class="card-action">
-                            <a href="#">No projects currently</a>
-                        </div>
-                    {{/if}}
-                    </div>
-
-                </div>
-                {{/each }}
-            {{else }}
-                <h2>No Clients Currently</h2>
-            {{/if }}
-        </div>
-    </div>
+{{!-- table --}}
+<div class ="container">
+<table class="table table-hover table-bordered results">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th scope="col-lg-4 col-md-4 col-xs-4=">Client</th>
+      <th scope="col-lg-4 col-md-4 col-xs-4">Primary Contact</th>
+      <th scope="col-log-4 col-md-4 col-xs-4">Projects</th>
+    </tr>
+    <tr class="warning no-result">
+      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each allClients}}  
+    <tr>
+      <th scope="row">#</th>
+      <td>{{this.name}}</td>
+      <td>{{this.contact}}</td>
+      <td>
+      <select>
+       {{#each projects}}   
+       <option>{{this.title}}</option>
+       {{/each}}
+      </select>
+      
+      </td>
+      
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
 </div>
