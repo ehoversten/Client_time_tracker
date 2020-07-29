@@ -12,6 +12,7 @@ const isLoggedIn = require("../config/auth");
 router.get('/', isLoggedIn, (req, res) => {
     // Check if user is logged in
   console.log(`Current User: ${req.user}`);
+
   let currentUser = req.user;
   console.log(`User Name: ${req.user.username}`);
 
@@ -34,22 +35,26 @@ router.get('/', isLoggedIn, (req, res) => {
           project_id: sesh.project_work.id,
           notes: sesh.notes,
           session_user: {
-            id: sesh.session_user._id,
+            id: sesh.session_user.id,
             username: sesh.session_user.username
           }
         }; 
-        console.log('--------------')
-        console.log(newSession)
+        // ** TESTING ** //
+        // console.log('--------------')
+        // console.log(newSession)
+
         // add data object to context array
         allSesh.push(newSession); 
       });
 
+      // ** TESTING ** //
+      console.log("<><><><><><><>");
+      // console.log(allSesh);
+
       res.render("session", { allSessions: allSesh, currentUser: currentUser });
     })
     .catch(err => {
-      if(err) {
-        res.status(500).json(err);
-      }
+      res.status(500).json(err);
     });
 })
 
@@ -57,10 +62,12 @@ router.get('/', isLoggedIn, (req, res) => {
 //       Get START NEW SESSION        //
 // ---------------------------------- //
 router.get('/start', isLoggedIn, (req, res) => {
+  // ** TESTING ** //
   console.log("*** HIT START SESSION ***");
   console.log(`User is ${req.user.username}`);
-
+  //-- Temp OBJ to pass DB data to VIEW
   let projects = [];
+  //-- Query Database
   db.Project.find({})
     .then(data => {
       data.forEach(proj => {
@@ -83,11 +90,14 @@ router.get('/start', isLoggedIn, (req, res) => {
 //     Post Create (START) SESSION    //
 // ---------------------------------- //
 router.post('/create', isLoggedIn, (req, res) => {
+  // ** TESTING ** //
   console.log("*** IN CREATE SESSION ***")
   console.log(`User is ${req.user.username}`);
   console.log(req.body);
-  // Parse data from from submit
+
+  //-- Parse data from from submit
   let { proj_id, proj_title } = req.body;
+
   db.Session.create({
     date: Date.now(),
     start_time: Date.now(),
@@ -105,47 +115,83 @@ router.post('/create', isLoggedIn, (req, res) => {
       console.log(data);
       // res.status(301).json(data);
       // res.redirect("/session/end");
-      res.redirect("/sessions/" + data._id + "/edit");
+      res.redirect("/sessions/" + data._id + "/stop");
     })
     .catch((err) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json(err);
-      }
+      console.log(err);
+      res.status(500).json(err);
     });
 });
+
+// ---------------------------------- //
+//        Get Detail SESSION          //
+// ---------------------------------- //
+router.get('/:id', isLoggedIn, (req, res) => {
+  console.log(req.params.id);
+
+  db.Session.findById(req.params.id)
+    .then(data => {
+      console.log("Found Session Data");
+      console.log(data);
+      // create temp variable to parse data from database
+      let session_time = data.end_time - data.start_time;
+      console.log(session_time);
+
+      let foundSession = {
+        _id: data._id,
+        date: data.date,
+        start_time: data.start_time,
+        end_time: data.end_time,
+        session_length: session_time,
+        project_id: data.project_id,
+        notes: data.notes,
+        session_user: {
+          id: req.user.id,
+          username: req.user.username
+        }
+      };
+      console.log(foundSession);
+      res.render('session_detail', { single: foundSession });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+    });
+});
+
+
 
 // ---------------------------------- //
 //      Put Update (END) SESSION      //
 // ---------------------------------- //
 router.put('/:id', isLoggedIn, (req, res) => {
-  console.log("*** END SESSION ***");
-  console.log("**********");
+  // ** TESTING ** //
+  console.log("*** UPDATE/END SESSION ***");
   console.log(req.params);
+  console.log("**********");
   console.log(req.body);
 
-  db.Session.findByIdAndUpdate(req.params.id, 
-    { 
-      end_time: Date.now(), 
-      notes: req.body.session_notes 
-    })
-    .then(updatedSession => {
-      console.log(updatedSession);
-      res.redirect('/sessions')
-    })
-    .catch(err => {
-      if(err) {
-          console.log(err);
-          res.status(500).json(err);
-      }
-    });
+  //-- Retrieve Session
+  // db.Session.findByIdAndUpdate(req.params.id, 
+  //   { 
+  //     end_time: Date.now(), 
+  //     notes: req.body.session_notes 
+  //   })
+  //   .then(updatedSession => {
+  //     console.log(updatedSession);
+  //     res.redirect('/sessions')
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.status(500).json(err);
+  //   });
 });
 
 
 // ---------------------------------- //
 //         Get END SESSION            //
 // ---------------------------------- //
-router.get('/:id/edit', isLoggedIn, (req, res) => {
+router.get('/:id/stop', isLoggedIn, (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
   // console.log(req.params);
@@ -176,6 +222,49 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
     res.render('session_end', { single: foundSession });
   });
 });
+
+// ---------------------------------- //
+//         Get EDIT SESSION           //
+// ---------------------------------- //
+router.get('/:id/edit', (req, res) => {
+  // ** TESTING ** //
+  console.log(`Req Params: ${req.params.id}`);
+  // console.log(req.params);
+
+
+
+  db.Session.findById(req.params.id)
+    .then(data => {
+      console.log(data);
+
+      // create temp variable to parse data from database
+      let session_time = data.end_time - data.start_time;
+      // console.log(session_time);
+
+      let foundSession = {
+        _id: data._id,
+        start_time: data.start_time,
+        end_time: data.end_time,
+        session_length: session_time,
+        project_id: data.project_id,
+        notes: data.notes,
+        session_user: {
+          id: req.user.id,
+          username: req.user.username,
+        },
+      };
+
+      console.log("<><><><><><>");
+      console.log(foundSession);
+      // res.send("Testing");
+      res.render("session_edit", { single: foundSession });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 
 // ---------------------------------- //
 //         Delete A SESSION           //

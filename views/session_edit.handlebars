@@ -1,0 +1,50 @@
+<div class="session-form">
+    <div class="container">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <h5>Current Session Info:</h5>
+                <hr>
+                <p>Username: {{ single.session_user.username }}</p>
+                <p>Session ID: {{ single._id }}</p>
+                <p>Session Length: {{ single.session_length }}</p>
+                <p>Session Start: {{ single.start_time }}</p>
+                <p>Session End: {{ single.end_time }}</p>
+                <p>Project ID: {{ single.project_id }}</p>
+
+                <form action="/sessions/{{ single._id }}?_method=PUT" method="POST">
+                    <div class="input-field col s12">
+                        <textarea name="session_notes" placeholder="Enter notes for current session" class="materialize-textarea">{{ single.notes }}</textarea>
+                        <label for="session_notes">Session Notes:</label>
+                    </div>
+                    <div class="input-filed col s4">
+                        <input 
+                            name="session_date" 
+                            type="text" 
+                            class="datepicker">
+                        <label for="session_date">Session Date:</label>
+                    </div>
+                    <div class="input-filed col s4">
+                        <input 
+                            name="session_start" 
+                            type="text" 
+                            class="timepicker"
+                            value="{{ single.start_time }}">
+                        <label for="session_start">Session Start:</label>
+                    </div>
+                    <div class="input-filed col s4">
+                        <input 
+                            name="session_end" 
+                            type="text"
+                            class="timepicker"
+                            value="{{ single.end_time }}">
+                        <label for="session_end">Session End:</label>
+                    </div>
+
+                    <button class="waves-effect waves-light btn right green darken-1" type="submit">Update Session</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

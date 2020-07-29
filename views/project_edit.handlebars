@@ -17,7 +17,7 @@
 
                         <div class="input-field col s8">
                             <select id="client_id" name="client_id">
-                                <option value="{{ proj.client_id }}" disabled selected>Select Client</option>
+                                <option value="{{ proj.client_id }}">Select Client</option>
                                 {{#each allClients }}
                                 <option value="{{ this._id }}">{{ this.name }}</option>
                                 {{/each }}

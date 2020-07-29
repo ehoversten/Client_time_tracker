@@ -61,6 +61,7 @@ router.get('/index', (req, res) => {
 // ---------------------------------- //
 //          Post LOGIN ROUTE          //
 // ---------------------------------- //
+
 router.post('/index', passport.authenticate("local", {
     successRedirect: '/secret',
     failureRedirect: '/'

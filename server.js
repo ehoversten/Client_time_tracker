@@ -19,8 +19,7 @@ const session_routes = require('./routes/session_routes');
 const html_routes = require('./controllers/html_routes');
 const user_routes = require('./controllers/user_routes');
 
-// const PORT = process.env.PORT || 3000;
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Connect to Database 
 mongoose.connect(

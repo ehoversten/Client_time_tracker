@@ -16,7 +16,8 @@ router.get('/', isLoggedIn, (req, res) => {
   db.Client.find({})
     .populate("projects")
     .then(data => {
-      // console.log(data);
+      console.log("*/*/*/*/*/*/*/*/*/*`")
+      console.log(data);
       data.forEach(client => {
         // create array to pass our parsed database data
         let project_data = [];
@@ -60,6 +61,9 @@ router.get('/', isLoggedIn, (req, res) => {
 
       // Render page, pass our parsed array data to the view
       res.render('clients', { allClients: clients });
+
+      // ** TESTING ** //
+      // res.status(200).json(clients);
     }).catch(err => {
       // console.log(err);
       res.status(500).json(err);
@@ -150,6 +154,32 @@ router.delete('/:id', (req, res) => {
     }
   });
 });
+
+// router.delete("/:id", checkCampgroundOwnership, (req, res) => {
+//   Campground.findByIdAndRemove(req.params.id, (err, campgroundRemoved) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     Comment.deleteMany({ _id: { $in: campgroundRemoved.comments } }, (err) => {
+//       if (err) {
+//         console.log(err);
+//       }
+//       res.redirect("/campgrounds");
+//     });
+//   });
+// });
+
+// Delete/destroy Campground (with PRE HOOK in Model Definition)
+// router.delete("/:id",async(req, res) => {
+//   try {
+//     let foundCampground = await Campground.findById(req.params.id);
+//     await foundCampground.remove();
+//     res.redirect("/campgrounds");
+//   } catch (error) {
+//     console.log(error.message);
+//     res.redirect("/campgrounds");
+//   }
+// });
 
 
 module.exports = router;
