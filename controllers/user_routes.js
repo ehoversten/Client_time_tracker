@@ -134,6 +134,7 @@ router.post('/register', (req, res) => {
         }
         console.log(user);
         passport.authenticate("local")(req, res, function() {
+            console.log("Authenticated...");
             res.redirect('/secret');
         });
 
