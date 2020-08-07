@@ -38,10 +38,10 @@
                                     {{!-- <td>{{ this.notes }}</td> --}}
                                     <td><a href="/users/overview"></a>{{ this.session_user.username }}</td>
                                     <td>
-                                        <a href="/sessions/{{ this._id }}" class="btn btn-secondary" type="submit"><i class="fa fa-">Edit</i></a>
+                                        <a href="/sessions/{{ this._id }}" class="btn btn-success" type="submit"><i class="fas fa-edit"></i></a>
 
                                         <form action="/sessions/{{ this._id }}?_method=DELETE" method="POST">
-                                            <button class="btn btn-danger" type="submit"><i class="fa fa">delete</i></button>
+                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                     </td>
                                 </tr>
