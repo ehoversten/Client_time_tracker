@@ -37,23 +37,37 @@
                 <div class="project-list">
                     <h3>Current Active Projects List | Total: {{ allProjects.length }}</h3>
                     {{#if allProjects }}
-                    <ul>
-                    {{#each allProjects }}
-                        <h5>Project Title: {{ this.title }}</h5>
-                        <li>Project ID: {{ this._id }}</li>
-                        <li>Project Description: {{ this.description }}</li>
-                        <li>Client ID: {{ this.client_id }}</li>
+                    {{!-- <ul> --}}
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each allProjects }}
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{ this.title }}</td>
+                                    <td>{{ this.description }}</td>
+                                    <td>{{ this.client_id }}</td>
+                                    <td>Primary Contact</td>
+                                    <td>
+                                        <a href="/projects/{{ this._id }}" class="btn btn-primary" type="submit"><i class="fas fa-edit"></i></a>
+                                        <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
+                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
 
-                        <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
-                            <button class="waves-effect waves-light btn right red darken-2" type="submit"><i class="material-icons">delete</i></button>
-                        </form>
-
-                        <a href="/projects/{{ this._id }}" class="waves-effect waves-light btn right green darken-2" type="submit"><i class="material-icons">chat</i></a>
-                        <br>
-                        <br>
-                        <hr>
-                    {{/each }}
-                    </ul>
                     {{else}}
                     <h2>No Projects Currently</h2>
                     {{/if }}
