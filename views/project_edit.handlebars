@@ -1,22 +1,22 @@
 <div class="edit-projects-container">
     <div class="container">
         <div class="row">
-            <div class="col s12">
+            <div class="col-md-12">
                 <h3>Edit Project</h3>
                 <form action="/projects/{{ proj._id }}?_method=PUT" method="post">
                     <div class="row">
-                        <div class="input-field col s8">
-                            <input class="validate" type="text" name="project_title"
+                        <div class="form-group col-md-8">
+                            <input class="form-control" type="text" name="project_title"
                                 value="{{ proj.title }}">
                             <label for="project_title">Project Name:</label>
                         </div>
-                        <div class="input-field col s8">
-                            <textarea id="project_desc" name="project_desc" class="materialize-textarea">{{ proj.description }}</textarea>
+                        <div class="form-group col-md-8">
+                            <textarea id="project_desc" name="project_desc" class="form-control">{{ proj.description }}</textarea>
                             <label for="project_desc">Project Description:</label>
                         </div>
 
-                        <div class="input-field col s8">
-                            <select id="client_id" name="client_id">
+                        <div class="form-group col-md-8">
+                            <select id="client_id" name="client_id" class="form-control">
                                 <option value="{{ proj.client_id }}">Select Client</option>
                                 {{#each allClients }}
                                 <option value="{{ this._id }}">{{ this.name }}</option>
@@ -24,8 +24,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn-floating right btn waves-effect waves-light green darken-1"><i
-                                class="material-icons">add</i></button>
+                        <button type="submit" class="btn btn-success">Save <i class="fas fa-save"></i></button>
                     </div>
                 </form>
             </div>
@@ -34,7 +33,7 @@
     </div>
 </div>
 
-<div class="container">
+{{!-- <div class="container">
     <p>{{ proj._id }}</p>
     <p>{{ proj.title }}</p>
-</div>
+</div> --}}
