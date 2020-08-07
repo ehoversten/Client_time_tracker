@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 
 // ---------------------------------- //
 //        Get LANDING PAGE            //
 // ---------------------------------- //
 router.get('/', (req, res) => {
-  // let now = moment().format("dddd, MMMM Do");
+  let now = moment().format("dddd, MMMM Do");
   // let now = Date.now();
   // console.log(now)
   res.render('index', { date: now });
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
 // ---------------------------------- //
 //         Get AUTH PAGE              //
 // ---------------------------------- //
-router.get('/secret', isLoggedIn, (req, res) => {
+router.get('/dashboard', isLoggedIn, (req, res) => {
   console.log(req.user);
   req.session.user = req.user;
   console.log(`****`);
@@ -27,7 +28,7 @@ router.get('/secret', isLoggedIn, (req, res) => {
     first_name: req.user.first_name
   }
 
-  res.render("secret", { currentUser: thisUser });
+  res.render("dashboard", { currentUser: thisUser });
 });
 
 

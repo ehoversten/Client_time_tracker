@@ -1,3 +1,25 @@
+/* ---------------------------------------------------
+    Main Layout STYLE
+----------------------------------------------------- */
+@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
+
+.body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.content-wrapper {
+    /* width: -webkit-fill-available; */
+    width: 100%;
+}
+
+
+
 #login-form {
   width: 22vw;
   border: 3px solid rgb(214, 214, 214);
@@ -83,10 +105,10 @@ span {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
-.wrapper {
+/* .wrapper {
     display: flex;
     align-items: stretch;
-}
+} */
 
 #sidebar {
     min-width: 150px;
@@ -224,10 +246,10 @@ a.article:hover {
 
 #content {
     width: 100%;
+ 
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
-    
 }
 
 #client-container {
@@ -248,6 +270,16 @@ a.article:hover {
 .counter{
   padding:8px; 
   color:#ccc;
+}
+
+/* ---------------------------------------------------
+    Sessions STYLE
+----------------------------------------------------- */
+
+.sessions-container {
+  background-color: lightblue;
+  /* width: -webkit-fill-available; */
+
 }
 
 /* ---------------------------------------------------

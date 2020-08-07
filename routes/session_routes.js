@@ -20,9 +20,20 @@ router.get('/', isLoggedIn, (req, res) => {
   // create a variable to pass data from CONTROLLER to VIEW
   let allSesh = [];
   db.Session.find({})
+    .populate('Project')
+    // .exec( (err, data) => {
+    //   if(err) {
+    //     console.log(err);
+    //   }
+    //   console.log("Populating Associated Data");
+    //   console.log(data);
+    //   return data;
+    // })
     .then(data => {
       // Did we get data? 
-      // console.log(data);
+      console.log("<<---- Found Session ---->>")
+      console.log(data);
+
       data.forEach(sesh => {
         
         // create a temp variable to parse data from db
@@ -50,6 +61,7 @@ router.get('/', isLoggedIn, (req, res) => {
       // ** TESTING ** //
       console.log("<><><><><><><>");
       // console.log(allSesh);
+
 
       res.render("session", { allSessions: allSesh, currentUser: currentUser });
     })
@@ -130,6 +142,8 @@ router.get('/:id', isLoggedIn, (req, res) => {
   console.log(req.params.id);
 
   db.Session.findById(req.params.id)
+    .populate('Project')
+    .populate('User')
     .then(data => {
       console.log("Found Session Data");
       console.log(data);
