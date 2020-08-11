@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
@@ -55,7 +56,8 @@ const seedDB = require('./seeds');
 const app = express();
 
 // middleware to serve up our static files
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

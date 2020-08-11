@@ -1,15 +1,15 @@
 <div class="projects-form">
     <div class="container">
         <div class="row">
-            <div class="col s10">
+            <div class="col-md-12">
                 <h3>Start New Session</h3>
                 <form action="/sessions/create" method="post">
-                    <div class="input-field col s10">
+                    <div class="form-group col-md-10">
                         <label for="proj_id">Select Project From List</label>
                     </div>
                     <br>
                     <br>
-                    <div class="input-field col s10">
+                    <div class="form-group col-md-10">
                         <select id="proj_id" name="proj_id">
                             <option value="" disabled selected>Select Project</option>
                             {{#each allProjects }}
@@ -17,11 +17,11 @@
                             {{/each }}
                         </select>
                     </div>
-                    <div class="input-field col s10">
+                    <div class="form-group col-md-10">
                         <input id="proj_title" type="text">
                         <label for="project-title">Project Title</label>
                     </div>
-                    <button type="submit" class="waves-effect waves-light btn orange lighten-1">Start Session</button>
+                    <button type="submit" class="btn btn-primary">Start Session</button>
                 </form>
             </div>
         </div>

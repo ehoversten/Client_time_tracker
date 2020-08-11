@@ -4,9 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const isLoggedIn = require('../config/auth');
-
 const bcrypt = require('bcryptjs');
-
 const db = require('../models');
 const User = require('../models/User');
 // const Session = require('../models/Session');
@@ -49,21 +47,23 @@ router.get("/overview", isLoggedIn, (req, res) => {
 
 });
 
+// ** REMOVE ** //
 // ---------------------------------- //
 //          Get LOGIN PAGE            //
 // ---------------------------------- //
-router.get('/index', (req, res) => {
-    console.log(req.body);
+// router.get('/index', (req, res) => {
+//     console.log(req.body);
 
-    res.render('index');
-})
+//     res.render('index');
+// })
+// ** REMOVE ** //
 
 // ---------------------------------- //
 //          Post LOGIN ROUTE          //
 // ---------------------------------- //
 
 router.post('/index', passport.authenticate("local", {
-    successRedirect: '/secret',
+    successRedirect: '/dashboard',
     failureRedirect: '/'
 }), (req, res) => {
     console.log(req.body);
@@ -134,7 +134,9 @@ router.post('/register', (req, res) => {
         }
         console.log(user);
         passport.authenticate("local")(req, res, function() {
-            res.redirect('/secret');
+            console.log("Authenticated...");
+            // res.redirect('/secret');
+            res.redirect('/dashboard');
         });
 
     })

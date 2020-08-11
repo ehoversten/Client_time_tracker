@@ -1,7 +1,7 @@
 <div class="detail-container">
     <div class="container">
         <div class="row">
-            <div class="col s12">
+            <div class="col-lg-12">
                 <h3>Project Title: {{ detail.title }}</h3>
                 <p>Client ID: {{ detail.client_id }}</p>
                 <p>Description:{{ detail.description }}</p>
@@ -9,7 +9,7 @@
                 <p>Started: {{ detail.start_date }}</p>
                 <p>Completed: {{ detail.completion_date }}</p>
 
-                <a href="/projects/{{ detail._id }}/edit"><button class="waves-effect waves-light btn right blue darken-2"><i class="material-icons">edit</i></button></a>
+                <a href="/projects/{{ detail._id }}/edit"><button class="btn btn-warning">Edit <i class="fas fa-user-edit"></i></button></a>
             </div>
 
             <hr>
@@ -17,7 +17,7 @@
 
             {{#if detail_sessions}}
             <h4>Sessions Found: {{ detail_sessions.length }}</h4>
-                <div class="col s12">
+                <div class="col-lg-12">
                 {{#each detail_sessions }}
                     <h5>User: {{ this.session_user.username }}</h5>
                     <h5>Session ID: {{ this._id }}</h5>
