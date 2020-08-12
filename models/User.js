@@ -37,6 +37,10 @@ const UserSchema = new Schema({
   ]
 });
 
+UserSchema.virtual('fullname').get(function() {
+  return this.first_name + ' ' + this.last_name;
+});
+
 UserSchema.plugin(passportLocalMongoose);
 
 let User = mongoose.model('User', UserSchema);

@@ -32,6 +32,10 @@ mongoose.connect(
   }
 );
 
+// Make Mongoose attach virtuals whenever calling `JSON.stringify()`,
+// including using `res.json()`
+mongoose.set('toJSON', { virtuals: true });
+
 // -------------------------------------------- //
 // Connect to Database through Docker Container //
 // -------------------------------------------- //

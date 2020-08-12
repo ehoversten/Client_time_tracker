@@ -19,20 +19,20 @@ const ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Client'
     },
-    client_obj: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Client'
-        }
-    ],
-    proj_client: {
-        id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Client'
-        },
-        client_name: { type: String },
-        client_contact: { type: String }
-    },
+    // client_obj: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Client'
+    //     }
+    // ],
+    // proj_client: {
+    //     id: {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Client'
+    //     },
+    //     client_name: { type: String },
+    //     client_contact: { type: String }
+    // },
     // team_members : [    
     //     {
     //         id : {

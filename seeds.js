@@ -23,10 +23,11 @@ const projects = JSON.parse(fs.readFileSync(`${__dirname}/_data/projects.json`, 
 const importData = async () => {
   try {
     await db.Client.create(clients);
+    console.log("Client Data Imported ...");
     await db.Project.create(projects);
+    console.log("Project Data Imported ...");
     // await db.Session.create(sessions);
 
-    console.log("Client Data Imported ...");
     process.exit();
   } catch (err) {
     console.log(err);
