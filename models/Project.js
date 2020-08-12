@@ -7,7 +7,8 @@ const Client = require('./Client');
 const ProjectSchema = new Schema({
     title: {
         type: String,
-        required: true,
+        trim: true,
+        required: [true, "Please enter a title"]
     },
     description: {
         type: String,
@@ -24,7 +25,7 @@ const ProjectSchema = new Schema({
             ref: 'Client'
         }
     ],
-    client: {
+    proj_client: {
         id: {
             type: Schema.Types.ObjectId,
             ref: 'Client'
@@ -32,30 +33,30 @@ const ProjectSchema = new Schema({
         client_name: { type: String },
         client_contact: { type: String }
     },
-    team_members : [    
-        {
-            id : {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }, 
-            username: {
-                type: String
-            }
-        }
-    ],
+    // team_members : [    
+    //     {
+    //         id : {
+    //             type: Schema.Types.ObjectId,
+    //             ref: 'User'
+    //         }, 
+    //         username: {
+    //             type: String
+    //         }
+    //     }
+    // ],
 
     // -- TESTING -- //
-    all_sessions : [
-        {
-            id: { 
-                type: Schema.Types.ObjectId,
-                ref: 'Session'
-            }
-        }
-    ],
+    // all_sessions : [
+    //     {
+    //         id: { 
+    //             type: Schema.Types.ObjectId,
+    //             ref: 'Session'
+    //         }
+    //     }
+    // ],
 
     // --> Which one is correct or better (?)
-    sessions : [
+    proj_sessions : [
         {
             type: Schema.Types.ObjectId,
             ref: 'Session'

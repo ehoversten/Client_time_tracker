@@ -11,42 +11,6 @@ mongoose.connect("mongodb://localhost/project_tracker_db", {
 });
 
 
-//-- Read JSON file
-const clients = JSON.parse(fs.readFileSync(`${__dirname}/_data/clients.json`, 'utf-8'));
-
-console.log(clients);
-
-//-- Import Data
-const importData = async () => {
-    try {
-        await db.Client.create(clients);
-
-        console.log("Client Data Imported ...");
-        process.exit();
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-//-- Remove Data
-const deleteData = async () => {
-    try {
-        await db.Client.deleteMany()
-
-        console.log("Client Data Removed ...");
-        process.exit();
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-if(process.argv[2] == '-i') {
-    importData();
-} else if(process.argv[2] == '-d') {
-    deleteData();
-}
-
-
 //-- Data
 let clientSeed = [
   {
@@ -79,13 +43,13 @@ let clientSeed = [
   },
 ];
 
-// db.Client.deleteMany({})
-//   .then(() => db.Client.collection.insertMany(clientSeed))
-//   .then((data) => {
-//     console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//     process.exit(1);
-//   });
+db.Client.deleteMany({})
+  .then(() => db.Client.collection.insertMany(clientSeed))
+  .then((data) => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

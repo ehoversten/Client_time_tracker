@@ -1,6 +1,6 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
-const db = require("../models");
+const db = require("./models");
 const { dirname } = require("path");
 
 //-- Connect to Database
@@ -14,13 +14,17 @@ mongoose.connect("mongodb://localhost/project_tracker_db", {
 const clients = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/clients.json`, "utf-8")
 );
+const projects = JSON.parse(fs.readFileSync(`${__dirname}/_data/projects.json`, 'utf-8'));
+// const sessions = JSON.parse(fs.readFileSync(`${__dirname}/_data/sessions.json`, 'utf-8'));
 
-console.log(clients);
+// console.log(clients);
 
 //-- Import Data
 const importData = async () => {
   try {
     await db.Client.create(clients);
+    await db.Project.create(projects);
+    // await db.Session.create(sessions);
 
     console.log("Client Data Imported ...");
     process.exit();
@@ -33,8 +37,12 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await db.Client.deleteMany();
-
     console.log("Client Data Removed ...");
+    await db.Project.deleteMany();
+    console.log("Project Data Removed ...");
+    await db.Session.deleteMany();
+    console.log("Session Data Removed ...");
+
     process.exit();
   } catch (err) {
     console.log(err);
