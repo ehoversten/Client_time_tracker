@@ -17,7 +17,8 @@ const ProjectSchema = new Schema({
     //-- Playing With Embedding vs. Referencing Associated Data --//
     client_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Client'
+        ref: 'Client',
+        required: true
     },
     // client_obj: [
     //     {

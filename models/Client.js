@@ -32,6 +32,17 @@ const ClientSchema = new Schema({
   ],
 });
 
+//-- Virtual Population
+ClientSchema.virtual("client_projects", {
+  ref: "Project", // The model to use
+  localField: "projects", // Find client where `localField`
+  foreignField: "project_id", // is equal to `foreignField`
+  // If `justOne` is true, 'members' will be a single doc as opposed to
+  // an array. `justOne` is false by default.
+  justOne: false,
+//   options: { sort: { name: -1 }, limit: 5 }, // Query options, see http://bit.ly/mongoose-query-options
+});
+
 //-- Look into PRE HOOKS with mongoose --//
 
 // const Comment = require("./comment");
@@ -41,7 +52,7 @@ const ClientSchema = new Schema({
 //       $in: this.comments,
 //     },
 //   });
-// });
+// }); 
 
 
 let Client = mongoose.model('Client', ClientSchema);

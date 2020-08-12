@@ -16,8 +16,12 @@ router.get('/', isLoggedIn, (req, res) => {
   db.Client.find({})
     .populate("projects")
     .then(data => {
-      console.log("*/*/*/*/*/*/*/*/*/*`")
+
+      //-- LOGGING --//
+      console.log("*/*/*/*/*/*/*/*/*/*`");
       console.log(data);
+
+
       data.forEach(client => {
         // create array to pass our parsed database data
         let project_data = [];
@@ -47,6 +51,8 @@ router.get('/', isLoggedIn, (req, res) => {
             _id: client._id,
             name: client.name,
             contact: client.contact,
+            primary: client.primary,
+            secondary: client.secondary,
             projects: project_data
         }
         // Add each parse CLient Object to our clients Array

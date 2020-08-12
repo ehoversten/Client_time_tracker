@@ -29,6 +29,7 @@ const SessionSchema = new Schema({
   project_id: {
     type: Schema.Types.ObjectId,
     ref: "Project",
+    required: true
   },
   notes: {
     type: String,
@@ -42,6 +43,10 @@ const SessionSchema = new Schema({
       type: String,
     },
   },
+  user_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 

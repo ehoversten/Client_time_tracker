@@ -10,14 +10,17 @@ const isLoggedIn = require("../config/auth");
 // ---------------------------------- //
 //        Get ALL PROJECTS            //
 // ---------------------------------- //
-router.get('/', isLoggedIn, (req, res) => {
+router.get('/', isLoggedIn, async (req, res) => {
 
   // Create a temp array to parse db data
   let clients = [];
   // Find all clients to populate pull-down 
-  db.Client.find({})
+  await db.Client.find({})
     .then(data => {
       // Loop through db data to parse for view context
+      console.log("RETRIEVING CLIENTS");
+      console.log(data);
+
       data.forEach(client => {
         let clientObj = {
           _id: client._id,
@@ -37,15 +40,19 @@ router.get('/', isLoggedIn, (req, res) => {
 
   // Create a temp array to parse db data
   let projects = [];
-  db.Project.find({})
-    .populate('Client', ['name', 'contact'])
+  await db.Project.find({})
+    .populate('clients', ['name', 'contact'])
     // .exec((err, result) => {
+    //   if(err) {
+    //     console.log(err);
+    //   }
     //   console.log("------------");
     //   console.log(result);
     //   return result;
     // })
     .then(data => {
       console.log("**********");
+      console.log("RETRIEVING PROJECTS");
       console.log(data);
 
       data.forEach(proj => {
@@ -61,7 +68,7 @@ router.get('/', isLoggedIn, (req, res) => {
 
         // ** TESTING ** //
         console.log("*^*^*^*^*^*^");
-        console.log(newProj);
+        // console.log(newProj);
 
         projects.push(newProj);
       });
