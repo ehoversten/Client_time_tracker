@@ -55,8 +55,8 @@
                                     <th scope="row">1</th>
                                     <td>{{ this.title }}</td>
                                     <td>{{ this.description }}</td>
-                                    <td>{{ this.client_id }}</td>
-                                    <td>Primary Contact</td>
+                                    <td>{{ this.client_name }}</td>
+                                    <td>{{ this.client_primary }} || {{ this.client_secondary }}</td>
                                     <td>
                                         <a href="/projects/{{ this._id }}" class="btn btn-primary" type="submit"><i class="fas fa-edit"></i></a>
                                         <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">

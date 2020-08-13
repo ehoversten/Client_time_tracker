@@ -41,7 +41,11 @@ router.get('/', isLoggedIn, async (req, res) => {
   // Create a temp array to parse db data
   let projects = [];
   await db.Project.find({})
-    .populate('clients', ['name', 'contact'])
+    // .populate('client_id')
+    .populate({
+      path: 'client_id',
+      select: 'name primary secondary'
+    })
     // .exec((err, result) => {
     //   if(err) {
     //     console.log(err);
@@ -56,19 +60,22 @@ router.get('/', isLoggedIn, async (req, res) => {
       console.log(data);
 
       data.forEach(proj => {
+        console.log('<######>   <######>')
+        console.log(proj);
         // create temp object to parse data for handlebars security
         let newProj = {
             _id: proj._id,
             title: proj.title,
             description: proj.description,
             client_id: proj.client_id,
-            client_name: proj.name,
-            client_contact: proj.contact
+            client_name: proj.client_id.name,
+            client_primary: proj.client_id.primary,
+            client_secondary: proj.client_id.secondary,
         }
 
         // ** TESTING ** //
         console.log("*^*^*^*^*^*^");
-        // console.log(newProj);
+        console.log(newProj);
 
         projects.push(newProj);
       });
