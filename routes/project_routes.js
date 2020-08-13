@@ -57,11 +57,11 @@ router.get('/', isLoggedIn, async (req, res) => {
     .then(data => {
       console.log("**********");
       console.log("RETRIEVING PROJECTS");
-      console.log(data);
+      // console.log(data);
 
       data.forEach(proj => {
-        console.log('<######>   <######>')
-        console.log(proj);
+        // console.log('<######>   <######>')
+        // console.log(proj);
         // create temp object to parse data for handlebars security
         let newProj = {
             _id: proj._id,
@@ -74,8 +74,8 @@ router.get('/', isLoggedIn, async (req, res) => {
         }
 
         // ** TESTING ** //
-        console.log("*^*^*^*^*^*^");
-        console.log(newProj);
+        // console.log("*^*^*^*^*^*^");
+        // console.log(newProj);
 
         projects.push(newProj);
       });
@@ -141,7 +141,9 @@ router.get('/:id', isLoggedIn, async (req, res) => {
     .populate('User')
     .populate('Project')
     .then(data => {
-      // console.log(data);
+      console.log("%%%%%%%%-----%%%%%%%%");
+      console.log(`Sessions: ${data}`);
+
       data.map(session => {
         let newSession = {
           _id: session._id,
@@ -176,11 +178,14 @@ router.get('/:id', isLoggedIn, async (req, res) => {
 
   // Find Single Project 
   await db.Project.findById({ _id: req.params.id})
+    .populate('client_id')
+    .populate('proj_sessions')
     .then(data => {
       console.log("Found Item");
       // -- TESTING -- //
       // console.log(typeof data);
-      // console.log(data);
+      console.log("/#/#/#/#/-----#/#/#/#/#");
+      console.log(data);
       
       // Create/Update/Assign a Temp variable by CLONING the returned DB data OBJECT
       proj = JSON.parse(JSON.stringify(data));
@@ -193,7 +198,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
       console.log(err);
     });
 
-    res.render("detail", {
+    res.render("project_detail", {
       detail: proj,
       detail_sessions: proj_sessions
     });

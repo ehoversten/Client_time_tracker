@@ -21,14 +21,15 @@ router.get('/', isLoggedIn, (req, res) => {
     .then(data => {
 
       //-- LOGGING --//
-      console.log("*/*/*/*/*/*/*/*/*/*`");
-      console.log(data);
+      // console.log("*/*/*/*/*/*/*/*/*/*`");
+      // console.log(data);
 
 
       data.forEach(client => {
 
-        console.log('(*)(*)(*)(*)(*)(*)(*)');
-        console.log(client);
+        // console.log('(*)(*)(*)(*)(*)(*)(*)');
+        // console.log(client);
+        
         // create array to pass our parsed database data
         let project_data = [];
 
