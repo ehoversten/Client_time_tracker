@@ -49,6 +49,8 @@ const SessionSchema = new Schema({
   }
 });
 
+//-- Create session_time Virtual --//
+
 
 const Session = mongoose.model('Session', SessionSchema);
 

@@ -138,8 +138,10 @@ router.get('/:id', isLoggedIn, async (req, res) => {
   let proj_sessions = [];
 
   await db.Session.find({})
-    .populate('User')
-    .populate('Project')
+    // .populate('session_user')
+    // .populate('user_id')
+    // .populate('project_id')
+    // .populate('project_work')
     .then(data => {
       console.log("%%%%%%%%-----%%%%%%%%");
       console.log(`Sessions: ${data}`);

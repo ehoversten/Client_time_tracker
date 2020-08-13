@@ -20,14 +20,20 @@ router.get('/', isLoggedIn, (req, res) => {
   // create a variable to pass data from CONTROLLER to VIEW
   let allSesh = [];
   db.Session.find({})
-    .populate('Project')
+    // .populate('project_id, project_work, session_user, user_id')
+    .populate('project_id')
+    // .populate('project_work')
+    // .populate('session_user')
+    // .populate('user_id')
+    // .populate('Project')
+    // .populate('User')
     // .exec( (err, data) => {
     //   if(err) {
     //     console.log(err);
     //   }
     //   console.log("Populating Associated Data");
     //   console.log(data);
-    //   return data;
+    //   // return data;
     // })
     .then(data => {
       // Did we get data? 
@@ -43,12 +49,16 @@ router.get('/', isLoggedIn, (req, res) => {
           start_time: sesh.start_time,
           end_time: sesh.end_time,
           session_length: sesh.end_time - sesh.start_time,
-          project_id: sesh.project_work.id,
+          project_wrk_id: sesh.project_work.id,
+          project_id: sesh.project_id._id,
+          project_title: sesh.project_id.title,
+          project_desc: sesh.project_id.description,
           notes: sesh.notes,
           session_user: {
             id: sesh.session_user.id,
             username: sesh.session_user.username
-          }
+          },
+          user_id: sesh.user_id
         }; 
         // ** TESTING ** //
         // console.log('--------------')
@@ -60,7 +70,7 @@ router.get('/', isLoggedIn, (req, res) => {
 
       // ** TESTING ** //
       console.log("<><><><><><><>");
-      // console.log(allSesh);
+      console.log(allSesh);
 
 
       res.render("session", { allSessions: allSesh, currentUser: currentUser });
@@ -108,7 +118,7 @@ router.post('/create', isLoggedIn, (req, res) => {
   console.log(req.body);
 
   //-- Parse data from from submit
-  let { proj_id, proj_title } = req.body;
+  let { proj_id, start_notes } = req.body;
 
   db.Session.create({
     date: Date.now(),
@@ -116,7 +126,7 @@ router.post('/create', isLoggedIn, (req, res) => {
     project_id: proj_id,
     project_work: {
       id: proj_id,
-      project_title: proj_title,
+      project_title: start_notes,
     },
     session_user: {
       id: req.user.id,
@@ -142,8 +152,8 @@ router.get('/:id', isLoggedIn, (req, res) => {
   console.log(req.params.id);
 
   db.Session.findById(req.params.id)
-    .populate('Project')
-    .populate('User')
+    .populate('project_id')
+    .populate('user_id')
     .then(data => {
       console.log("Found Session Data");
       console.log(data);
@@ -158,12 +168,16 @@ router.get('/:id', isLoggedIn, (req, res) => {
         end_time: data.end_time,
         session_length: session_time,
         project_id: data.project_id,
+        project_title: data.project_id.title,
+        project_desc: data.project_id.description,
         notes: data.notes,
         session_user: {
           id: req.user.id,
-          username: req.user.username
-        }
+          username: req.user.username,
+        },
+        user_id: data.user_id,
       };
+
       console.log(foundSession);
       res.render('session_detail', { single: foundSession });
     })
@@ -185,20 +199,20 @@ router.put('/:id', isLoggedIn, (req, res) => {
   console.log("**********");
   console.log(req.body);
 
-  //-- Retrieve Session
-  // db.Session.findByIdAndUpdate(req.params.id, 
-  //   { 
-  //     end_time: Date.now(), 
-  //     notes: req.body.session_notes 
-  //   })
-  //   .then(updatedSession => {
-  //     console.log(updatedSession);
-  //     res.redirect('/sessions')
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   });
+  // -- Retrieve Session
+  db.Session.findByIdAndUpdate(req.params.id, 
+    { 
+      end_time: Date.now(), 
+      notes: req.body.session_notes 
+    })
+    .then(updatedSession => {
+      console.log(updatedSession);
+      res.redirect('/sessions')
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 
