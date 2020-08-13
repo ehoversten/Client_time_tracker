@@ -7,7 +7,8 @@ const Client = require('./Client');
 const ProjectSchema = new Schema({
     title: {
         type: String,
-        required: true,
+        trim: true,
+        required: [true, "Please enter a title"]
     },
     description: {
         type: String,
@@ -16,46 +17,47 @@ const ProjectSchema = new Schema({
     //-- Playing With Embedding vs. Referencing Associated Data --//
     client_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Client'
+        ref: 'Client',
+        required: true
     },
-    client_obj: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Client'
-        }
-    ],
-    client: {
-        id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Client'
-        },
-        client_name: { type: String },
-        client_contact: { type: String }
-    },
-    team_members : [    
-        {
-            id : {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }, 
-            username: {
-                type: String
-            }
-        }
-    ],
+    // client_obj: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Client'
+    //     }
+    // ],
+    // proj_client: {
+    //     id: {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Client'
+    //     },
+    //     client_name: { type: String },
+    //     client_contact: { type: String }
+    // },
+    // team_members : [    
+    //     {
+    //         id : {
+    //             type: Schema.Types.ObjectId,
+    //             ref: 'User'
+    //         }, 
+    //         username: {
+    //             type: String
+    //         }
+    //     }
+    // ],
 
     // -- TESTING -- //
-    all_sessions : [
-        {
-            id: { 
-                type: Schema.Types.ObjectId,
-                ref: 'Session'
-            }
-        }
-    ],
+    // all_sessions : [
+    //     {
+    //         id: { 
+    //             type: Schema.Types.ObjectId,
+    //             ref: 'Session'
+    //         }
+    //     }
+    // ],
 
     // --> Which one is correct or better (?)
-    sessions : [
+    proj_sessions : [
         {
             type: Schema.Types.ObjectId,
             ref: 'Session'

@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const logger = require("morgan");
 const methodOverride = require('method-override');
 const moment = require("helper-moment");
@@ -9,6 +10,8 @@ const handlebars = require("handlebars");
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require("passport-local-mongoose");
+
+const connectDB = require('./config/db');
 
 
 // Bring in Routes
@@ -20,17 +23,29 @@ const session_routes = require('./routes/session_routes');
 const html_routes = require('./controllers/html_routes');
 const user_routes = require('./controllers/user_routes');
 
+
+//-- Load environment variables
+dotenv.config({ path: './config/config.env'});
+
+
 const PORT = process.env.PORT || 3000;
 
 // Connect to Database 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   }
+// );
+
+//-- Connect Using Mongo Atlas
+connectDB();
+
+// Make Mongoose attach virtuals whenever calling `JSON.stringify()`,
+// including using `res.json()`
+mongoose.set('toJSON', { virtuals: true });
 
 // -------------------------------------------- //
 // Connect to Database through Docker Container //
@@ -50,7 +65,7 @@ mongoose.connect(
 // Bring in our Models
 const db = require("./models");
 
-const seedDB = require('./seeds');
+// const seedDB = require('./seeds');
 
 // Initialize an express instance
 const app = express();

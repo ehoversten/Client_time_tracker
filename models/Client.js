@@ -2,23 +2,45 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ClientSchema = new Schema({
-    name: {
-        type: String,
-        required: true
+  name: {
+    type: String,
+    trim: true,
+    required: [true, "Please add a name for client"],
+  },
+  contact: {
+    type: String,
+    trim: true,
+  },
+  primary: {
+    type: String,
+    trim: true,
+    required: [true, "Please add a primary contact"],
+  },
+  secondary: {
+    type: String,
+    trim: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  projects: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
     },
-    contact: {
-        type: String
-    },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
-    projects: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Project'
-        }
-    ]
+  ],
+});
+
+//-- Virtual Population
+ClientSchema.virtual("client_projects", {
+  ref: "Project", // The model to use
+  localField: "projects", // Find client where `localField`
+  foreignField: "project_id", // is equal to `foreignField`
+  // If `justOne` is true, 'members' will be a single doc as opposed to
+  // an array. `justOne` is false by default.
+  justOne: false,
+//   options: { sort: { name: -1 }, limit: 5 }, // Query options, see http://bit.ly/mongoose-query-options
 });
 
 //-- Look into PRE HOOKS with mongoose --//
@@ -30,7 +52,7 @@ const ClientSchema = new Schema({
 //       $in: this.comments,
 //     },
 //   });
-// });
+// }); 
 
 
 let Client = mongoose.model('Client', ClientSchema);

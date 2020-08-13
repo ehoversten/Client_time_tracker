@@ -10,14 +10,17 @@ const isLoggedIn = require("../config/auth");
 // ---------------------------------- //
 //        Get ALL PROJECTS            //
 // ---------------------------------- //
-router.get('/', isLoggedIn, (req, res) => {
+router.get('/', isLoggedIn, async (req, res) => {
 
   // Create a temp array to parse db data
   let clients = [];
   // Find all clients to populate pull-down 
-  db.Client.find({})
+  await db.Client.find({})
     .then(data => {
       // Loop through db data to parse for view context
+      console.log("RETRIEVING CLIENTS");
+      console.log(data);
+
       data.forEach(client => {
         let clientObj = {
           _id: client._id,
@@ -37,31 +40,42 @@ router.get('/', isLoggedIn, (req, res) => {
 
   // Create a temp array to parse db data
   let projects = [];
-  db.Project.find({})
-    .populate('Client', ['name', 'contact'])
+  await db.Project.find({})
+    // .populate('client_id')
+    .populate({
+      path: 'client_id',
+      select: 'name primary secondary'
+    })
     // .exec((err, result) => {
+    //   if(err) {
+    //     console.log(err);
+    //   }
     //   console.log("------------");
     //   console.log(result);
     //   return result;
     // })
     .then(data => {
       console.log("**********");
-      console.log(data);
+      console.log("RETRIEVING PROJECTS");
+      // console.log(data);
 
       data.forEach(proj => {
+        // console.log('<######>   <######>')
+        // console.log(proj);
         // create temp object to parse data for handlebars security
         let newProj = {
             _id: proj._id,
             title: proj.title,
             description: proj.description,
             client_id: proj.client_id,
-            client_name: proj.name,
-            client_contact: proj.contact
+            client_name: proj.client_id.name,
+            client_primary: proj.client_id.primary,
+            client_secondary: proj.client_id.secondary,
         }
 
         // ** TESTING ** //
-        console.log("*^*^*^*^*^*^");
-        console.log(newProj);
+        // console.log("*^*^*^*^*^*^");
+        // console.log(newProj);
 
         projects.push(newProj);
       });
@@ -124,10 +138,14 @@ router.get('/:id', isLoggedIn, async (req, res) => {
   let proj_sessions = [];
 
   await db.Session.find({})
-    .populate('User')
-    .populate('Project')
+    // .populate('session_user')
+    // .populate('user_id')
+    // .populate('project_id')
+    // .populate('project_work')
     .then(data => {
-      // console.log(data);
+      console.log("%%%%%%%%-----%%%%%%%%");
+      console.log(`Sessions: ${data}`);
+
       data.map(session => {
         let newSession = {
           _id: session._id,
@@ -162,11 +180,14 @@ router.get('/:id', isLoggedIn, async (req, res) => {
 
   // Find Single Project 
   await db.Project.findById({ _id: req.params.id})
+    .populate('client_id')
+    .populate('proj_sessions')
     .then(data => {
       console.log("Found Item");
       // -- TESTING -- //
       // console.log(typeof data);
-      // console.log(data);
+      console.log("/#/#/#/#/-----#/#/#/#/#");
+      console.log(data);
       
       // Create/Update/Assign a Temp variable by CLONING the returned DB data OBJECT
       proj = JSON.parse(JSON.stringify(data));
@@ -179,7 +200,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
       console.log(err);
     });
 
-    res.render("detail", {
+    res.render("project_detail", {
       detail: proj,
       detail_sessions: proj_sessions
     });

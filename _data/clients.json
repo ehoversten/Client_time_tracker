@@ -1,0 +1,34 @@
+[
+    {
+        "_id": "5f332c53c01e5c2de7e8e0c5",
+        "name": "Client 1",
+        "contact": "Garfield",
+        "primary": "Garfield",
+        "secondary": "Ode",
+        "projects": []
+    },
+    {
+        "_id": "5f332c53c01e5c2de7e8e0c6",
+        "name": "Client 2",
+        "contact": "Batman",
+        "primary": "Batman",
+        "secondary": "Robin",
+        "projects": []
+    },
+    {
+        "_id": "5f332c53c01e5c2de7e8e0c7",
+        "name": "Client 3",
+        "contact": "Jack",
+        "primary": "Jack",
+        "secondary": "Diane",
+        "projects": []
+    },
+    {
+        "_id": "5f332c53c01e5c2de7e8e0c8",
+        "name": "Client 4",
+        "contact": "Mario",
+        "primary": "Mario",
+        "secondary": "Luigi",
+        "projects": []
+    }
+]
