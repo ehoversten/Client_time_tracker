@@ -1,42 +1,49 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ClientSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: [true, "Please add a name for client"],
-  },
-  contact: {
-    type: String,
-    trim: true,
-  },
-  primary: {
-    type: String,
-    trim: true,
-    required: [true, "Please add a primary contact"],
-  },
-  secondary: {
-    type: String,
-    trim: true,
-  },
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-  projects: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Project",
+const ClientSchema = new Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: [true, "Please add a name for client"],
     },
-  ],
-});
+    contact: {
+      type: String,
+      trim: true,
+    },
+    primary: {
+      type: String,
+      trim: true,
+      required: [true, "Please add a primary contact"],
+    },
+    secondary: {
+      type: String,
+      trim: true,
+    },
+    created_at: {
+      type: Date,
+      default: Date.now,
+    },
+    projects: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Project",
+      },
+    ],
+  },
+  {
+    //-- Mongoose Virtuals Options --//
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  }
+);
 
 //-- Virtual Population
-ClientSchema.virtual("client_projects", {
+ClientSchema.virtual("clients_projects", {
   ref: "Project", // The model to use
-  localField: "projects", // Find client where `localField`
-  foreignField: "project_id", // is equal to `foreignField`
+  localField: "_id", // Find client where `localField`
+  foreignField: "client_id", // is equal to `foreignField`
   // If `justOne` is true, 'members' will be a single doc as opposed to
   // an array. `justOne` is false by default.
   justOne: false,

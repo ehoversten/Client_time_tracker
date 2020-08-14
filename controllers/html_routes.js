@@ -25,7 +25,9 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
   let thisUser = {
     id: req.user._id,
     username: req.user.username,
-    first_name: req.user.first_name
+    first_name: req.user.first_name,
+    last_name: req.user.last_name,
+    fullname: req.user.fullname,
   }
 
   res.render("dashboard", { currentUser: thisUser });
