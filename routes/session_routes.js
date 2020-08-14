@@ -73,7 +73,7 @@ router.get('/', isLoggedIn, (req, res) => {
       console.log(allSesh);
 
 
-      res.render("session", { allSessions: allSesh, currentUser: currentUser });
+      res.render("sessions/session", { allSessions: allSesh, currentUser: currentUser });
     })
     .catch(err => {
       res.status(500).json(err);
@@ -101,7 +101,7 @@ router.get('/start', isLoggedIn, (req, res) => {
         }
         projects.push(pjo);
       });
-      res.render('session_start', { allProjects: projects });
+      res.render('sessions/session_start', { allProjects: projects });
     })
     .catch(err => {
       res.status(500).json(err);
@@ -179,7 +179,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
       };
 
       console.log(foundSession);
-      res.render('session_detail', { single: foundSession });
+      res.render('sessions/session_detail', { single: foundSession });
     })
     .catch(err => {
       console.log(err);
@@ -246,7 +246,7 @@ router.get('/:id/stop', isLoggedIn, (req, res) => {
       };
       console.log(foundSession);
 
-      res.render('session_end', {single: foundSession} )
+      res.render('sessions/session_end', {single: foundSession} )
     }).catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -310,7 +310,7 @@ router.get('/:id/edit', (req, res) => {
       console.log("<><><><><><>");
       console.log(foundSession);
       // res.send("Testing");
-      res.render("session_edit", { single: foundSession });
+      res.render("sessions/session_edit", { single: foundSession });
     })
     .catch(err => {
       console.log(err);

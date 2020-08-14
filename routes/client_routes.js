@@ -76,7 +76,7 @@ router.get('/', isLoggedIn, (req, res) => {
       // console.log(`Projects Array : ${projectsArr}`);
 
       // Render page, pass our parsed array data to the view
-      res.render('clients', { allClients: clients });
+      res.render('clients/clients', { allClients: clients });
 
       // ** TESTING ** //
       // res.status(200).json(clients);
@@ -124,7 +124,7 @@ router.get('/:id/edit', (req, res) => {
       name: data.name,
       contact: data.contact,
     }
-    res.render('client_edit', { item: cli });
+    res.render('clients/client_edit', { item: cli });
   }).catch(err => {
     res.status(500).json(err);
   })

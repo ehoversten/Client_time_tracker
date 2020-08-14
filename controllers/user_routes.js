@@ -55,7 +55,6 @@ router.get('/all', isLoggedIn, (req, res) => {
     console.log(`User: ${req.user}`);
 
     db.User.find({})
-        // .populate('fullname')
         .then(data => {
             console.log(data);
             let all = [];
