@@ -80,7 +80,7 @@ router.get('/', isLoggedIn, async (req, res) => {
         projects.push(newProj);
       });
       // Render page, pass our parsed data as context to view page
-      res.render('projects', { allProjects: projects, allClients: clients });
+      res.render('projects/projects', { allProjects: projects, allClients: clients });
 
       // ** TESTING ** //
       // res.status(200).json(data);
@@ -200,7 +200,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
       console.log(err);
     });
 
-    res.render("project_detail", {
+    res.render("projects/project_detail", {
       detail: proj,
       detail_sessions: proj_sessions
     });
@@ -244,13 +244,22 @@ router.get('/:id/edit', async (req, res) => {
       completion_date: this_proj.completion_date,
     };
 
-    this_client = await db.Client.findById(proj.client_id);
+    // this_client = await db.Client.findById(proj.client_id);
+    this_client = await db.Client.findById(this_proj.client_id);
     console.log("<#><#><#> CLIENT <#><#><#><#>");
     console.log(this_client);
 
-    res.render("project_edit", {
+    let current_client = {
+      _id: this_client._id,
+      name: this_client.name,
+      primary: this_client.primary,
+      secondary: this_client.secondary,
+    }
+
+    res.render("projects/project_edit", {
       proj: proj,
       allClients: clients,
+      current: current_client,
     });
 
   } catch(err) {

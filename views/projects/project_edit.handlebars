@@ -6,18 +6,22 @@
                 <form action="/projects/{{ proj._id }}?_method=PUT" method="post">
                     <div class="row">
                         <div class="form-group col-md-8">
+                            <label for="project_title">Project Name:</label>
                             <input class="form-control" type="text" name="project_title"
                                 value="{{ proj.title }}">
-                            <label for="project_title">Project Name:</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <textarea id="project_desc" name="project_desc" class="form-control">{{ proj.description }}</textarea>
                             <label for="project_desc">Project Description:</label>
+                            <textarea id="project_desc" name="project_desc" class="form-control">{{ proj.description }}</textarea>
                         </div>
 
+                        {{!-- <p>{{ current }}</p>
+                        <p>{{ current._id }}</p>
+                        <p>{{ current.name }}</p> --}}
                         <div class="form-group col-md-8">
+                            <label for="client_id">Project is associated with Client:</label>
                             <select id="client_id" name="client_id" class="form-control">
-                                <option value="{{ proj.client_id }}">Select Client</option>
+                                <option selected="{{ current._id }}">{{ current.name }}</option>
                                 {{#each allClients }}
                                 <option value="{{ this._id }}">{{ this.name }}</option>
                                 {{/each }}

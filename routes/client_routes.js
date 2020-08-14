@@ -16,14 +16,14 @@ router.get('/', isLoggedIn, (req, res) => {
   db.Client.find({})
     .populate({
       path: 'projects',
-      // select: 'title description'
+      select: 'title description'
     })
+    .populate('clients_projects')
     .then(data => {
 
       //-- LOGGING --//
-      // console.log("*/*/*/*/*/*/*/*/*/*`");
-      // console.log(data);
-
+      console.log("*/*/*/*/*/*/*/*/*/*`");
+      console.log(data);
 
       data.forEach(client => {
 
@@ -42,13 +42,24 @@ router.get('/', isLoggedIn, (req, res) => {
                 _id: item._id,
                 title: item.title,
                 description: item.description,
-                client_id: item.client_id,
-                client_name: item.client_id.name,
-                client_primary: item.client_id.primary,
-                client_secondary: item.client_id.secondary
+                // client_id: item.client_id,
+                // client_name: item.client_id.name,
+                // client_primary: item.client_id.primary,
+                // client_secondary: item.client_id.secondary
             }
             // Add each parse Project Object to our project_data Array
             project_data.push(proj);
+        });
+
+        let projects_results = [];
+        client.clients_projects.map(proj => {
+          console.log(proj);
+          let temp = {
+            _id: proj._id,
+            title: proj.title,
+            desc: proj.description
+          }
+          projects_results.push(temp);
         })
 
         // *** TESTING *** //
@@ -63,7 +74,8 @@ router.get('/', isLoggedIn, (req, res) => {
             contact: client.contact,
             primary: client.primary,
             secondary: client.secondary,
-            projects: project_data
+            projects: project_data,
+            all_projects: projects_results,
         }
         // Add each parse CLient Object to our clients Array
         clients.push(client_obj);
@@ -71,12 +83,12 @@ router.get('/', isLoggedIn, (req, res) => {
 
       // *** TESTING *** //
       // console.log("********")
-      // console.log(clients);
+      console.log(clients);
       // console.log("//****//")
       // console.log(`Projects Array : ${projectsArr}`);
 
       // Render page, pass our parsed array data to the view
-      res.render('clients', { allClients: clients });
+      res.render('clients/clients', { allClients: clients });
 
       // ** TESTING ** //
       // res.status(200).json(clients);
@@ -124,7 +136,7 @@ router.get('/:id/edit', (req, res) => {
       name: data.name,
       contact: data.contact,
     }
-    res.render('client_edit', { item: cli });
+    res.render('clients/client_edit', { item: cli });
   }).catch(err => {
     res.status(500).json(err);
   })

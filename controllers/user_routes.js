@@ -18,7 +18,7 @@ router.get("/overview", isLoggedIn, (req, res) => {
 //   console.log(req.session);
 //   console.log(req.session.passport);
 //   console.log(req.session.passport.user);
-//   console.log(req.user);
+  console.log(req.user);
 //   console.log(req.user._id);
 
     // create temp user object to pass to Handlebars View
@@ -26,6 +26,7 @@ router.get("/overview", isLoggedIn, (req, res) => {
         _id: req.user._id,
         first_name: req.user.first_name,
         last_name: req.user.last_name,
+        fullname: req.user.fullname,
         username: req.user.username,
         department: req.user.department,
         email: req.user.email,
@@ -46,6 +47,38 @@ router.get("/overview", isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 
 });
+
+// ---------------------------------- //
+//      Get All Users PAGE            //  --> (if authenticated) 
+// ---------------------------------- //
+router.get('/all', isLoggedIn, (req, res) => {
+    console.log(`User: ${req.user}`);
+
+    db.User.find({})
+        .then(data => {
+            console.log(data);
+            let all = [];
+            data.map(user => {
+                let temp = {
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    fullname: user.fullname,
+                    department: user.department,
+                    sessions: user.sessions,
+                    assigned_to: user.assigned_to
+                }
+                all.push(temp);
+            });
+            console.log(`All users: ${all}`);
+
+            res.render('users/all_users', { users: all })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+})
 
 // ** REMOVE ** //
 // ---------------------------------- //
@@ -68,7 +101,6 @@ router.post('/index', passport.authenticate("local", {
 }), (req, res) => {
     console.log(req.body);
 
-   // res.redirect('/sessions');
 });
 
 // ---------------------------------- //
