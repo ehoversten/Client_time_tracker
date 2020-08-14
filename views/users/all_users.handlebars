@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="all_users">
+        {{#each users}}
+        <h4>User ID: {{ this._id }}</h4>
+        <h4>Username: {{ this.username }}</h4>
+        <h4>Email: {{ this.email }}</h4>
+        <h4>Full Name: {{ this.fullname }}</h4>
+        <h4>Department: {{ this.department }}</h4>
+        <h4>Sessions: {{ this.session }}</h4>
+        <h4>Assigned To: {{ this.assigned_to }}</h4>
+        <hr>
+        {{/each }}
+    </div>
+</div>

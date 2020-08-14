@@ -50,7 +50,11 @@ const SessionSchema = new Schema({
 });
 
 //-- Create session_time Virtual --//
-
+SessionSchema.virtual('session_duration').get(function() {
+  let time_diff = this.start_time - this.end_time;
+  console.log(time_diff);
+  return time_diff;
+});
 
 const Session = mongoose.model('Session', SessionSchema);
 

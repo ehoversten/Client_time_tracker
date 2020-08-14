@@ -35,11 +35,17 @@ const UserSchema = new Schema({
       ref: "Project"
     }
   ]
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
+//--  User full name Virtual --//
 UserSchema.virtual('fullname').get(function() {
   return this.first_name + ' ' + this.last_name;
 });
+
+
 
 UserSchema.plugin(passportLocalMongoose);
 

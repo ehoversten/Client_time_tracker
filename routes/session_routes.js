@@ -225,30 +225,57 @@ router.get('/:id/stop', isLoggedIn, (req, res) => {
   // console.log(req.params);
 
   // Retrieve currently open session to update
-  db.Session.findById(req.params.id, (err, data) => {
-    if(err) {
+  db.Session.findById(req.params.id)
+    .populate('project_id')
+    .populate('user_id')
+    .then(data => {
+      console.log("/#\/#\/#\/#\/#");
+      console.log(data);
+
+      let foundSession = {
+        _id: data._id,
+        // start_time: data.start_time,
+        // end_time: data.end_time,
+        // session_length: session_time,
+        // project_id: data.project_id,
+        // notes: data.notes,
+        // session_user: {
+        //   id: req.user.id,
+        //   username: req.user.username,
+        // },
+      };
+      console.log(foundSession);
+
+      res.render('session_end', {single: foundSession} )
+    }).catch(err => {
       console.log(err);
       res.status(500).json(err);
-    }
-    // create temp variable to parse data from database
-    let session_time = data.end_time - data.start_time;
-    console.log(session_time);
+    });
 
-    let foundSession = {
-      _id: data._id,
-      start_time: data.start_time,
-      end_time: data.end_time,
-      session_length: session_time,
-      project_id: data.project_id,
-      notes: data.notes,
-      session_user: {
-        id: req.user.id,
-        username: req.user.username
-      }
-    };
-    console.log(foundSession);
-    res.render('session_end', { single: foundSession });
-  });
+  // db.Session.findById(req.params.id, (err, data) => {
+  //   if(err) {
+  //     console.log(err);
+  //     res.status(500).json(err);
+  //   }
+  //   // create temp variable to parse data from database
+  //   // let session_time = data.end_time - data.start_time;
+  //   // console.log(session_time);
+
+  //   let foundSession = {
+  //     _id: data._id,
+  //     start_time: data.start_time,
+  //     end_time: data.end_time,
+  //     session_length: session_time,
+  //     project_id: data.project_id,
+  //     notes: data.notes,
+  //     session_user: {
+  //       id: req.user.id,
+  //       username: req.user.username
+  //     }
+  //   };
+  //   console.log(foundSession);
+  //   res.render('session_end', { single: foundSession });
+  // });
 });
 
 // ---------------------------------- //
@@ -258,8 +285,6 @@ router.get('/:id/edit', (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
   // console.log(req.params);
-
-
 
   db.Session.findById(req.params.id)
     .then(data => {
