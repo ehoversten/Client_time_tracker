@@ -5,18 +5,18 @@ const db = require("./models");
 const { dirname } = require("path");
 
 //-- Connect to Database
-// mongoose.connect("mongodb://localhost/project_tracker_db", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-// });
+mongoose.connect("mongodb://localhost/project_tracker_db", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 //-- Load environment variables
-dotenv.config({ path: './config/config.env'});
+// dotenv.config({ path: './config/config.env'});
 
-//-- Atlas DB --//
-const connectDB = require('./config/db');
-connectDB();
+// //-- Atlas DB --//
+// const connectDB = require('./config/db');
+// connectDB();
 
 //-- Read JSON file
 const clients = JSON.parse(

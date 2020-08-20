@@ -111,10 +111,12 @@ span {
 
 #sidebar {
   min-width: 150px;
-  max-width: 150px;
-  background: #5a5d69;
+  /* max-width: 150px; */
+  background: #808486;;
   color: #fff;
   transition: all 0.3s;
+  width: 5vw;
+  height: 100vh;
 }
 
 #sidebar.active {
@@ -133,7 +135,13 @@ span {
 }
 
 #sidebar ul li a {
-  text-align: left;
+  text-align: center;
+}
+
+.solid {
+  border-top: 3px solid rgb(100, 100, 100);
+  margin: 0;
+  padding: 0;
 }
 
 #sidebar.active ul li a {
@@ -165,6 +173,7 @@ span {
 #sidebar .sidebar-header {
   padding: 20px;
   background: #8b8e9c;
+  margin-bottom: 6px solid #7d808d;
 }
 
 #sidebar .sidebar-header strong {
@@ -174,7 +183,7 @@ span {
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+  border-bottom: 1px solid #9ea7ac;
 }
 
 #sidebar ul li a {
