@@ -51,6 +51,7 @@ router.get('/', isLoggedIn, (req, res) => {
             project_data.push(proj);
         });
 
+        //-- Populates the Virtual 'clients_projects' Record --//
         let projects_results = [];
         client.clients_projects.map(proj => {
           console.log(proj);
