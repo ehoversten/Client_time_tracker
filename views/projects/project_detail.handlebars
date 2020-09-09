@@ -21,9 +21,6 @@
                 </div>
             </div>
 
-            <hr>
-            <hr>
-
             {{#if detail_sessions}}
             <div class="col-md-12 mt-4">
                 <h4>Sessions Found: {{ detail_sessions.length }}</h4>
@@ -55,7 +52,9 @@
                 </table>
             </div>
             {{else}}
-            <h3>No Sessions Found: </h3>
+            <div class="col-md-12 mt-4">
+                <h3>No Sessions Saved</h3>
+            </div>
             {{/if}}
         </div>
     </div>

@@ -15,9 +15,6 @@
                             <textarea id="project_desc" name="project_desc" class="form-control">{{ proj.description }}</textarea>
                         </div>
 
-                        {{!-- <p>{{ current }}</p>
-                        <p>{{ current._id }}</p>
-                        <p>{{ current.name }}</p> --}}
                         <div class="form-group col-md-8">
                             <label for="client_id">Project is associated with Client:</label>
                             <select id="client_id" name="client_id" class="form-control">
@@ -28,16 +25,15 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Save <i class="fas fa-save"></i></button>
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-success mr-3">Save <i class="fas fa-save"></i></button>
                     </div>
                 </form>
+                <div class="row mt-2">
+                    <a href="/projects/{{ proj._id }}"><button class="btn btn-warning">Cancel <i class="fas fa-window-close"></i></button></a>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
-
-{{!-- <div class="container">
-    <p>{{ proj._id }}</p>
-    <p>{{ proj.title }}</p>
-</div> --}}

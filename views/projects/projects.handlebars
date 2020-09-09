@@ -37,37 +37,35 @@
                 <div class="project-list">
                     <h3>Current Active Projects List | Total: {{ allProjects.length }}</h3>
                     {{#if allProjects }}
-                    {{!-- <ul> --}}
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Client</th>
-                                    <th scope="col">Contact</th>
-                                    <th scope="col">Details</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {{#each allProjects }}
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>{{ this.title }}</td>
-                                    <td>{{ this.description }}</td>
-                                    <td>{{ this.client_name }}</td>
-                                    <td>{{ this.client_primary }} || {{ this.client_secondary }}</td>
-                                    <td>
-                                        <a href="/projects/{{ this._id }}" class="btn btn-primary" type="submit"><i class="fas fa-edit"></i></a>
-                                        <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
-                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            {{/each}}
-                            </tbody>
-                        </table>
-
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Client</th>
+                                <th scope="col">Contact</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{#each allProjects }}
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ this.title }}</td>
+                                <td>{{ this.description }}</td>
+                                <td>{{ this.client_name }}</td>
+                                <td>{{ this.client_primary }} || {{ this.client_secondary }}</td>
+                                <td>
+                                    <a href="/projects/{{ this._id }}" class="btn btn-primary" type="submit"><i class="fas fa-edit"></i></a>
+                                    <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
+                                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                     {{else}}
                     <h2>No Projects Currently</h2>
                     {{/if }}
