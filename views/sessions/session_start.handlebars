@@ -1,28 +1,35 @@
 <div class="projects-form">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h3>Start New Session</h3>
-                <form action="/sessions/create" method="post">
-                    <div class="form-group col-md-10">
-                        <label for="proj_id">Select Project From List</label>
+            <div class="col-md-12 m-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3>Start New Session</h3>
                     </div>
-                    <br>
-                    <br>
-                    <div class="form-group col-md-10">
-                        <select id="proj_id" name="proj_id" class="form-control">
-                            <option value="" disabled selected>Select Project</option>
-                            {{#each allProjects }}
-                            <option value="{{ this._id }}">Proj Title: {{ this.title }} | Proj-Id : {{this._id}}</option>
-                            {{/each }}
-                        </select>
+                    <div class="card-body text-center">
+                        <form action="/sessions/create" method="post">
+                            <div class="form-group col-md-10">
+                                <label for="proj_id">Select Project From List</label>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <select id="proj_id" name="proj_id" class="form-control">
+                                    <option value="" disabled selected>Select Project</option>
+                                    {{#each allProjects }}
+                                    <option value="{{ this._id }}">Proj Title: {{ this.title }} | Proj-Id : {{this._id}}</option>
+                                    {{/each }}
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="start_notes">Starting Session Notes/Tasks:</label>
+                                <input id="start_notes" type="text" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Begin Session</button>
+                        </form>
                     </div>
-                    <div class="form-group col-md-10">
-                        <label for="start_notes">Starting Session Notes/Tasks:</label>
-                        <input id="start_notes" type="text" class="form-control">
+                    <div class="card-footer text-muted">
+                        Create New Session
                     </div>
-                    <button type="submit" class="btn btn-primary">Begin Session</button>
-                </form>
+                </div>
             </div>
         </div>
 
