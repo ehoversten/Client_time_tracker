@@ -46,7 +46,6 @@ UserSchema.virtual('fullname').get(function() {
 });
 
 
-
 UserSchema.plugin(passportLocalMongoose);
 
 let User = mongoose.model('User', UserSchema);

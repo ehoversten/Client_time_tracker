@@ -1,22 +1,30 @@
 <div class="session-form">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10">
-                <h5>Current Session Info:</h5>
-                <hr>
-                <p>Username: {{ single.session_user.username }}</p>
-                <p>Session ID: {{ single._id }}</p>
-                <p>Session Date: {{ single.date }}</p>
-                <p>Session Length: {{ single.session_length }}</p>
-                <p>Session Start: {{ single.start_time }}</p>
-                <p>Session End: {{ single.end_time }}</p>
-                <p>Notes: {{ single.notes }}</p>
-                <p>Project ID: {{ single.project_id }}</p>
-                <p>Project Title: {{ single.project_title }}</p>
-                <p>Project Description: {{ single.project_desc }}</p>
-                <a href="/sessions/{{ single._id }}/edit">
-                    <button class="btn btn-success" type="submit">Update Session</button>
-                </a>
+            <div class="col-md-12 m-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Current Session Info</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Username: {{ single.session_user.username }}</p>
+                        <p class="card-text">Session ID: {{ single._id }}</p>
+                        <p class="card-text">Session Date: {{ single.date }}</p>
+                        <p class="card-text">Session Length: {{ single.session_length }}</p>
+                        <p class="card-text">Session Start: {{ single.start_time }}</p>
+                        <p class="card-text">Session End: {{ single.end_time }}</p>
+                        <p class="card-text">Notes: {{ single.notes }}</p>
+                        <p class="card-text">Project ID: {{ single.project_id }}</p>
+                        <p class="card-text">Project Title: {{ single.project_title }}</p>
+                        <p class="card-text">Project Description: {{ single.project_desc }}</p>
+                        <a href="/sessions/{{ single._id }}/edit">
+                            <button class="btn btn-success right" type="submit">Update Session</button>
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        Session Data
+                    </div>
+                </div>
             </div>
         </div>
     </div>

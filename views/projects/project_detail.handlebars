@@ -1,39 +1,60 @@
 <div class="detail-container">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <h3>Project Title: {{ detail.title }}</h3>
-                <p>Description:{{ detail.description }}</p>
-                <p>Client ID: {{ detail.client_id._id }}</p>
-                <p>Client Name: {{ detail.client_id.name }}</p>
-                <p>Client Primary Contact: {{ detail.client_id.primary }}</p>
-                <p>Client Secondary Contact: {{ detail.client_id.secondary }}</p>
-                <p>Created: {{ detail.created_at }}</p>
-                <p>Started: {{ detail.start_date }}</p>
-                <p>Completed: {{ detail.completion_date }}</p>
-
-                <a href="/projects/{{ detail._id }}/edit"><button class="btn btn-warning">Edit <i class="fas fa-user-edit"></i></button></a>
+            <div class="col-md-12 mt-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Project Title: {{ detail.title }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Description: {{ detail.description }}</p>
+                        <p class="card-text">Client ID: {{ detail.client_id._id }}</p>
+                        <p class="card-text">Client: {{ detail.client_id.name }}</p>
+                        <p class="card-text">Primary Contact: {{ detail.client_id.primary }}</p>
+                        <p class="card-text">Secondary Contact: {{ detail.client_id.secondary }}</p>
+                        <p class="card-text">Created: {{ detail.created_at }}</p>
+                        <p class="card-text">Started: {{ detail.start_date }}</p>
+                        <p class="card-text">Completed: {{ detail.completion_date }}</p>
+                        
+                        <a href="/projects/{{ detail._id }}/edit"><button class="btn btn-warning">Edit <i class="fas fa-user-edit"></i></button></a>
+                    </div>
+                </div>
             </div>
 
-            <hr>
-            <hr>
-
             {{#if detail_sessions}}
-            <h4>Sessions Found: {{ detail_sessions.length }}</h4>
-                <div class="col-lg-12">
-                {{#each detail_sessions }}
-                    <h5>User: {{ this.session_user.username }}</h5>
-                    <h5>Session ID: {{ this._id }}</h5>
-                    <h5>Date: {{ this.date }}</h5>
-                    <h5>Time started: {{ this.start_time }}</h5>
-                    <h5>Time ended:{{ this.end_time }}</h5>
-                    <h5>Notes: {{ this.notes }}</h5>
-                    <hr>
-                {{/each}}
-                </div>
+            <div class="col-md-12 mt-4">
+                <h4>Sessions Found: {{ detail_sessions.length }}</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Session ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">End Time</th>
+                            <th scope="col">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {{#each detail_sessions }}
+                        <tr>
+                            <th scope="row">#</th>
+                            <td>{{ this.session_user.username }}</td>
+                            <td>{{ this._id }}</td>
+                            <td>{{ this.date }}</td>
+                            <td>{{ this.start_time }}</td>
+                            <td>{{ this.end_time }}</td>
+                            <td>{{ this.notes }}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
             {{else}}
-            <h3>None Sessions Found: </h3>
-
+            <div class="col-md-12 mt-4">
+                <h3>No Sessions Saved</h3>
+            </div>
             {{/if}}
         </div>
     </div>
