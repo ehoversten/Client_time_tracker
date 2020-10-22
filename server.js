@@ -30,14 +30,14 @@ dotenv.config({ path: './config/config.env'});
 const PORT = process.env.PORT || 3000;
 
 // Connect to Database 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://localhost/project_tracker_db",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   }
+// );
 
 //-- Connect Using Mongo Atlas
 connectDB();

@@ -328,22 +328,36 @@ router.put('/:id', (req, res) => {
   // console.log(req.body);
 
   let update = {
+    _id: req.params.id,
     title: req.body.project_title,
     description: req.body.project_desc,
+    // saving STRING 'CLIENT X' not client_id (???)
     client_id: req.body.client_id,
   };
 
   console.log("*******");
   console.log(update)
-
-  db.Project.findByIdAndUpdate(req.params.id, update, { new: true }, (err, data) => {
-    if(err) {
-      res.status(500).json(err);
+  // Need to use Different Method? 
+  // db.Project.findByIdAndUpdate(req.params.id, { update }, { new: true }, (err, data) => {
+  db.Project.findByIdAndUpdate(
+    req.params.id,
+    {
+      _id: req.params.id,
+      title: req.body.project_title,
+      description: req.body.project_desc,
+      client_id: req.body.client_id,
+    },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+      console.log("Record Updated");
+      // Return updated Record from DB
+      console.log(data);
+      res.redirect("/projects");
     }
-    console.log("Record Updated");
-    console.log(data);
-    res.redirect("/projects");
-  })
+  );
 });
 
 
