@@ -323,17 +323,16 @@ router.get('/:id/edit', async (req, res) => {
 //          Update A Project          //
 // ---------------------------------- //
 router.put('/:id', (req, res) => {
+  // ** TESTING ** //
   // console.log("Saving Project Edit");
   // console.log(req.params.id);
-  console.log("Edit Project Submit: ", req.body);
+  // console.log("Edit Project Submit: ", req.body);
 
   let update = {
     _id: req.params.id,
     title: req.body.project_title,
     description: req.body.project_desc,
-    // saving STRING 'CLIENT X' not client_id (???)
     client_id: req.body.client_id,
-    // client_id: req.body.client_id.value,
   };
 
   console.log("*******");
