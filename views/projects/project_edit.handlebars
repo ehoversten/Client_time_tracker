@@ -18,7 +18,7 @@
                         <div class="form-group col-md-8">
                             <label for="client_id">Project is associated with Client:</label>
                             <select id="client_id" name="client_id" class="form-control">
-                                <option selected="{{ current._id }}">{{ current.name }}</option>
+                                <option value="{{ current._id }}" selected="{{ current._id }}">{{ current.name }}</option>
                                 {{#each allClients }}
                                 <option value="{{ this._id }}">{{ this.name }}</option>
                                 {{/each }}
