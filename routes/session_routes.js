@@ -223,6 +223,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
 router.get('/:id/stop', isLoggedIn, (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
+  console.log(`User is ${req.user.username}`);
   // console.log(req.params);
 
   // Retrieve currently open session to update
@@ -238,7 +239,11 @@ router.get('/:id/stop', isLoggedIn, (req, res) => {
         start_time: data.start_time,
         // end_time: data.end_time,
         // session_length: session_time,
-        project_id: data.project_id,
+        project_id: data.project_id._id,
+        project_title: data.project_id.title,
+        project_desc: data.project_id.description,
+        project_create: data.project_id.created_at,
+        client_id: data.project_id.client_id,
         // notes: data.notes,
         session_user: {
           id: req.user.id,
