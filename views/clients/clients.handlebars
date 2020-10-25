@@ -16,7 +16,7 @@
         <th scope="col-lg-4 col-md-4 col-xs-4">Primary Contact</th>
         <th scope="col-lg-4 col-md-4 col-xs-4">Secondary Contact</th>
         <th scope="col-log-4 col-md-4 col-xs-4">Projects</th>
-        <th scope="col-log-4 col-md-4 col-xs-4">Virtual</th>
+        <th scope="col-log-4 col-md-4 col-xs-4">Edit / Modify</th>
       </tr>
       <tr class="warning no-result">
         <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -31,17 +31,19 @@
         <td>{{this.secondary}}</td>
         <td>
           <select>
-          {{#each projects}}   
+          {{#each all_projects}}   
             <option>{{this.title}}</option>
           {{/each}}
           </select>
         </td>
         <td>
-          <select>
-          {{#each all_projects}}   
-            <option>{{this.title}}</option>
-          {{/each}}
-          </select>
+          <div class="row">
+            <a href="/clients/{{ this._id }}" class="btn btn-success" type="submit"><i class="fas fa-edit"></i></a>
+            
+            <form action="/clients/{{ this._id }}?_method=DELETE" method="POST">
+              <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </div>
         </td>
 
       </tr>

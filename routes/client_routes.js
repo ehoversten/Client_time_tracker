@@ -26,42 +26,46 @@ router.get('/', isLoggedIn, (req, res) => {
       console.log(data);
 
       data.forEach(client => {
-
+        // ** TESTING ** //
         // console.log('(*)(*)(*)(*)(*)(*)(*)');
         // console.log(client);
-        
+
+        // ** REMOVE SECTION ?? ** //
+/*        
         // create array to pass our parsed database data
         let project_data = [];
 
         // create array to parse associated Project data
         let client_projects = client.projects;
 
-        client_projects.forEach(item => {
-            // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
-            let proj = {
-                _id: item._id,
-                title: item.title,
-                description: item.description,
-                // client_id: item.client_id,
-                // client_name: item.client_id.name,
-                // client_primary: item.client_id.primary,
-                // client_secondary: item.client_id.secondary
-            }
-            // Add each parse Project Object to our project_data Array
-            project_data.push(proj);
+        client_projects.forEach((item) => {
+          // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
+          let proj = {
+            _id: item._id,
+            title: item.title,
+            description: item.description,
+            // client_id: item.client_id,
+            // client_name: item.client_id.name,
+            // client_primary: item.client_id.primary,
+            // client_secondary: item.client_id.secondary
+          };
+          // Add each parse Project Object to our project_data Array
+          project_data.push(proj);
         });
+*/
+        // ^^ REMOVE SECTION ?? ^^ //
 
         //-- Populates the Virtual 'clients_projects' Record --//
         let projects_results = [];
-        client.clients_projects.map(proj => {
-          console.log(proj);
+        client.clients_projects.map((proj) => {
+          // console.log(proj);
           let temp = {
             _id: proj._id,
             title: proj.title,
-            desc: proj.description
-          }
+            desc: proj.description,
+          };
           projects_results.push(temp);
-        })
+        });
 
         // *** TESTING *** //
         // console.log("Project data:")
@@ -70,14 +74,14 @@ router.get('/', isLoggedIn, (req, res) => {
 
         // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
         let client_obj = {
-            _id: client._id,
-            name: client.name,
-            contact: client.contact,
-            primary: client.primary,
-            secondary: client.secondary,
-            projects: project_data,
-            all_projects: projects_results,
-        }
+          _id: client._id,
+          name: client.name,
+          contact: client.contact,
+          primary: client.primary,
+          secondary: client.secondary,
+          // projects: project_data,
+          all_projects: projects_results,
+        };
         // Add each parse CLient Object to our clients Array
         clients.push(client_obj);
       });
@@ -105,8 +109,10 @@ router.get('/', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 router.post('/create', (req, res) => {
     // console.log(req.body);
+
     // Parse data from from submit
     let { client_name, client_contact } = req.body;
+
     db.Client.create({
       name: client_name,
       contact: client_contact
