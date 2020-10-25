@@ -13,7 +13,7 @@
                         <p class="card-text">Secondary Contact: {{ item.secondary }}</p>
                         <hr>
                         <p class="card-text">Client Projects:</p>
-                        {{#each item.projects }}
+                        {{#each client_proj }}
                             <p>{{ this }}</p>
                             <p class="card-text">Project Title: {{ this.title }}</p>
                             <p class="card-text">Project Description: {{ this.description }}</p>

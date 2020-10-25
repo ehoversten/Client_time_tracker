@@ -113,6 +113,13 @@ router.get('/:id', (req, res) => {
     .then(client => {
       console.log(client);
 
+      // create array for associated client projects
+      let client_projs = [];
+      client.projects.map(proj => {
+        client_projs.push(proj);
+      });
+      console.log("Associated Projects: ", client_projs);
+      
       // create temp OBJ for client
       let client_obj = {
         _id: client._id,
@@ -120,12 +127,12 @@ router.get('/:id', (req, res) => {
         contact: client.contact,
         primary: client.primary,
         secondary: client.secondary,
-        projects: client.projects
+        // projects: client_projs
       }
 
       console.log("Found Client: ", client_obj);
 
-      res.status(200).render("clients/client_detail", { item: client_obj });
+      res.status(200).render("clients/client_detail", { item: client_obj, client_proj: client_projs });
     })
     .catch(err => {
       console.log(err);
@@ -165,13 +172,13 @@ router.get('/:id/edit', (req, res) => {
 
   // Find Client in DB
   db.Client.findById(client_id).then(data => {
-    // console.log("Found :")
     console.log("Found Client: ", data);
 
     let cli = {
       _id: data._id,
       name: data.name,
-      contact: data.contact,
+      primary: data.primary,
+      secondary: data.secondary,
     }
     res.render('clients/client_edit', { item: cli });
   }).catch(err => {
