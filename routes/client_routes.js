@@ -14,16 +14,16 @@ router.get('/', isLoggedIn, (req, res) => {
   let clients = [];
 
   db.Client.find({})
-    .populate({
-      path: 'projects',
-      select: 'title description'
-    })
+    // .populate({
+    //   path: 'projects',
+    //   select: 'title description'
+    // })
     .populate('clients_projects')
     .then(data => {
 
       //-- LOGGING --//
       console.log("*/*/*/*/*/*/*/*/*/*`");
-      console.log(data);
+      // console.log(data);
 
       data.forEach(client => {
         // ** TESTING ** //
@@ -88,7 +88,7 @@ router.get('/', isLoggedIn, (req, res) => {
 
       // *** TESTING *** //
       // console.log("********")
-      console.log(clients);
+      // console.log(clients);
       // console.log("//****//")
       // console.log(`Projects Array : ${projectsArr}`);
 
@@ -101,6 +101,36 @@ router.get('/', isLoggedIn, (req, res) => {
       // console.log(err);
       res.status(500).json(err);
   });
+});
+
+
+// ---------------------------------- //
+//          Get CLIENT Detail         //
+// ---------------------------------- //
+router.get('/:id', (req, res) => {
+  db.Client.findById(req.params.id)
+    .populate('projects')
+    .then(client => {
+      console.log(client);
+
+      // create temp OBJ for client
+      let client_obj = {
+        _id: client._id,
+        name: client.name,
+        contact: client.contact,
+        primary: client.primary,
+        secondary: client.secondary,
+        projects: client.projects
+      }
+
+      console.log("Found Client: ", client_obj);
+
+      res.status(200).render("clients/client_detail", { item: client_obj });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
 });
 
 
@@ -136,7 +166,7 @@ router.get('/:id/edit', (req, res) => {
   // Find Client in DB
   db.Client.findById(client_id).then(data => {
     // console.log("Found :")
-    // console.log(data);
+    console.log("Found Client: ", data);
 
     let cli = {
       _id: data._id,
