@@ -1,7 +1,7 @@
 <div class="edit-client">
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12 m-4">
                 <div class="card">
                     <div class="card-header text-center">
                         <h3>Edit Client</h3>
@@ -9,15 +9,15 @@
                     <div class="card-body">
                         <form action="/clients/{{ item._id }}?_method=PUT" method="post">
                             <div class="row">
-                                <div class="form-group">
+                                <div class="form-group col-md-8">
                                     <label for="client_name">Client Account Name:</label>
                                     <input type="text" name="client_name" value="{{ item.name }}" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-8">
                                     <label for="primary_contact">Primary Contact:</label>
                                     <input type="text" name="primary_contact" value="{{ item.primary }}" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-8">
                                     <label for="secondary_contact">Secondary Contact:</label>
                                     <input type="text" name="secondary_contact" value="{{ item.secondary }}" class="form-control">
                                 </div>
