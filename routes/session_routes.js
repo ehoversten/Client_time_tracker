@@ -11,10 +11,10 @@ const isLoggedIn = require("../config/auth");
 // ---------------------------------- //
 router.get('/', isLoggedIn, (req, res) => {
     // Check if user is logged in
-  console.log(`Current User: ${req.user}`);
+  // console.log(`Current User: ${req.user}`);
 
   let currentUser = req.user;
-  console.log(`User Name: ${req.user.username}`);
+  console.log(`User Name: ${currentUser.username}`);
 
 
   // create a variable to pass data from CONTROLLER to VIEW
@@ -36,9 +36,9 @@ router.get('/', isLoggedIn, (req, res) => {
     //   // return data;
     // })
     .then(data => {
-      // Did we get data? 
-      console.log("<<---- Found Session ---->>")
-      console.log(data);
+      // ** TESTING ** // Did we get data? 
+      console.log("<<---- Found Session Data ---->>");
+      // console.log(data);
 
       data.forEach(sesh => {
         
@@ -58,7 +58,7 @@ router.get('/', isLoggedIn, (req, res) => {
             id: sesh.session_user.id,
             username: sesh.session_user.username
           },
-          user_id: sesh.user_id
+          user_id: sesh.session_user.id
         }; 
         // ** TESTING ** //
         // console.log('--------------')
@@ -70,8 +70,8 @@ router.get('/', isLoggedIn, (req, res) => {
 
       // ** TESTING ** //
       console.log("<><><><><><><>");
-      console.log(allSesh);
-
+      console.log("<<---- All Session Data ---->>");
+      // console.log(allSesh);
 
       res.render("sessions/session", { allSessions: allSesh, currentUser: currentUser });
     })
@@ -149,6 +149,7 @@ router.post('/create', isLoggedIn, (req, res) => {
 //        Get Detail SESSION          //
 // ---------------------------------- //
 router.get('/:id', isLoggedIn, (req, res) => {
+  console.log(`User is ${req.user.username}`);
   console.log(req.params.id);
 
   db.Session.findById(req.params.id)
@@ -156,10 +157,10 @@ router.get('/:id', isLoggedIn, (req, res) => {
     .populate('user_id')
     .then(data => {
       console.log("Found Session Data");
-      console.log(data);
+      // console.log(data);
       // create temp variable to parse data from database
       let session_time = data.end_time - data.start_time;
-      console.log(session_time);
+      // console.log(session_time);
 
       let foundSession = {
         _id: data._id,
@@ -175,7 +176,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
           id: req.user.id,
           username: req.user.username,
         },
-        user_id: data.user_id,
+        user_id: req.user.id,
       };
 
       console.log(foundSession);
@@ -222,6 +223,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
 router.get('/:id/stop', isLoggedIn, (req, res) => {
   // ** TESTING ** //
   console.log(`Req Params: ${req.params.id}`);
+  console.log(`User is ${req.user.username}`);
   // console.log(req.params);
 
   // Retrieve currently open session to update
@@ -233,18 +235,22 @@ router.get('/:id/stop', isLoggedIn, (req, res) => {
       console.log(data);
 
       let foundSession = {
-        _id: data._id,
-        // start_time: data.start_time,
+        _id: data._id,  
+        start_time: data.start_time,
         // end_time: data.end_time,
         // session_length: session_time,
-        // project_id: data.project_id,
+        project_id: data.project_id._id,
+        project_title: data.project_id.title,
+        project_desc: data.project_id.description,
+        project_create: data.project_id.created_at,
+        client_id: data.project_id.client_id,
         // notes: data.notes,
-        // session_user: {
-        //   id: req.user.id,
-        //   username: req.user.username,
-        // },
+        session_user: {
+          id: req.user.id,
+          username: req.user.username,
+        },
       };
-      console.log(foundSession);
+      console.log("Session Object: ", foundSession);
 
       res.render('sessions/session_end', {single: foundSession} )
     }).catch(err => {

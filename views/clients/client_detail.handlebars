@@ -1,0 +1,36 @@
+<div class="client-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 m-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Current Client Info</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Client ID: {{ item._id }}</p>
+                        <p class="card-text">Client Name: {{ item.name }}</p>
+                        <p class="card-text">Primary Contact: {{ item.primary }}</p>
+                        <p class="card-text">Secondary Contact: {{ item.secondary }}</p>
+                        <hr>
+                        <p class="card-text">Client Projects:</p>
+                        {{#each client_proj }}
+                            <p>{{ this }}</p>
+                            <p class="card-text">Project Title: {{ this.title }}</p>
+                            <p class="card-text">Project Description: {{ this.description }}</p>
+                            <hr>
+                        {{/each}}
+                        <a href="/clients/{{ item._id }}/edit">
+                            <button class="btn btn-success right" type="submit">Edit Client</button>
+                        </a>
+                        <a href="/clients">
+                            <button class="btn btn-primary right" type="submit">Back</button>
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        Client Data
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

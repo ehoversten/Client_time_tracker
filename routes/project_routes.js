@@ -323,11 +323,13 @@ router.get('/:id/edit', async (req, res) => {
 //          Update A Project          //
 // ---------------------------------- //
 router.put('/:id', (req, res) => {
+  // ** TESTING ** //
   // console.log("Saving Project Edit");
   // console.log(req.params.id);
-  // console.log(req.body);
+  // console.log("Edit Project Submit: ", req.body);
 
   let update = {
+    _id: req.params.id,
     title: req.body.project_title,
     description: req.body.project_desc,
     client_id: req.body.client_id,
@@ -335,15 +337,27 @@ router.put('/:id', (req, res) => {
 
   console.log("*******");
   console.log(update)
-
-  db.Project.findByIdAndUpdate(req.params.id, update, { new: true }, (err, data) => {
-    if(err) {
-      res.status(500).json(err);
+  // Need to use Different Method? 
+  // db.Project.findByIdAndUpdate(req.params.id, { update }, { new: true }, (err, data) => {
+  db.Project.findByIdAndUpdate(
+    req.params.id,
+    {
+      _id: req.params.id,
+      title: req.body.project_title,
+      description: req.body.project_desc,
+      client_id: req.body.client_id,
+    },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+      console.log("Record Updated");
+      // Return updated Record from DB
+      console.log(data);
+      res.redirect("/projects");
     }
-    console.log("Record Updated");
-    console.log(data);
-    res.redirect("/projects");
-  })
+  );
 });
 
 

@@ -14,54 +14,58 @@ router.get('/', isLoggedIn, (req, res) => {
   let clients = [];
 
   db.Client.find({})
-    .populate({
-      path: 'projects',
-      select: 'title description'
-    })
+    // .populate({
+    //   path: 'projects',
+    //   select: 'title description'
+    // })
     .populate('clients_projects')
     .then(data => {
 
       //-- LOGGING --//
       console.log("*/*/*/*/*/*/*/*/*/*`");
-      console.log(data);
+      // console.log(data);
 
       data.forEach(client => {
-
+        // ** TESTING ** //
         // console.log('(*)(*)(*)(*)(*)(*)(*)');
         // console.log(client);
-        
+
+        // ** REMOVE SECTION ?? ** //
+/*        
         // create array to pass our parsed database data
         let project_data = [];
 
         // create array to parse associated Project data
         let client_projects = client.projects;
 
-        client_projects.forEach(item => {
-            // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
-            let proj = {
-                _id: item._id,
-                title: item.title,
-                description: item.description,
-                // client_id: item.client_id,
-                // client_name: item.client_id.name,
-                // client_primary: item.client_id.primary,
-                // client_secondary: item.client_id.secondary
-            }
-            // Add each parse Project Object to our project_data Array
-            project_data.push(proj);
+        client_projects.forEach((item) => {
+          // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
+          let proj = {
+            _id: item._id,
+            title: item.title,
+            description: item.description,
+            // client_id: item.client_id,
+            // client_name: item.client_id.name,
+            // client_primary: item.client_id.primary,
+            // client_secondary: item.client_id.secondary
+          };
+          // Add each parse Project Object to our project_data Array
+          project_data.push(proj);
         });
+*/
+        // ^^ REMOVE SECTION ?? ^^ //
 
         //-- Populates the Virtual 'clients_projects' Record --//
         let projects_results = [];
-        client.clients_projects.map(proj => {
-          console.log(proj);
+        client.clients_projects.map((proj) => {
+          // console.log(proj);
           let temp = {
             _id: proj._id,
             title: proj.title,
-            desc: proj.description
-          }
+            desc: proj.description,
+          };
           projects_results.push(temp);
-        })
+        });
 
         // *** TESTING *** //
         // console.log("Project data:")
@@ -70,21 +74,21 @@ router.get('/', isLoggedIn, (req, res) => {
 
         // create a temp object to push into our array, this way we avoid a security issue with mongoose and handlebars
         let client_obj = {
-            _id: client._id,
-            name: client.name,
-            contact: client.contact,
-            primary: client.primary,
-            secondary: client.secondary,
-            projects: project_data,
-            all_projects: projects_results,
-        }
+          _id: client._id,
+          name: client.name,
+          contact: client.contact,
+          primary: client.primary,
+          secondary: client.secondary,
+          // projects: project_data,
+          all_projects: projects_results,
+        };
         // Add each parse CLient Object to our clients Array
         clients.push(client_obj);
       });
 
       // *** TESTING *** //
       // console.log("********")
-      console.log(clients);
+      // console.log(clients);
       // console.log("//****//")
       // console.log(`Projects Array : ${projectsArr}`);
 
@@ -99,44 +103,98 @@ router.get('/', isLoggedIn, (req, res) => {
   });
 });
 
+// ---------------------------------- //
+//        Get CLIENT Create           //
+// ---------------------------------- //
+router.get('/create', (req, res) => {
+  console.log("Hit Client Create Route");
+  res.render('clients/client_new');
+});
 
 // ---------------------------------- //
 //         Post Create CLIENT         //
 // ---------------------------------- //
 router.post('/create', (req, res) => {
-    // console.log(req.body);
-    // Parse data from from submit
+    console.log(req.body);
+    
+    //Parse data from from submit
     let { client_name, client_contact } = req.body;
+
     db.Client.create({
       name: client_name,
       contact: client_contact
     }).then(data => {
         // console.log(data);
         // res.status(301).json(data);
-        res.redirect('/clients');
+        // res.redirect('/clients');
       })
       .catch(err => {
         res.status(500).json(err);
       });
+    // res.send("testing client create route")
 });
+
+
+
+// ---------------------------------- //
+//          Get CLIENT Detail         //
+// ---------------------------------- //
+router.get('/:id', isLoggedIn, (req, res) => {
+  db.Client.findById(req.params.id)
+    .populate('projects')
+    .then(client => {
+      console.log(client);
+
+      // create array for associated client projects
+      let client_projs = [];
+      client.projects.map(proj => {
+        client_projs.push(proj);
+      });
+      console.log("Associated Projects: ", client_projs);
+      
+      // create temp OBJ for client
+      let client_obj = {
+        _id: client._id,
+        name: client.name,
+        contact: client.contact,
+        primary: client.primary,
+        secondary: client.secondary,
+        // projects: client_projs
+      }
+
+      console.log("Found Client: ", client_obj);
+
+      res.status(200).render("clients/client_detail", { item: client_obj, client_proj: client_projs });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+});
+
+
 
 // ---------------------------------- //
 //           Edit A Client            //
 // ---------------------------------- //
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', isLoggedIn, (req, res) => {
   let client_id = req.params.id;
   // console.log(client_id);
 
   // Find Client in DB
   db.Client.findById(client_id).then(data => {
-    // console.log("Found :")
-    // console.log(data);
+    console.log("Found Client: ", data);
 
     let cli = {
       _id: data._id,
       name: data.name,
-      contact: data.contact,
+      primary: data.primary,
+      secondary: data.secondary,
     }
+
+    // ** TESTING ** //
+    console.log("Sending Client: ", cli);
+
     res.render('clients/client_edit', { item: cli });
   }).catch(err => {
     res.status(500).json(err);
@@ -146,31 +204,40 @@ router.get('/:id/edit', (req, res) => {
 // ---------------------------------- //
 //         Update A Client            //
 // ---------------------------------- //
-router.put('/:id', (req, res) => {
-  let update = {
-    // _id: req.body._id,
-    name: req.body.client_name,
-    contact: req.body.client_contact
-  }
-  
+router.put('/:id', isLoggedIn, (req, res) => {
   console.log(req.params.id);
+
+  let update = {
+    // _id: req.params.id,
+    name: req.body.client_name,
+    primary: req.body.primary_contact,
+    secondary: req.body.secondary_contact,
+  };
+
+  // ** TESTING ** //
+  console.log("Update Client: ", update);
+
   // -- Update Record -- //
-  db.Client.findByIdAndUpdate(req.params.id, update, { new: true }, (err, updatedClient) => {
-    if(err) {
-      console.log(err);
-      res.status(500).redirect('/clients')
+  db.Client.findByIdAndUpdate(
+    req.params.id,
+    update,
+    { new: true },
+    (err, updatedClient) => {
+      if (err) {
+        console.log(err);
+        res.status(500).redirect("/clients");
+      }
+      console.log("Record Updated ...");
+      console.log(updatedClient);
+      res.status(203).redirect("/clients");
     }
-    console.log("Record Updated ...");
-    console.log(updatedClient);
-    res.status(203).redirect('/clients');
-  })
-  
+  );
 });
 
 // ---------------------------------- //
 //         Delete A Client            //
 // ---------------------------------- //
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLoggedIn, (req, res) => {
   let objId = req.params.id
   console.log(`Object ID: ${objId}`);
 
