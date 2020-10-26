@@ -180,6 +180,10 @@ router.get('/:id/edit', (req, res) => {
       primary: data.primary,
       secondary: data.secondary,
     }
+
+    // ** TESTING ** //
+    console.log("Sending Client: ", cli);
+
     res.render('clients/client_edit', { item: cli });
   }).catch(err => {
     res.status(500).json(err);
@@ -190,24 +194,33 @@ router.get('/:id/edit', (req, res) => {
 //         Update A Client            //
 // ---------------------------------- //
 router.put('/:id', (req, res) => {
-  let update = {
-    // _id: req.body._id,
-    name: req.body.client_name,
-    contact: req.body.client_contact
-  }
-  
   console.log(req.params.id);
+
+  let update = {
+    // _id: req.params.id,
+    name: req.body.client_name,
+    primary: req.body.primary_contact,
+    secondary: req.body.secondary_contact,
+  };
+
+  // ** TESTING ** //
+  console.log("Update Client: ", update);
+
   // -- Update Record -- //
-  db.Client.findByIdAndUpdate(req.params.id, update, { new: true }, (err, updatedClient) => {
-    if(err) {
-      console.log(err);
-      res.status(500).redirect('/clients')
+  db.Client.findByIdAndUpdate(
+    req.params.id,
+    update,
+    { new: true },
+    (err, updatedClient) => {
+      if (err) {
+        console.log(err);
+        res.status(500).redirect("/clients");
+      }
+      console.log("Record Updated ...");
+      console.log(updatedClient);
+      res.status(203).redirect("/clients");
     }
-    console.log("Record Updated ...");
-    console.log(updatedClient);
-    res.status(203).redirect('/clients');
-  })
-  
+  );
 });
 
 // ---------------------------------- //
