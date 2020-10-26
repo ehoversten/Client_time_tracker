@@ -107,7 +107,7 @@ router.get('/', isLoggedIn, (req, res) => {
 //        Get CLIENT Create           //
 // ---------------------------------- //
 router.get('/create', (req, res) => {
-  console.log("Hit Client Create Route");
+  // console.log("Hit Client Create Route");
   res.render('clients/client_new');
 });
 
@@ -115,23 +115,25 @@ router.get('/create', (req, res) => {
 //         Post Create CLIENT         //
 // ---------------------------------- //
 router.post('/create', (req, res) => {
-    console.log(req.body);
-    
-    //Parse data from from submit
-    let { client_name, client_contact } = req.body;
+  // ** TESTING ** //
+  // console.log("Post Create Client Route");
+    // console.log(req.body);
+  
+  //Parse data from from submit
+  let { client_name, client_primary, client_secondary } = req.body;
 
-    db.Client.create({
-      name: client_name,
-      contact: client_contact
-    }).then(data => {
-        // console.log(data);
-        // res.status(301).json(data);
-        // res.redirect('/clients');
-      })
-      .catch(err => {
-        res.status(500).json(err);
-      });
-    // res.send("testing client create route")
+  db.Client.create({
+    name: client_name,
+    primary: client_primary,
+    secondary: client_secondary
+  }).then(data => {
+      // console.log("New Client: ", data);
+      res.status(201).redirect('/clients');
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+
 });
 
 
