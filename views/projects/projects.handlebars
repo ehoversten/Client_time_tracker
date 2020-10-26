@@ -29,7 +29,7 @@
                                         {{/each }}
                                     </select>
                                 </div>
-                        
+                                
                                 <button type="submit" class="btn btn-success">Add Project <i class="fas fa-plus-square"></i></button>
                             </div>
                         </form>
@@ -60,16 +60,19 @@
                         <tbody>
                         {{#each allProjects }}
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">#</th>
                                 <td>{{ this.title }}</td>
                                 <td>{{ this.description }}</td>
                                 <td>{{ this.client_name }}</td>
                                 <td>{{ this.client_primary }} || {{ this.client_secondary }}</td>
                                 <td>
-                                    <a href="/projects/{{ this._id }}" class="btn btn-primary" type="submit"><i class="fas fa-edit"></i></a>
-                                    <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
-                                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                    <div class="row">
+                                        <a href="/projects/{{ this._id }}" class="btn btn-primary mr-3" type="submit"><i class="fas fa-edit"></i></a>
+                                        <form action="/projects/{{ this._id }}?_method=DELETE" method="POST">
+                                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+
+                                    </div>
                                 </td>
                             </tr>
                         {{/each}}
