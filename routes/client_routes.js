@@ -107,7 +107,7 @@ router.get('/', isLoggedIn, (req, res) => {
 // ---------------------------------- //
 //          Get CLIENT Detail         //
 // ---------------------------------- //
-router.get('/:id', (req, res) => {
+router.get('/:id', isLoggedIn, (req, res) => {
   db.Client.findById(req.params.id)
     .populate('projects')
     .then(client => {
@@ -166,7 +166,7 @@ router.post('/create', (req, res) => {
 // ---------------------------------- //
 //           Edit A Client            //
 // ---------------------------------- //
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', isLoggedIn, (req, res) => {
   let client_id = req.params.id;
   // console.log(client_id);
 
@@ -193,7 +193,7 @@ router.get('/:id/edit', (req, res) => {
 // ---------------------------------- //
 //         Update A Client            //
 // ---------------------------------- //
-router.put('/:id', (req, res) => {
+router.put('/:id', isLoggedIn, (req, res) => {
   console.log(req.params.id);
 
   let update = {
@@ -226,7 +226,7 @@ router.put('/:id', (req, res) => {
 // ---------------------------------- //
 //         Delete A Client            //
 // ---------------------------------- //
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLoggedIn, (req, res) => {
   let objId = req.params.id
   console.log(`Object ID: ${objId}`);
 
