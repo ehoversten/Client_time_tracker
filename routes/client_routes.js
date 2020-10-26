@@ -142,25 +142,31 @@ router.get('/:id', isLoggedIn, (req, res) => {
 
 
 // ---------------------------------- //
+//        Get Create CLIENT           //
+// ---------------------------------- //
+
+
+// ---------------------------------- //
 //         Post Create CLIENT         //
 // ---------------------------------- //
 router.post('/create', (req, res) => {
     // console.log(req.body);
-
+    
     // Parse data from from submit
-    let { client_name, client_contact } = req.body;
+    // let { client_name, client_contact } = req.body;
 
-    db.Client.create({
-      name: client_name,
-      contact: client_contact
-    }).then(data => {
-        // console.log(data);
-        // res.status(301).json(data);
-        res.redirect('/clients');
-      })
-      .catch(err => {
-        res.status(500).json(err);
-      });
+    // db.Client.create({
+    //   name: client_name,
+    //   contact: client_contact
+    // }).then(data => {
+    //     // console.log(data);
+    //     // res.status(301).json(data);
+    //     // res.redirect('/clients');
+    //   })
+    //   .catch(err => {
+    //     res.status(500).json(err);
+    //   });
+    res.send("testing client create route")
 });
 
 // ---------------------------------- //
