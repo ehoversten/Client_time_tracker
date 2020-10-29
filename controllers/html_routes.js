@@ -17,10 +17,13 @@ router.get('/', (req, res) => {
 //         Get AUTH PAGE              //
 // ---------------------------------- //
 router.get('/dashboard', isLoggedIn, (req, res) => {
+  let now = moment().format("dddd, MMMM Do");
+  // ** TESTING ** //
   console.log(req.user);
   req.session.user = req.user;
   console.log(`****`);
   console.log(req.session);
+  
   // create temp variable to pass to Handlebars View
   let thisUser = {
     id: req.user._id,
@@ -30,7 +33,7 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
     fullname: req.user.fullname,
   }
 
-  res.render("dashboard", { currentUser: thisUser });
+  res.render("dashboard", { currentUser: thisUser, date: now });
 });
 
 
