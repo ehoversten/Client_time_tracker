@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
+const dayjs = require('dayjs');
+// import { formatDistance, subDays } from "date-fns";
 
 // ---------------------------------- //
 //        Get LANDING PAGE            //
 // ---------------------------------- //
 router.get('/', (req, res) => {
   let now = moment().format("dddd, MMMM Do");
+  let today = dayjs().day();
   // let now = Date.now();
   // console.log(now)
-  res.render('index', { date: now });
+  console.log(today);
+  res.render('index', { date: now, today: today });
 });
 
 
@@ -18,6 +22,9 @@ router.get('/', (req, res) => {
 // ---------------------------------- //
 router.get('/dashboard', isLoggedIn, (req, res) => {
   let now = moment().format("dddd, MMMM Do");
+  let day = dayjs().day();
+  let today = dayjs().format("dddd, MMMM, D");
+  console.log(today);
   // ** TESTING ** //
   console.log(req.user);
   req.session.user = req.user;
@@ -33,7 +40,7 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
     fullname: req.user.fullname,
   }
 
-  res.render("dashboard", { currentUser: thisUser, date: now });
+  res.render("dashboard", { currentUser: thisUser, date: now, today: today });
 });
 
 
