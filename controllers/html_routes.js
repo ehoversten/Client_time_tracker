@@ -23,7 +23,7 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
   req.session.user = req.user;
   console.log(`****`);
   console.log(req.session);
-  
+
   // create temp variable to pass to Handlebars View
   let thisUser = {
     id: req.user._id,
