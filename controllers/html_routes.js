@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
+
 const dayjs = require('dayjs');
+const customParseFormat = require("dayjs/plugin/customParseFormat");
+dayjs.extend(customParseFormat);
+
+const localizedFormat = require("dayjs/plugin/localizedFormat");
+dayjs.extend(localizedFormat);
 // import { formatDistance, subDays } from "date-fns";
 
 // ---------------------------------- //
@@ -22,8 +28,9 @@ router.get('/', (req, res) => {
 // ---------------------------------- //
 router.get('/dashboard', isLoggedIn, (req, res) => {
   let now = moment().format("dddd, MMMM Do");
-  let day = dayjs().day();
+ 
   let today = dayjs().format("dddd, MMMM, D");
+  let day = dayjs().format("LLLL");
   console.log(today);
   // ** TESTING ** //
   console.log(req.user);
@@ -40,7 +47,7 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
     fullname: req.user.fullname,
   }
 
-  res.render("dashboard", { currentUser: thisUser, date: now, today: today });
+  res.render("dashboard", { currentUser: thisUser, date: now, today: today, day: day });
 });
 
 
