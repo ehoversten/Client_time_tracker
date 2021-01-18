@@ -162,7 +162,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
 
         client_projs.push(current);
       });
-      // console.log("Associated Projects: ", client_projs);
+      console.log("Associated Projects: ", client_projs);
       
       // create temp OBJ for client
       let client_obj = {
