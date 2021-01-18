@@ -145,14 +145,24 @@ router.get('/:id', isLoggedIn, (req, res) => {
   db.Client.findById(req.params.id)
     .populate('projects')
     .then(client => {
-      console.log(client);
+      // console.log(client);
 
       // create array for associated client projects
       let client_projs = [];
       client.projects.map(proj => {
-        client_projs.push(proj);
+        console.log(proj);
+        let current = {
+          proj_sessions: proj.proj_sessions,
+          _id: proj._id,
+          title: proj.title,
+          description: proj.description,
+          client_id: proj.client_id,
+          created_at: proj.created_at
+        }
+
+        client_projs.push(current);
       });
-      console.log("Associated Projects: ", client_projs);
+      // console.log("Associated Projects: ", client_projs);
       
       // create temp OBJ for client
       let client_obj = {
@@ -164,7 +174,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
         // projects: client_projs
       }
 
-      console.log("Found Client: ", client_obj);
+      // console.log("Found Client: ", client_obj);
 
       res.status(200).render("clients/client_detail", { item: client_obj, client_proj: client_projs });
     })

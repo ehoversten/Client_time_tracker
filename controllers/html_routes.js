@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
   let today = dayjs().day();
   // let now = Date.now();
   // console.log(now)
-  console.log(today);
+  // console.log(today);
   res.render('index', { date: now, today: today });
 });
 
@@ -31,7 +31,7 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
  
   let today = dayjs().format("dddd, MMMM, D");
   let day = dayjs().format("LLLL");
-  console.log(today);
+  // console.log(today);
   // ** TESTING ** //
   console.log(req.user);
   req.session.user = req.user;
