@@ -1,5 +1,37 @@
 <div class="container">
     <div class="row">
-        <h1>Create New Client</h1>
+        <div class="col-md-12 m-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>Create New Client</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/clients/create" method="post">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="client_name">Enter Client Name:</label>
+                                <input id="client_name" name="client_name" type="text" class="form-control">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="contact_primary">Enter Primary Contact:</label>
+                                <input id="contact_primary" name="client_primary" type="text" class="form-control">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="contact_secondary">Enter Secondary Contact:</label>
+                                <input id="contact_secondary" name="client_secondary" type="text" class="form-control">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="row justify-content-end">
+                                    <button type="submit" class="btn btn-primary mr-3">Create Client</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    Enter New Client Data
+                </div>
+            </div>
+        </div>
     </div>
 </div>

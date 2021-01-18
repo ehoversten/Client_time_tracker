@@ -50,6 +50,7 @@ router.post('/client/create', (req, res) => {
 //       API Get ALL PROJECTS         //
 // ---------------------------------- //
 router.get('/projects', (req, res) => {
+    console.log("Hit Project Route")
     db.Project.find({})
         .then(data => {
             res.json(data);

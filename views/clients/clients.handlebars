@@ -1,7 +1,7 @@
 {{!-- Search function --}}
 {{!-- <div class="container" id="client-container">
   <div class="form-group pull-right">
-      <input type="text" class="search form-control" placeholder="What you looking for?">
+    <input type="text" class="search form-control" placeholder="What you looking for?">
   </div>
   <span class="counter pull-right"></span>
 </div> --}}
@@ -15,7 +15,7 @@
     <thead>
       <tr>
         <th>#</th>
-        <th scope="col-lg-4 col-md-4 col-xs-4=">Client</th>
+        <th scope="col-lg-4 col-md-4 col-xs-4">Client</th>
         <th scope="col-lg-4 col-md-4 col-xs-4">Primary Contact</th>
         <th scope="col-lg-4 col-md-4 col-xs-4">Secondary Contact</th>
         <th scope="col-log-4 col-md-4 col-xs-4">Projects</th>
@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each allClients}}  
+      {{#each allClients}}
       <tr>
         <th scope="row">#</th>
         <td>{{this.name}}</td>
@@ -35,17 +35,16 @@
         <td>
           <div class="form-group">
             <select class="form-control">
-            {{#each all_projects}}   
+              {{#each all_projects}}
               <option>{{this.title}}</option>
-            {{/each}}
+              {{/each}}
             </select>
-
           </div>
         </td>
         <td>
           <div class="row m-auto">
             <a href="/clients/{{ this._id }}" class="btn btn-success mr-3" type="submit"><i class="fas fa-edit"></i></a>
-            
+
             <form action="/clients/{{ this._id }}?_method=DELETE" method="POST">
               <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
             </form>
@@ -57,8 +56,8 @@
     </tbody>
   </table>
   <div class="new-client">
-    <div class="row">
-      <a href="/clients/create">
+    <div class="row justify-content-end">
+      <a href="/clients/create" class="mr-3">
         <button class="btn btn-success">New Client</button>
       </a>
     </div>

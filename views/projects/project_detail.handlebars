@@ -15,8 +15,12 @@
                         <p class="card-text">Created: {{ detail.created_at }}</p>
                         <p class="card-text">Started: {{ detail.start_date }}</p>
                         <p class="card-text">Completed: {{ detail.completion_date }}</p>
-                        
-                        <a href="/projects/{{ detail._id }}/edit"><button class="btn btn-warning">Edit <i class="fas fa-user-edit"></i></button></a>
+                        <div class="container">
+                            <div class="row justify-content-end">
+                                <a href="/projects/{{ detail._id }}/edit"><button class="btn btn-warning">Edit <i
+                                            class="fas fa-user-edit"></i></button></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {{#each detail_sessions }}
+                        {{#each detail_sessions }}
                         <tr>
                             <th scope="row">#</th>
                             <td>{{ this.session_user.username }}</td>
@@ -47,7 +51,7 @@
                             <td>{{ this.end_time }}</td>
                             <td>{{ this.notes }}</td>
                         </tr>
-                    {{/each}}
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

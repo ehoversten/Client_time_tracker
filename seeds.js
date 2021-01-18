@@ -35,6 +35,7 @@ const importData = async () => {
     await db.Project.create(projects);
     console.log("Project Data Imported ...");
     // await db.Session.create(sessions);
+    // console.log("Session Data Imported ...");
 
     process.exit();
   } catch (err) {
@@ -47,10 +48,10 @@ const deleteData = async () => {
   try {
     await db.Client.deleteMany();
     console.log("Client Data Removed ...");
-    // await db.Project.deleteMany();
-    // console.log("Project Data Removed ...");
-    // await db.Session.deleteMany();
-    // console.log("Session Data Removed ...");
+    await db.Project.deleteMany();
+    console.log("Project Data Removed ...");
+    await db.Session.deleteMany();
+    console.log("Session Data Removed ...");
     // await db.User.deleteMany();
     // console.log("Users Data Removed ...");
 
