@@ -63,7 +63,7 @@ let projectSeed =  [
       description: "Project description A",
       client_id: "5f332c53c01e5c2de7e8e0c5",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -71,7 +71,7 @@ let projectSeed =  [
       description: "Project description B",
       client_id: "5f332c53c01e5c2de7e8e0c5",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -79,7 +79,7 @@ let projectSeed =  [
       description: "Project description C",
       client_id: "5f332c53c01e5c2de7e8e0c6",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -87,7 +87,7 @@ let projectSeed =  [
       description: "Project description D",
       client_id: "5f332c53c01e5c2de7e8e0c6",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -95,7 +95,7 @@ let projectSeed =  [
       description: "Project description E",
       client_id: "5f332c53c01e5c2de7e8e0c7",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -103,7 +103,7 @@ let projectSeed =  [
       description: "Project description F",
       client_id: "5f332c53c01e5c2de7e8e0c7",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -111,7 +111,7 @@ let projectSeed =  [
       description: "Project description G",
       client_id: "5f332c53c01e5c2de7e8e0c8",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
     {
@@ -119,7 +119,7 @@ let projectSeed =  [
       description: "Project description H",
       client_id: "5f332c53c01e5c2de7e8e0c8",
       proj_sessions: [],
-      start_date: null,
+      start_date: Date.now(),
       completion_date: null,
     },
   ];

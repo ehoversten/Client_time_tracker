@@ -42,10 +42,14 @@ router.get('/', isLoggedIn, async (req, res) => {
   let projects = [];
   await db.Project.find({})
     // .populate('client_id')
+
+    // -- TESTING -- //
     .populate({
       path: 'client_id',
       select: 'name primary secondary'
     })
+
+
     // .exec((err, result) => {
     //   if(err) {
     //     console.log(err);
