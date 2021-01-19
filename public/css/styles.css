@@ -11,11 +11,17 @@
 .wrapper {
   display: flex;
   align-items: stretch;
+  height: 100vh;
 }
 
 .content-wrapper {
   /* width: -webkit-fill-available; */
   width: 100%;
+
+}
+
+strong {
+  font-weight: 600;
 }
 
 
