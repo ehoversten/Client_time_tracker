@@ -21,7 +21,13 @@ router.get('/', isLoggedIn, (req, res) => {
   let allSesh = [];
   db.Session.find({})
     // .populate('project_id, project_work, session_user, user_id')
-    .populate('project_id')
+    // .populate('project_id')
+    .populate({
+      path: 'project_id',
+      populate: {
+        path: 'client_id'
+      }
+    })
     // .populate('project_work')
     // .populate('session_user')
     // .populate('user_id')
@@ -41,7 +47,7 @@ router.get('/', isLoggedIn, (req, res) => {
       // console.log(data);
 
       data.forEach(sesh => {
-        
+        console.log(sesh);
         // create a temp variable to parse data from db
         let newSession = {
           _id: sesh._id,
@@ -54,6 +60,7 @@ router.get('/', isLoggedIn, (req, res) => {
           project_title: sesh.project_id.title,
           project_desc: sesh.project_id.description,
           notes: sesh.notes,
+          client_name: sesh.project_id.client_id.name,
           session_user: {
             id: sesh.session_user.id,
             username: sesh.session_user.username
@@ -153,7 +160,13 @@ router.get('/:id', isLoggedIn, (req, res) => {
   console.log(req.params.id);
 
   db.Session.findById(req.params.id)
-    .populate('project_id')
+    // .populate('project_id')
+    .populate({
+      path: 'project_id',    // populate associated project
+      populate: {
+        path: 'client_id'    // populate associated project client
+      }
+    })
     .populate('user_id')
     .then(data => {
       console.log("Found Session Data");
@@ -168,9 +181,11 @@ router.get('/:id', isLoggedIn, (req, res) => {
         start_time: data.start_time,
         end_time: data.end_time,
         session_length: session_time,
-        project_id: data.project_id,
+        project_id: data.project_id._id,
         project_title: data.project_id.title,
         project_desc: data.project_id.description,
+        // project_id: data.project_id,
+        client_name: data.project_id.client_id.name,
         notes: data.notes,
         session_user: {
           id: req.user.id,
@@ -293,6 +308,12 @@ router.get('/:id/edit', (req, res) => {
   // console.log(req.params);
 
   db.Session.findById(req.params.id)
+    .populate({
+      path: 'project_id',
+      populate: {
+        path: 'client_id'
+      }
+    })
     .then(data => {
       console.log(data);
 
@@ -302,10 +323,13 @@ router.get('/:id/edit', (req, res) => {
 
       let foundSession = {
         _id: data._id,
+        session_date: data.date,
         start_time: data.start_time,
         end_time: data.end_time,
         session_length: session_time,
-        project_id: data.project_id,
+        client_name: data.project_id.client_id.name,
+        project_id: data.project_id._id,
+        project_title: data.project_id.title,
         notes: data.notes,
         session_user: {
           id: req.user.id,

@@ -1,23 +1,24 @@
 <div id="secret" class="container">
     <div class="center">
-        <div class="row">
+        {{!-- <div class="row">
             <p>{{date}}</p>
         </div>
         <div class="row">
             <p>{{today}}</p>
-        </div>
-        <div class="row">
+        </div> --}}
+        {{!-- <div class="row">
             <p>{{day}}</p>
-        </div>
-        <div class="row">
-            <h4>Welcome, {{ currentUser.fullname }} |#|-> </h4>
-            <h4>Username: {{ currentUser.username }}</h4>
+        </div> --}}
+        <div class="row mt-5">
+            <h4>Welcome, {{ currentUser.fullname }}</h4>
+            {{!-- <h4>Username: {{ currentUser.username }}</h4> --}}
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-3">
         <h1>Project & User Session Tracking Dashboard </h1>
         <hr>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde sunt quaerat cumque impedit assumenda consectetur asperiores, eligendi fuga corporis molestiae magnam ducimus nobis quidem sed est. A voluptatem facere ipsum. Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente sequi odit mollitia consequuntur ipsa! Sapiente unde fugiat nulla necessitatibus dolorem veniam omnis beatae vel dignissimos? Optio sint nulla recusandae a quod, quaerat quas exercitationem, quia, quasi maxime sequi alias expedita.</p>
+        <p>Thank you for registering and logging into the Project Session Tracker. Users have the ability to add Clients, add and associate new Projects with a respective Client. And finally the User will be able to track and log working Sessions attached to individual Projects.</p>
+        <p>To begin select <strong>'Clients'</strong> from the sidebar navigation menu, and view or create a new Client to associate Projects to. Details about the client can be viewed or modified as needed. Next checkout the <strong>'Projects'</strong> link. View current projects or create a new one and choose which client to associate it with. Project details can also be viewed and updated as desired. Finally navigate to the <strong>'Sessions'</strong> page. View, modify or create new working session on respective client projects. Your time will automatically be tracked and you have the option to add session notes.</p>
+        <p>Don't forget to <strong>logout</strong> when you are finished!</p>
     </div>
 </div>
