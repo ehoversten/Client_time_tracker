@@ -12,6 +12,8 @@ This is a simple project that allows a User to login/register to the application
 
 [Project Time Tracker](https://#)
 
+&nbsp;
+
 ## Usage
 
 A User Can: 
@@ -43,7 +45,6 @@ A Session Can:
 
 &nbsp;
 
-
 ## Installation
 
 Start by cloning the project Repo
@@ -66,9 +67,9 @@ Run the application locally
 ```javascript
 $> npm run start
 ```
-#
 
- 
+&nbsp;
+
 ## Deployment
 
 Deployment with Docker and AWS coming
@@ -80,22 +81,28 @@ Deployment with Docker and AWS coming
 * [JavaScript]() - Development Language
 * [Node](www.nodejs.org) - Backend Sever
 * [Express]() - Web framework
-* [Handlebars]() - Templating Engine
-* [MaterializeCSS]() - CSS Framework
+* [Handlebars]() - Template View Engine
+* [BootstrapCSS]() - CSS Framework
 * [MongoDB]() - Database Storage
 * [Mongoose]() - Database ORM
 * [Passport]() - User Authentication using PassportJS
 
+&nbsp;
 
 ## Versioning
 
 Version 1.0
 
+&nbsp;
+
 ## Authors
 
-* **Erik Hoversten** - *Initial work* - GitHub: [ehoversten](https://github.com/ehoversten)
+* **Erik Hoversten** - *Backend API and Database Development* - GitHub: [ehoversten](https://github.com/ehoversten)
+* **Dan Rosenbaum** - *Frontend and Styling* - GitHub: [drosenbaum5](https://github.com/drosenbaum5)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ehoversten/Client_time_tracker/graphs/contributors) who participated in this project.
+
+&nbsp;
 
 ## License
 
