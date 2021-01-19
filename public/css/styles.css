@@ -19,8 +19,6 @@
 }
 
 
-
-
 #login-form {
   width: 22vw;
   border: 3px solid rgb(214, 214, 214);
@@ -271,11 +269,11 @@ a.article:hover {
 }
 
 .sessions-container {
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 /* ---------------------------------------------------
-    MEDIAQUERIES
+    MEDIA QUERIES
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
