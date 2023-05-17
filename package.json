@@ -9,6 +9,9 @@
     "watch": "nodemon server.js",
     "seed": "node seeds.js"
   },
+  "engines": {
+    "node": "16.20.0"
+  },
   "author": "Erik Hoversten",
   "license": "MIT",
   "dependencies": {
